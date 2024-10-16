@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 type QuoteProps = TextProps & {
 	children?: string;
 };
-// comment
+
 const Quote: FC<QuoteProps> = ({ children, ...props }) => {
 	const { fonts } = useCustomStyle();
 	return (
