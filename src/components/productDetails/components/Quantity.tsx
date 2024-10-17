@@ -16,7 +16,7 @@ const Quanity: FC<QuanityProps> = ({ quantity, handleQuantity, ...props }) => {
 			justifyContent='space-around'
 			border={`1px solid ${colors?.primary}`}
 			p='8px 12px'
-			width='8rem'
+			width={{ base: 'auto', md: '8rem' }}
 			h='full'
 			borderRadius='4px'
 			{...props}
@@ -25,6 +25,7 @@ const Quanity: FC<QuanityProps> = ({ quantity, handleQuantity, ...props }) => {
 				cursor='pointer'
 				onClick={() => handleQuantity('decrement')}
 				w='2rem'
+				userSelect='none'
 			>
 				<Icon name='subtract-two' />
 			</Center>
@@ -37,6 +38,7 @@ const Quanity: FC<QuanityProps> = ({ quantity, handleQuantity, ...props }) => {
 				cursor='pointer'
 				onClick={() => handleQuantity('increment')}
 				w='2rem'
+				userSelect='none'
 			>
 				<Icon name='add' />
 			</Center>

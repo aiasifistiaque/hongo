@@ -1,5 +1,6 @@
-export { default as MenuDrawer } from './drawer/MenuDrawer';
-export { default as SearchDrawer } from './drawer/SearchDrawer';
+export { default as MenuDrawer } from './drawer/search-drawer/MenuDrawer';
+export { default as SearchDrawer } from './drawer/search-drawer/SearchDrawer';
+export { default as CartDrawer } from './drawer/cart-drawer/CartDrawer';
 export { default as DesktopHeader } from './header/DesktopHeader';
 export { default as Banner } from './banner/Banner';
 export { default as TopHeader } from './topHeader/TopHeader';

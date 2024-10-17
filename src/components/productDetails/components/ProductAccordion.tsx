@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import useCustomStyle from '@/hooks/useCustomStyle';
-import {
-	Accordion,
-	AccordionItem,
-
-	AccordionProps,
-} from '@chakra-ui/react';
+import { Accordion, AccordionItem, AccordionProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import Description from './Description';
 import Shipping from './Shipping';
@@ -25,7 +20,7 @@ const ProductAccordion: FC<ProductAccordionProps> = ({
 }) => {
 	const { colors } = useCustomStyle();
 	return (
-		<Accordion defaultIndex={[0]} allowMultiple {...props}>
+		<Accordion allowToggle {...props}>
 			<AccordionItem
 				border='none'
 				borderBottom={`1px solid ${colors?.primary}`}

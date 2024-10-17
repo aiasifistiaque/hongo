@@ -13,6 +13,8 @@ export const colors = {
 	black: '#000000',
 	menuTextColor: '#322e2a',
 	titleColor: '#322e2a',
+	danger: '#ed5c5c',
+	deepDanger: '#d43333',
 };
 
 export const fonts = {

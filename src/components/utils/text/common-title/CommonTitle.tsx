@@ -15,7 +15,7 @@ const CommonTitle: FC<CommonTitleProps> = ({ children, ...props }) => {
 			fontStyle='normal'
 			fontWeight='500'
 			fontSize='3.5rem'
-			lineHeight='2.35rem'
+			lineHeight='3.5rem'
 			{...props}
 		>
 			{children}

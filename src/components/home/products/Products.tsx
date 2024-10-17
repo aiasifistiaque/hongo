@@ -13,6 +13,9 @@ type ProductsProps = BoxProps & {
 
 const Products: FC<ProductsProps> = ({ data, ...props }) => {
 	const { colors } = useCustomStyle();
+
+
+	
 	return (
 		<Box py='4rem' bg={colors.secondary} {...props}>
 			<CommonTitle mb='4rem'>Products</CommonTitle>

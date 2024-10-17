@@ -1,8 +1,10 @@
 'use client';
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import { Box, Center } from '@chakra-ui/react';
 import useCustomStyle from '@/hooks/useCustomStyle';
+
 import { CommonTitle } from '@/components/utils';
+import SwiperCore from 'swiper';
 import CategoriesCart from './components/CategoriesCart';
 
 // Import Swiper components
@@ -10,6 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
+import SwipperArrowButton from '@/components/swiper-arrow/SwipperArrowButton';
 
 const swiperBreakpoints = {
 	320: {
@@ -22,6 +25,9 @@ const swiperBreakpoints = {
 		slidesPerView: 3,
 	},
 	1024: {
+		slidesPerView: 4,
+	},
+	1536: {
 		slidesPerView: 5,
 	},
 };
@@ -35,19 +41,24 @@ type CategoriesProps = {
 
 const Categories: FC<CategoriesProps> = ({ data }) => {
 	const { colors } = useCustomStyle();
+	const swiperRef = useRef<SwiperCore>();
 
 	return (
 		<Box
 			py='4rem'
 			bg={colors.secondary}
 			borderBottom={`1px solid ${colors.primary}`}
+			position='relative'
 		>
-			<CommonTitle mb='4rem'>Categories</CommonTitle>
+			<CommonTitle fontSize={{ base: '2rem', lg: '3.5rem' }} mb='4rem'>
+				Categories
+			</CommonTitle>
 			<Swiper
 				spaceBetween={20}
 				pagination={{ clickable: true }}
 				modules={[Pagination]}
 				breakpoints={swiperBreakpoints}
+				onSwiper={swiper => (swiperRef.current = swiper)}
 			>
 				{data?.map((item, i) => (
 					<SwiperSlide key={i}>
@@ -57,6 +68,12 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 					</SwiperSlide>
 				))}
 			</Swiper>
+			<Box position='absolute' top={{ base: '56px', xl: '48px' }} right='0px'>
+				<SwipperArrowButton
+					next={() => swiperRef.current?.slideNext()}
+					prev={() => swiperRef.current?.slidePrev()}
+				/>
+			</Box>
 		</Box>
 	);
 };

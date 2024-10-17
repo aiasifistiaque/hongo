@@ -12,7 +12,11 @@ type CategoriesCartProps = FlexProps & {
 const CategoriesCart: FC<CategoriesCartProps> = ({ data, ...props }) => {
 	return (
 		<Flex alignItems='center' flexDir='column' {...props}>
-			<Flex w='14rem' h='14rem' mb='16px'>
+			<Flex
+				w={{ base: '12rem', xl: '14rem' }}
+				h={{ base: '12rem', xl: '14rem' }}
+				mb='16px'
+			>
 				<Image
 					w='full'
 					h='full'

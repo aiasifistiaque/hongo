@@ -24,3 +24,6 @@ export const currency = {
 export const cartBoxShadow = '0px 0px 8px -4px #C09671';
 
 export const searchInputWidth = '30rem';
+
+export const CartDrawerWidth = '30rem';
+export const HeaderZIndex = '999';
