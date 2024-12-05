@@ -15,17 +15,12 @@ export const colors = {
 	titleColor: '#322e2a',
 	danger: '#ed5c5c',
 	deepDanger: '#d43333',
-};
-
-export const fonts = {
-	marcellus: 'Marcellus, serif',
-	inter: 'Inter, sans-serif',
+	borderColor: '#DEE9E9',
 };
 
 const useCustomStyle = () => {
 	return {
 		colors,
-		fonts,
 	};
 };
 

@@ -16,6 +16,7 @@ import { LuImagePlus } from 'react-icons/lu';
 import { MdBrandingWatermark } from 'react-icons/md';
 import { RiCoupon2Fill, RiSettings3Fill } from 'react-icons/ri';
 import { SiCkeditor4 } from 'react-icons/si';
+import { FiTag } from 'react-icons/fi';
 import {
 	TbArrowForward,
 	TbFileInvoice,
@@ -110,7 +111,8 @@ export type IconNameOptions =
 	| 'map'
 	| 'phone'
 	| 'envelope'
-	| 'subtract-two';
+	| 'subtract-two'
+	| 'tag';
 
 type IconProps = {
 	size?: number;
@@ -173,6 +175,7 @@ const icons: { [key in IconNameOptions]: FC<{ size: number; color: string }> } =
 		phone: MdLocalPhone,
 		envelope: FaRegEnvelope,
 		'subtract-two': HiOutlineMinusSmall,
+		tag: FiTag,
 	};
 
 const Icon: FC<IconProps> = ({ name, ...props }) => {

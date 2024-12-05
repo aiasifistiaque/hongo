@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import { Text, TextProps } from '@chakra-ui/react';
-import useCustomStyle from '@/hooks/useCustomStyle';
+
+import useCustomFont from '@/hooks/useCustomFont';
 type SearchDrawerTitleProps = TextProps & {
 	children?: string;
 };
 
 const SearchDrawerTitle: FC<SearchDrawerTitleProps> = ({ children }) => {
-	const { fonts } = useCustomStyle();
+	const { fonts } = useCustomFont();
 	return (
 		<Text
 			fontFamily={fonts.marcellus}

@@ -39,8 +39,6 @@ const ProductDetails: FC<ProductDetailsProps> = ({ id, data, ...props }) => {
 		}
 	};
 
-	console.log('Data', data);
-
 	const handleAddToCart = () => {
 		dispatch(
 			addToCart({

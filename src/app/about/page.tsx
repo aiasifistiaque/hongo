@@ -6,6 +6,8 @@ import SmallBanner from '@/components/banner/SmallBanner';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { data } from '@/lib/config/data';
 
+const PX = { base: '1rem', sm: '2rem', md: '3rem', lg: '15rem', xl: '20rem' };
+
 export default function Home() {
 	const { colors } = useCustomStyle();
 	return (
@@ -13,11 +15,7 @@ export default function Home() {
 			{/* Slider */}
 			<SmallBanner bannarData={data?.about?.banner} />
 			{/* Slider Bottom */}
-			<SectionPadding
-				px={{ base: '1rem', sm: '2rem', md: '3rem', lg: '15rem', xl: '20rem' }}
-				py='3rem'
-				bg={colors?.secondary}
-			>
+			<SectionPadding px={PX} py='3rem' bg={colors?.secondary}>
 				<TextNormal fontWeight='600' fontSize='3rem' mb='2rem'>
 					About
 				</TextNormal>

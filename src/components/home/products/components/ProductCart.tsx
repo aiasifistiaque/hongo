@@ -1,8 +1,6 @@
 import { Box, BoxProps, Center, useToast } from '@chakra-ui/react';
 import React, { FC } from 'react';
-import CartHeader from './CartHeader';
-import CartBody from './CartBody';
-import CartButton from './CartButton';
+import { CartHeader, CartBody, CartButton } from './index';
 import { addToCart } from '@/store/slices/cartSlice';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
@@ -39,8 +37,9 @@ const ProductCart: FC<ProductCartProps> = ({ data, ...props }) => {
 	};
 	return (
 		<Box w='full' {...props}>
-			<CartHeader imgSrc={data?.imgSrc} />
 			<Link href={`/products/${_id}`}>
+				<CartHeader imgSrc={data?.imgSrc} />
+
 				<CartBody data={data} />
 			</Link>
 			<Center mt='auto' p='.8rem'>

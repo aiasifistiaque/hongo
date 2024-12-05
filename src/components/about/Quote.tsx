@@ -1,4 +1,4 @@
-import useCustomStyle from '@/hooks/useCustomStyle';
+import useCustomFont from '@/hooks/useCustomFont';
 import { Text, TextProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
@@ -7,7 +7,7 @@ type QuoteProps = TextProps & {
 };
 
 const Quote: FC<QuoteProps> = ({ children, ...props }) => {
-	const { fonts } = useCustomStyle();
+	const { fonts } = useCustomFont();
 	return (
 		<Text
 			py='3rem'

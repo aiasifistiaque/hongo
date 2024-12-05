@@ -12,3 +12,6 @@ export * from './header';
 export * from './icon';
 export * from './utils';
 export * from './home/index';
+
+export * from './checkout';
+export * from './common';

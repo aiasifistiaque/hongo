@@ -13,6 +13,9 @@ const RemoveButton: FC<RemoveButtonProps> = ({ children, ...props }) => {
 			color={colors?.white}
 			bg={colors?.danger}
 			transition='.4s'
+			fontSize='.875rem'
+			p={2}
+			h='auto'
 			_hover={{ backgroundColor: colors?.deepDanger }}
 			{...props}
 		>
