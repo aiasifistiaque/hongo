@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Price from '@/components/home/products/sections/Price';
 import { CommonTitle, TextNormal } from '@/components/utils';
+import Rating from '@/components/utils/rating/Rating';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { Box, CenterProps, Flex } from '@chakra-ui/react';
 import React, { FC } from 'react';
@@ -18,10 +19,10 @@ const ProductInfo: FC<ProductInfoProps> = ({ data, ...props }) => {
 			</TextNormal>
 			<CommonTitle fontSize='2rem'>{data?.name}</CommonTitle>
 			<Flex alignItems='center' gap={4}>
-				{/* <Rating ratingValue={data?.rating || 4} /> */}
-				{/* <TextNormal
+				<Rating ratingValue={data?.rating || 4} />
+				<TextNormal
 					color={colors?.textColor}
-				>{`${data?.totalReview} reviews`}</TextNormal> */}
+				>{`${data?.totalReview} reviews`}</TextNormal>
 			</Flex>
 			<Flex mb='.5rem'>
 				<Price fontSize='1.5rem' price={data?.price} />
