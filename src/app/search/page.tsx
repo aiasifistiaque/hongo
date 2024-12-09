@@ -8,14 +8,14 @@ import {
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { data } from '@/lib/config/data';
 import React, { ReactNode } from 'react';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 
 const FONT_SIZE = { base: '1rem', md: '2rem', lg: '2.8rem' };
 
 const SearchPage = () => {
-	const searchParams = useSearchParams();
-	const searchValue = searchParams.get('value');
-	
+	// const searchParams = useSearchParams();
+	// const searchValue = searchParams.get('value');
+
 	const { productsBySearch } = data;
 	return (
 		<PageLayout>

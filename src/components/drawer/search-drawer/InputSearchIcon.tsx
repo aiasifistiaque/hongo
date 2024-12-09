@@ -1,6 +1,6 @@
 import { Icon } from '@/components';
 import useCustomStyle from '@/hooks/useCustomStyle';
-import { Box, BoxProps, Center, CenterProps } from '@chakra-ui/react';
+import { Center, CenterProps } from '@chakra-ui/react';
 import { FC } from 'react';
 
 type InputSearchIconProps = CenterProps & {};

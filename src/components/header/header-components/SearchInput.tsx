@@ -1,6 +1,5 @@
 'use client';
 import { Icon } from '@/components/icon';
-import useCustomStyle from '@/hooks/useCustomStyle';
 import { InputRadius } from '@/lib/config/constants';
 import { Center, CenterProps, Input, InputProps } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
@@ -32,7 +31,7 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 	};
 
 	return (
-		<Container>
+		<Container {...props}>
 			<SearchInputField
 				onKeyDown={handleKeyDown}
 				onChange={handleSearchValue}
