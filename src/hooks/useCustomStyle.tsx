@@ -16,6 +16,7 @@ export const colors = {
 	danger: '#ed5c5c',
 	deepDanger: '#d43333',
 	borderColor: '#DEE9E9',
+	overlay: 'rgba(0,0,0,0.3)',
 };
 
 const useCustomStyle = () => {

@@ -2,11 +2,11 @@ import { Flex, FlexProps, Image } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
 
-type DesktopLogoProps = FlexProps & {
+type LogoProps = FlexProps & {
 	imgSrc: string;
 };
 
-const DesktopLogo: FC<DesktopLogoProps> = ({ imgSrc, ...props }) => {
+const Logo: FC<LogoProps> = ({ imgSrc, ...props }) => {
 	return (
 		<Flex
 			w='full'
@@ -28,4 +28,4 @@ const DesktopLogo: FC<DesktopLogoProps> = ({ imgSrc, ...props }) => {
 	);
 };
 
-export default DesktopLogo;
+export default Logo;

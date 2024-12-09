@@ -1,5 +1,5 @@
 'use client';
-import { CartDrawer, DesktopLogo } from '@/components';
+import { CartDrawer, Logo } from '@/components';
 import { SearchDrawer } from '@/components/index';
 import {
 	HeaderZIndex,
@@ -14,15 +14,15 @@ import {
 	GridItem,
 	useDisclosure,
 } from '@chakra-ui/react';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import SearchInput from './header-components/SearchInput';
 import SearchButton from './header-components/SearchButton';
 import CartButton from './header-components/CartButton';
 import Container from './header-components/Container';
 
-type DesktopHeaderProps = BoxProps & {};
+type HeaderProps = BoxProps & {};
 
-const DesktopHeader: FC<DesktopHeaderProps> = ({ ...props }) => {
+const Header: FC<HeaderProps> = ({}) => {
 	const { header } = data;
 	const { isOpen, onOpen: onSearchDrawerOpen, onClose } = useDisclosure();
 	const {
@@ -31,27 +31,11 @@ const DesktopHeader: FC<DesktopHeaderProps> = ({ ...props }) => {
 		onClose: onCartDeawerClose,
 	} = useDisclosure();
 
-	// const { colors } = useCustomStyle();
-
 	return (
-		<Container
-			position='sticky'
-			top='0px'
-			left='0px'
-			zIndex={HeaderZIndex}
-			{...props}
-		>
-			<Grid
-				px={{
-					base: padding.layoutPadding_X_Mobile,
-					lg: padding.layoutPadding_X,
-				}}
-				templateColumns='repeat(2, 1fr)'
-				gap={2}
-				h='full'
-			>
+		<Wrapper>
+			<GridWrapper>
 				<GridItem>
-					<DesktopLogo imgSrc={header?.logo} />
+					<Logo imgSrc={header?.logo} />
 				</GridItem>
 				<GridItem>
 					<Flex justifyContent='flex-end' alignItems='center' h='full'>
@@ -60,13 +44,33 @@ const DesktopHeader: FC<DesktopHeaderProps> = ({ ...props }) => {
 						<CartButton onOpen={onCartDrawerOpen} />
 					</Flex>
 				</GridItem>
-			</Grid>
+			</GridWrapper>
 
 			{/* This drawer will open from top section */}
 			<SearchDrawer isOpen={isOpen} onClose={onClose} />
 			<CartDrawer isOpen={cartOpen} onClose={onCartDeawerClose} />
-		</Container>
+		</Wrapper>
 	);
 };
 
-export default DesktopHeader;
+export default Header;
+
+const Wrapper = ({ children }: { children: ReactNode }) => (
+	<Container position='sticky' top='0px' left='0px' zIndex={HeaderZIndex}>
+		{children}
+	</Container>
+);
+
+const GridWrapper = ({ children }: { children: ReactNode }) => (
+	<Grid
+		px={{
+			base: padding.layoutPadding_X_Mobile,
+			lg: padding.layoutPadding_X,
+		}}
+		templateColumns='1fr 1fr'
+		gap={2}
+		h='full'
+	>
+		{children}
+	</Grid>
+);

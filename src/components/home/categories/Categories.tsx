@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { FC, useRef } from 'react';
+import React, { FC, ReactNode, useRef } from 'react';
 import { Box, Center } from '@chakra-ui/react';
 import useCustomStyle from '@/hooks/useCustomStyle';
 
@@ -42,12 +42,7 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 	const swiperRef = useRef<SwiperCore>();
 
 	return (
-		<Box
-			py='4rem'
-			bg={colors.secondary}
-			borderBottom={`1px solid ${colors.primary}`}
-			position='relative'
-		>
+		<BoxWrapper>
 			<CommonTitle fontSize={{ base: '2rem', lg: '3.5rem' }} mb='4rem'>
 				Categories
 			</CommonTitle>
@@ -76,8 +71,22 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 					prev={() => swiperRef.current?.slidePrev()}
 				/>
 			</Box>
-		</Box>
+		</BoxWrapper>
 	);
 };
 
 export default Categories;
+
+const BoxWrapper = ({ children }: { children: ReactNode }) => {
+	const { colors } = useCustomStyle();
+	return (
+		<Box
+			py='4rem'
+			bg={colors.secondary}
+			borderBottom={`1px solid ${colors.primary}`}
+			position='relative'
+		>
+			{children}
+		</Box>
+	);
+};

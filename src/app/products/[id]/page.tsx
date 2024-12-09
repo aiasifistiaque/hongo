@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation';
 
 export default function Home() {
 	const { id } = useParams<{ id: string }>();
-	const { singleProduct } = data;
+	const { singleProduct, relatedProduct } = data;
 	const { colors } = useCustomStyle();
 
 	
@@ -16,11 +16,11 @@ export default function Home() {
 	return (
 		<PageLayout>
 			<SectionPadding bg={colors?.secondary}>
-				<ProductDetails id={id} data={singleProduct?.productDetails} />
+				<ProductDetails id={id} data={singleProduct} />
 			</SectionPadding>
 
 			<SectionPadding bg={colors?.secondary}>
-				<RelatedProrduct data={singleProduct?.relatedProducts} />
+				<RelatedProrduct data={relatedProduct?.doc} />
 			</SectionPadding>
 		</PageLayout>
 	);

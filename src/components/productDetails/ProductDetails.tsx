@@ -47,7 +47,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({ id, data, ...props }) => {
 					name: data?.name,
 					price: data?.price,
 					vat: 0,
-					image: data?.imgSrc,
+					image: data?.image,
 				},
 				qty: quantity,
 			})
@@ -69,7 +69,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({ id, data, ...props }) => {
 				gap={6}
 			>
 				<GridItem w='100%' h='auto' mb='4rem'>
-					<LeftPart imgSrc={data?.imgSrc} />
+					<LeftPart imgSrc={data?.image} />
 				</GridItem>
 				<GridItem w='100%' h='auto'>
 					<Box>

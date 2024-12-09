@@ -1,4 +1,4 @@
-import { DesktopHeader, SectionPadding, TopHeader } from '@/components';
+import { Header, SectionPadding, TopHeader } from '@/components';
 import React, { FC, ReactNode } from 'react';
 import { data } from '@/lib/config/data';
 import { Box } from '@chakra-ui/react';
@@ -14,7 +14,7 @@ const PageLayout: FC<LayoutProps> = ({ children }) => {
 	return (
 		<>
 			<TopHeader data={topHeader} />
-			<DesktopHeader />
+			<Header />
 			<Box minH={'80vh'}>{children}</Box>
 			<SectionPadding bg={colors.footer}>
 				<Footer data={footer} />

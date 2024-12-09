@@ -8,12 +8,14 @@ type SearchButtonProps = CenterProps & {
 	onOpen: () => void;
 };
 
+const BTN_WIDTH = { base: '2rem', md: '2.8rem' };
+
 const SearchButton: FC<SearchButtonProps> = ({ onOpen, ...props }) => {
 	const { colors } = useCustomStyle();
 	return (
 		<Center
-			w='2.8rem'
-			h='2.8rem'
+			w={BTN_WIDTH}
+			h={BTN_WIDTH}
 			borderRadius='50%'
 			backgroundColor={colors?.primary}
 			cursor='pointer'

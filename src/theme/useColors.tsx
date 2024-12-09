@@ -1,17 +1,17 @@
-import { useColorModeValue } from '@chakra-ui/react';
+// import { useColorModeValue } from '@chakra-ui/react';
 
-const useColors = (): {
-	colors: {
-		bg: string;
-		dark: string;
-	};
-} => {
-	const bg = useColorModeValue('white', '#202020');
-	const dark = useColorModeValue('#fafafa', 'black');
+// const useColors = (): {
+// 	colors: {
+// 		bg: string;
+// 		dark: string;
+// 	};
+// } => {
+// 	const bg = useColorModeValue('white', '#202020');
+// 	const dark = useColorModeValue('#fafafa', 'black');
 
-	return {
-		colors: { bg, dark },
-	};
-};
+// 	return {
+// 		colors: { bg, dark },
+// 	};
+// };
 
-export default useColors;
+// export default useColors;

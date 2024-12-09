@@ -8,7 +8,7 @@ import { data } from '@/lib/config/data';
 
 const PX = { base: '1rem', sm: '2rem', md: '3rem', lg: '15rem', xl: '20rem' };
 
-export default function Home() {
+export default function About() {
 	const { colors } = useCustomStyle();
 	return (
 		<PageLayout>
