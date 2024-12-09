@@ -1,4 +1,4 @@
-import Price from '@/components/home/products/components/Price';
+import Price from '@/components/home/products/sections/Price';
 import { CommonTitle, TextNormal } from '@/components/utils';
 import Rating from '@/components/utils/rating/Rating';
 import useCustomStyle from '@/hooks/useCustomStyle';

@@ -1,4 +1,4 @@
-import Price from '@/components/home/products/components/Price';
+import Price from '@/components/home/products/sections/Price';
 import { CheckoutButton, TextNormal } from '@/components/utils';
 import { Box, Center, DrawerFooter } from '@chakra-ui/react';
 import Link from 'next/link';

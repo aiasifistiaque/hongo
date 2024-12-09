@@ -15,3 +15,5 @@ export * from './home/index';
 
 export * from './checkout';
 export * from './common';
+export * from './invoice';
+export * from './product-carousel';

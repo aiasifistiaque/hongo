@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React, { FC, useRef } from 'react';
 import { Box, Center } from '@chakra-ui/react';
 import useCustomStyle from '@/hooks/useCustomStyle';
-import { CommonTitle } from '@/components/utils';
+
+import SwiperCore from 'swiper';
+import ProductCart from '@/components/home/products/sections/ProductCart';
 
 // Import Swiper components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
-import ProductCart from '../home/products/sections/ProductCart';
-import SwiperCore from 'swiper';
-import { cartBoxShadow, productCartHeight } from '@/lib/config/constants';
-import SwipperArrowButton from '../swiper-arrow/SwipperArrowButton';
+import SwipperArrowButton from '@/components/swiper-arrow/SwipperArrowButton';
+import { CommonTitle } from '@/components';
 
 const swiperBreakpoints = {
 	320: {
@@ -32,26 +33,24 @@ const swiperBreakpoints = {
 	},
 };
 
-type RelatedProrductProps = {
-	data: {
-		_id: string;
-		imgSrc: string;
-		productName: string;
-		price: string | number;
-		rating: number;
-		category: string;
-		stock?: number;
-	}[];
+type ProductCarouselProps = {
+	data: any;
+	title: string;
 };
 
-const RelatedProrduct: FC<RelatedProrductProps> = ({ data }) => {
-	const swiperRef = useRef<SwiperCore>();
+const ProductCarousel: FC<ProductCarouselProps> = ({ data, title }) => {
 	const { colors } = useCustomStyle();
+	const swiperRef = useRef<SwiperCore>();
 
 	return (
-		<Box py='4rem' bg={colors.secondary} position='relative'>
+		<Box
+			py='4rem'
+			bg={colors.secondary}
+			borderBottom={`1px solid ${colors.primary}`}
+			position='relative'
+		>
 			<CommonTitle fontSize={{ base: '2rem', lg: '3.5rem' }} mb='4rem'>
-				Related Products
+				{title}
 			</CommonTitle>
 			<Swiper
 				spaceBetween={20}
@@ -60,20 +59,20 @@ const RelatedProrduct: FC<RelatedProrductProps> = ({ data }) => {
 				breakpoints={swiperBreakpoints}
 				onSwiper={swiper => (swiperRef.current = swiper)}
 			>
-				{data?.map((item, i) => (
+				{data?.map((item: any, i: number) => (
 					<SwiperSlide key={i}>
-						<Center
-							bg={colors.secondary}
-							w='full'
-							h={productCartHeight}
-							boxShadow={cartBoxShadow}
-						>
+						<Center bg={colors.secondary} w='full' h='auto'>
 							<ProductCart data={item} />
 						</Center>
 					</SwiperSlide>
 				))}
 			</Swiper>
-			<Box position='absolute' top={{ base: '56px', xl: '48px' }} right='0px'>
+			<Box
+				position='absolute'
+				top={{ base: '3.25rem', lg: '1.75rem' }}
+				right='0px'
+				bg='red'
+			>
 				<SwipperArrowButton
 					next={() => swiperRef.current?.slideNext()}
 					prev={() => swiperRef.current?.slidePrev()}
@@ -83,4 +82,4 @@ const RelatedProrduct: FC<RelatedProrductProps> = ({ data }) => {
 	);
 };
 
-export default RelatedProrduct;
+export default ProductCarousel;

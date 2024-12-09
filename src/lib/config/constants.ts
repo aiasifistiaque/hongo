@@ -27,3 +27,12 @@ export const searchInputWidth = '30rem';
 
 export const CartDrawerWidth = '30rem';
 export const HeaderZIndex = '999';
+
+export const borderRadius = {
+	xs: '4px',
+	sm: '8px',
+	md: '12px',
+	lg: '16px',
+	xl: '20px',
+	xxl: '24px',
+};

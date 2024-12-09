@@ -1,4 +1,4 @@
-import Price from '@/components/home/products/components/Price';
+import Price from '@/components/home/products/sections/Price';
 import { Column, RemoveButton, TextNormal } from '@/components/utils';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { useAppDispatch } from '@/hooks/useReduxHooks';
