@@ -4,7 +4,6 @@ import { SearchDrawer } from '@/components/index';
 import {
 	HeaderZIndex,
 	padding,
-	searchInputWidth,
 } from '@/lib/config/constants';
 import { data } from '@/lib/config/data';
 import {
@@ -39,7 +38,7 @@ const Header: FC<HeaderProps> = ({}) => {
 				</GridItem>
 				<GridItem>
 					<Flex justifyContent='flex-end' alignItems='center' h='full'>
-						<SearchInput width={searchInputWidth} />
+						<SearchInput />
 						<SearchButton onOpen={onSearchDrawerOpen} />
 						<CartButton onOpen={onCartDrawerOpen} />
 					</Flex>

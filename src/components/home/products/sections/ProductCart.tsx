@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, BoxProps, Center, useToast } from '@chakra-ui/react';
 import React, { FC } from 'react';

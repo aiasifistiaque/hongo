@@ -1,21 +1,28 @@
-import { HeaderIcon } from "@/components";
-import useCustomStyle from "@/hooks/useCustomStyle";
-import { Box } from "@chakra-ui/react";
+import { Icon } from '@/components';
+import useCustomStyle from '@/hooks/useCustomStyle';
+import { Box, BoxProps, Center, CenterProps } from '@chakra-ui/react';
+import { FC } from 'react';
 
-const InputSearchIcon = () => {
-  const { colors } = useCustomStyle();
-  return (
-    <Box
-      position="absolute"
-      top="14px"
-      right="15px"
-      cursor="pointer"
-      fontSize="1.3rem"
-      color={colors.textColor}
-    >
-      <HeaderIcon name="search" />
-    </Box>
-  );
+type InputSearchIconProps = CenterProps & {};
+
+const InputSearchIcon: FC<InputSearchIconProps> = ({ ...props }) => {
+	const { colors } = useCustomStyle();
+	return (
+		<Center
+			w={'40px'}
+			h={'40px'}
+			position='absolute'
+			top='4px'
+			right='15px'
+			cursor='pointer'
+			fontSize='1.3rem'
+			color={colors.textColor}
+			userSelect='none'
+			{...props}
+		>
+			<Icon name={'search'} color={colors.dark} />
+		</Center>
+	);
 };
 
 export default InputSearchIcon;

@@ -3,7 +3,7 @@ import { Text, TextProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
 type CommonTitleProps = TextProps & {
-	children: string;
+	children: string | number;
 };
 
 const CommonTitle: FC<CommonTitleProps> = ({ children, ...props }) => {

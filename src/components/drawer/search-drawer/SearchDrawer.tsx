@@ -5,12 +5,13 @@ import {
 	DrawerContent,
 	DrawerOverlay,
 } from '@chakra-ui/react';
-import { FC, useRef } from 'react';
+import { FC, ReactNode, useRef, useState } from 'react';
 import { DrawerHeader, Flex } from '@chakra-ui/react';
 import { Column, SearchInput, TextNormal } from '@/components';
 import { SearchDrawerHeaderMaxWidth } from '@/lib/config/constants';
 import InputSearchIcon from './InputSearchIcon';
 import useCustomStyle from '@/hooks/useCustomStyle';
+import { useRouter } from 'next/navigation';
 
 type SearchDrawerProps = {
 	isOpen: boolean;
@@ -18,8 +19,28 @@ type SearchDrawerProps = {
 };
 
 const SearchDrawer: FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
+	const [searchValue, setSearchValue] = useState('');
+	const router = useRouter();
 	const btnRef = useRef<HTMLButtonElement>(null);
 	const { colors } = useCustomStyle();
+
+	const handleSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchValue(e.target.value);
+	};
+
+	const handleSearchPage = () => {
+		if (searchValue.trim()) {
+			router.push(`/search?value=${encodeURIComponent(searchValue.trim())}`);
+		} else {
+			alert('Please enter a search value'); // Replace with better UX if needed
+		}
+	};
+
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') {
+			handleSearchPage();
+		}
+	};
 
 	return (
 		<Drawer
@@ -34,22 +55,20 @@ const SearchDrawer: FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 
 				{/* <SearchDrawerHeader /> */}
 				<DrawerHeader m={0}>
-					<Column
-						alignItems='center'
-						maxW={SearchDrawerHeaderMaxWidth}
-						m={{ base: '1.5rem auto', md: '4.5rem auto' }}
-						h='full'
-					>
+					<ColumnComponent>
 						<Flex w='full' position='relative'>
-							<SearchInput type='text' placeholder='I am looking for...' />
-							<InputSearchIcon />
+							<SearchInput
+								onKeyDown={handleKeyDown}
+								handleSearchValue={handleSearchValue}
+							/>
+							<InputSearchIcon onClick={handleSearchPage} />
 						</Flex>
 						<Flex>
 							<TextNormal mr='12px' color={colors.textColor}>
 								Quick Search:
 							</TextNormal>
 						</Flex>
-					</Column>
+					</ColumnComponent>
 				</DrawerHeader>
 			</DrawerContent>
 		</Drawer>
@@ -57,3 +76,14 @@ const SearchDrawer: FC<SearchDrawerProps> = ({ isOpen, onClose }) => {
 };
 
 export default SearchDrawer;
+
+const ColumnComponent = ({ children }: { children: ReactNode }) => (
+	<Column
+		alignItems='center'
+		maxW={SearchDrawerHeaderMaxWidth}
+		m={{ base: '1.5rem auto', md: '4.5rem auto' }}
+		h='full'
+	>
+		{children}
+	</Column>
+);
