@@ -9,14 +9,9 @@ import SubmitButton from '@/components/contact/SubmitButton';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import Container from '@/components/contact/Container';
 import { data } from '@/lib/config/data';
-import {
-	FormControl,
-	FormLabel,
-	Grid,
-	GridItem,
-	Textarea,
-} from '@chakra-ui/react';
+import { FormControl, FormLabel, Grid, GridItem, Textarea } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useColors } from '@/hooks';
 
 export default function Home() {
 	const [formData, setFormData] = useState({
@@ -24,7 +19,7 @@ export default function Home() {
 		email: '',
 		message: '',
 	});
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 
 	const handleFormData = (key: string, value: string) => {
 		setFormData(prev => ({
@@ -34,27 +29,35 @@ export default function Home() {
 	};
 
 	return (
-		<PageLayout>
+		<PageLayout isLoading={false}>
 			{/* Slider */}
 			<SmallBanner bannarData={data?.contact?.banner} />
 			{/* Slider Bottom */}
-			<SectionPadding py='8rem' bg={colors?.secondary}>
+			<SectionPadding
+				py='8rem'
+				bg={colors?.bg}>
 				<Container>
-					<Grid w='full' h='auto' templateColumns='repeat(8, 1fr)' gap={2}>
+					<Grid
+						w='full'
+						h='auto'
+						templateColumns='repeat(8, 1fr)'
+						gap={2}>
 						<GridItem
 							colSpan={3}
 							w='100%'
 							h='32rem'
-							display={{ base: 'none', lg: 'block' }}
-						>
+							display={{ base: 'none', lg: 'block' }}>
 							<ImagePart imgSrc='/contact/contact.webp' />
 						</GridItem>
-						<GridItem p='2rem' colSpan={{ base: 8, lg: 5 }} w='100%' h='32rem'>
+						<GridItem
+							p='2rem'
+							colSpan={{ base: 8, lg: 5 }}
+							w='100%'
+							h='32rem'>
 							<TextNormal
 								fontWeight='600'
 								fontSize={{ base: '1.5rem', lg: '2rem' }}
-								mb='.4rem'
-							>
+								mb='.4rem'>
 								Contact Form
 							</TextNormal>
 							<InputContainer
@@ -74,9 +77,7 @@ export default function Home() {
 							<FormControl mb='1.2rem'>
 								<FormLabel>Comment or message</FormLabel>
 								<Textarea
-									onChange={(e: any) =>
-										handleFormData('message', e.target.value)
-									}
+									onChange={(e: any) => handleFormData('message', e.target.value)}
 									placeholder='Here is a sample placeholder'
 								/>
 							</FormControl>

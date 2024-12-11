@@ -6,7 +6,7 @@ export const storeApi = mainApi.injectEndpoints({
 	endpoints: builder => ({
 		getStore: builder.query({
 			query: () => ({
-				url: `/store`,
+				url: `/store/hongo`,
 			}),
 			// providesTags: (_result, _error, { path }) => [path],
 		}),

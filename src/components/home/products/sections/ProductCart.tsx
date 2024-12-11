@@ -6,6 +6,7 @@ import { CartHeader, CartBody, CartButton } from './index';
 import { addToCart } from '@/store/slices/cartSlice';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
+import { useColors } from '@/hooks';
 
 type ProductCartProps = BoxProps & {
 	data: any;
@@ -14,6 +15,7 @@ type ProductCartProps = BoxProps & {
 const ProductCart: FC<ProductCartProps> = ({ data, ...props }) => {
 	const dispatch = useDispatch();
 	const toast = useToast();
+	const colors = useColors();
 
 	const handleAddToCart = () => {
 		dispatch(
@@ -37,12 +39,18 @@ const ProductCart: FC<ProductCartProps> = ({ data, ...props }) => {
 	};
 
 	return (
-		<Box w='full' {...props}>
+		<Box
+			bg={colors.cardBg}
+			w='full'
+			borderRadius={`${colors.cardRadius}px`}
+			{...props}>
 			<Link href={`/products/${data?._id}`}>
 				<CartHeader imgSrc={data?.image} />
 				<CartBody data={data} />
 			</Link>
-			<Center mt='auto' p='.8rem'>
+			<Center
+				mt='auto'
+				p='.8rem'>
 				<CartButton onClick={handleAddToCart}>Add to Cart</CartButton>
 			</Center>
 		</Box>

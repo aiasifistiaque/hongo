@@ -1,19 +1,15 @@
 import { Center, Flex, TextProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { Icon } from '../icon';
-import useCustomStyle from '@/hooks/useCustomStyle';
+import { useColors } from '@/hooks';
 
 type SwipperArrowButtonProps = TextProps & {
 	prev: () => void;
 	next: () => void;
 };
 
-const SwipperArrowButton: FC<SwipperArrowButtonProps> = ({
-	prev,
-	next,
-	...props
-}) => {
-	const { colors } = useCustomStyle();
+const SwipperArrowButton: FC<SwipperArrowButtonProps> = ({ prev, next, ...props }) => {
+	const colors = useColors();
 	return (
 		<Center
 			w={{ base: '5rem', lg: '8rem' }}
@@ -24,8 +20,7 @@ const SwipperArrowButton: FC<SwipperArrowButtonProps> = ({
 			top='0px'
 			justifyContent='space-between'
 			userSelect='none'
-			{...props}
-		>
+			{...props}>
 			<Flex
 				bg='transparent'
 				justifyContent='center'
@@ -36,9 +31,12 @@ const SwipperArrowButton: FC<SwipperArrowButtonProps> = ({
 				borderRadius='full'
 				zIndex='10'
 				onClick={prev}
-				border={`1px solid ${colors?.primary}`}
-			>
-				<Icon name='arrow-left' color={colors?.primary} size={40} />
+				border={`1px solid ${colors?.brand}`}>
+				<Icon
+					name='arrow-left'
+					color={colors?.brand}
+					size={40}
+				/>
 			</Flex>
 			<Flex
 				bg='transparent'
@@ -50,9 +48,12 @@ const SwipperArrowButton: FC<SwipperArrowButtonProps> = ({
 				borderRadius='full'
 				zIndex='10'
 				onClick={next}
-				border={`1px solid ${colors?.primary}`}
-			>
-				<Icon name='arrow-right' color={colors?.primary} size={40} />
+				border={`1px solid ${colors?.brand}`}>
+				<Icon
+					name='arrow-right'
+					color={colors?.brand}
+					size={40}
+				/>
 			</Flex>
 		</Center>
 	);

@@ -2,6 +2,7 @@ import { Box, BoxProps, Center } from '@chakra-ui/react';
 import { Overlay, TextNormal } from '@/components';
 import { FC, ReactNode } from 'react';
 import useCustomStyle from '@/hooks/useCustomStyle';
+import { useColors } from '@/hooks';
 type SmallBannerProps = {
 	bannarData?: {
 		imgSrc?: string;
@@ -10,12 +11,17 @@ type SmallBannerProps = {
 };
 
 const SmallBanner: FC<SmallBannerProps> = ({ bannarData }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
 		<BannerWrapper backgroundImage={`url(${bannarData?.imgSrc})`}>
-			<Center w='full' h='full'>
-				<Overlay bg={colors?.overlay} />
-				<TextNormal zIndex={'3'} fontSize='3rem' color={colors?.white}>
+			<Center
+				w='full'
+				h='full'>
+				{/* <Overlay bg={colors?.overlay} /> */}
+				<TextNormal
+					zIndex={'3'}
+					fontSize='3rem'
+					color={colors?.primaryText}>
 					{bannarData?.text}
 				</TextNormal>
 			</Center>
@@ -25,10 +31,7 @@ const SmallBanner: FC<SmallBannerProps> = ({ bannarData }) => {
 
 export default SmallBanner;
 
-const BannerWrapper = ({
-	children,
-	...props
-}: BoxProps & { children: ReactNode }) => {
+const BannerWrapper = ({ children, ...props }: BoxProps & { children: ReactNode }) => {
 	return (
 		<Box
 			w='full'
@@ -37,8 +40,7 @@ const BannerWrapper = ({
 			backgroundSize='cover'
 			backgroundRepeat='no-repeat'
 			position='relative'
-			{...props}
-		>
+			{...props}>
 			{children}
 		</Box>
 	);

@@ -1,4 +1,4 @@
-import useCustomStyle from '@/hooks/useCustomStyle';
+import { useColors } from '@/hooks';
 import { Button, ButtonProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
@@ -7,18 +7,15 @@ type RemoveButtonProps = ButtonProps & {
 };
 
 const RemoveButton: FC<RemoveButtonProps> = ({ children, ...props }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
 		<Button
-			color={colors?.white}
-			bg={colors?.danger}
+			colorScheme='red'
 			transition='.4s'
 			fontSize='.875rem'
 			p={2}
 			h='auto'
-			_hover={{ backgroundColor: colors?.deepDanger }}
-			{...props}
-		>
+			{...props}>
 			{children}
 		</Button>
 	);

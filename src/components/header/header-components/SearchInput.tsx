@@ -5,6 +5,7 @@ import { Center, CenterProps, Input, InputProps } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { searchInputWidth } from '@/lib/config/constants';
 import React, { FC, ReactNode, useState } from 'react';
+import { useColors } from '@/hooks';
 
 type SearchInputProps = CenterProps & {};
 
@@ -30,6 +31,8 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 		}
 	};
 
+	const colors = useColors();
+
 	return (
 		<Container {...props}>
 			<SearchInputField
@@ -37,7 +40,10 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 				onChange={handleSearchValue}
 			/>
 			<SearchButton onClick={handleSearchPage}>
-				<Icon name='search' />
+				<Icon
+					name='search'
+					color={colors?.brand}
+				/>
 			</SearchButton>
 		</Container>
 	);
@@ -45,24 +51,21 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 
 export default SearchInput;
 
-const Container = ({
-	children,
-	...props
-}: CenterProps & { children: ReactNode }) => {
+const Container = ({ children, ...props }: CenterProps & { children: ReactNode }) => {
 	return (
 		<Center
 			position='relative'
 			mr='16px'
 			display={{ base: 'none', lg: 'flex' }}
 			w={searchInputWidth}
-			{...props}
-		>
+			{...props}>
 			{children}
 		</Center>
 	);
 };
 
 const SearchInputField = ({ ...props }: InputProps & {}) => {
+	const colors = useColors();
 	return (
 		<Input
 			pr='4rem'
@@ -70,16 +73,17 @@ const SearchInputField = ({ ...props }: InputProps & {}) => {
 			placeholder='Search your desired products'
 			borderRadius={InputRadius}
 			w={searchInputWidth}
+			borderColor={colors?.brand}
+			color={colors?.primaryText}
 			py='1.5rem'
 			{...props}
 		/>
 	);
 };
 
-const SearchButton = ({
-	children,
-	...props
-}: CenterProps & { children: ReactNode }) => {
+const SearchButton = ({ children, ...props }: CenterProps & { children: ReactNode }) => {
+	const colors = useColors();
+
 	return (
 		<Center
 			w='40px'
@@ -89,8 +93,7 @@ const SearchButton = ({
 			right='12px'
 			cursor='pointer'
 			userSelect='none'
-			{...props}
-		>
+			{...props}>
 			{children}
 		</Center>
 	);

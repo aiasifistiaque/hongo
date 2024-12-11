@@ -1,32 +1,23 @@
 'use client';
-import {
-	CommonTitle,
-	PageLayout,
-	Products,
-	SectionPadding,
-} from '@/components';
-import useCustomStyle from '@/hooks/useCustomStyle';
+import { CommonTitle, PageLayout, Products, SectionPadding } from '@/components';
 import { data } from '@/lib/config/data';
 import React, { ReactNode } from 'react';
-// import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useColors } from '@/hooks';
 
 const FONT_SIZE = { base: '1rem', md: '2rem', lg: '2.8rem' };
 
 const SearchPage = () => {
-	// const searchParams = useSearchParams();
-	// const searchValue = searchParams.get('value');
-
 	const { productsBySearch } = data;
 	return (
-		<PageLayout>
+		<PageLayout isLoading={false}>
 			<SectionWrapper>
 				<CommonTitle
 					textAlign='center'
-					fontSize={FONT_SIZE}
-				>{`Search: ${6} result found for adfdf`}</CommonTitle>
+					fontSize={FONT_SIZE}>{`Search: ${6} result found for adfdf`}</CommonTitle>
 			</SectionWrapper>
 			<SectionWrapper>
-				<Products data={productsBySearch?.doc} />
+				<Products search={''} />
 			</SectionWrapper>
 		</PageLayout>
 	);
@@ -35,9 +26,11 @@ const SearchPage = () => {
 export default SearchPage;
 
 const SectionWrapper = ({ children }: { children: ReactNode }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
-		<SectionPadding py='2rem' bg={colors?.secondary}>
+		<SectionPadding
+			py='2rem'
+			bg={colors?.bg}>
 			{children}
 		</SectionPadding>
 	);

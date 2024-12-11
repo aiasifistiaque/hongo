@@ -18,6 +18,7 @@ import CartItem from './components/CartItem';
 import { CartDrawerWidth } from '@/lib/config/constants';
 
 import CartDrawerFooter from './components/CartDrawerFooter';
+import { useColors } from '@/hooks';
 
 type CartDrawerProps = {
 	isOpen: boolean;
@@ -26,7 +27,7 @@ type CartDrawerProps = {
 
 const CartDrawer: FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 	const btnRef = useRef<HTMLButtonElement>(null);
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	// const { isLoggedIn } = useAuth();
 	const { cartItems, subTotal } = useAppSelector(state => state.cart);
 
@@ -35,26 +36,31 @@ const CartDrawer: FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 			isOpen={isOpen}
 			placement='right'
 			onClose={onClose}
-			finalFocusRef={btnRef}
-		>
+			finalFocusRef={btnRef}>
 			<DrawerOverlay />
-			<DrawerContent maxW={CartDrawerWidth}>
+			<DrawerContent
+				maxW={CartDrawerWidth}
+				bg={colors?.bg}>
 				<DrawerCloseButton />
 
 				{/* <SearchDrawerHeader /> */}
 				<DrawerHeader m={0}>
-					<CommonTitle fontSize='1.5rem' color={colors?.black}>
+					<CommonTitle
+						fontSize='1.5rem'
+						color={colors?.primaryText}>
 						Shopping Cart
 					</CommonTitle>
 				</DrawerHeader>
 				<DrawerBody
-					borderBottom={`1px solid ${colors?.primary}`}
+					borderBottom={`1px solid ${colors?.border}`}
 					maxH='70vh'
-					overflowY='scroll'
-				>
+					overflowY='scroll'>
 					<Column py='.5rem'>
 						{cartItems?.map((item: CartItemProps, i: number) => (
-							<CartItem key={i} {...item} />
+							<CartItem
+								key={i}
+								{...item}
+							/>
 						))}
 					</Column>
 				</DrawerBody>

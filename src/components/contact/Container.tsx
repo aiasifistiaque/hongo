@@ -1,5 +1,6 @@
+import { useColors } from '@/hooks';
 import useCustomStyle from '@/hooks/useCustomStyle';
-import { Center, FlexProps} from '@chakra-ui/react';
+import { Center, FlexProps } from '@chakra-ui/react';
 import React, { FC, ReactNode } from 'react';
 
 type ContainerProps = FlexProps & {
@@ -7,17 +8,16 @@ type ContainerProps = FlexProps & {
 };
 
 const Container: FC<ContainerProps> = ({ children, ...props }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
 		<Center
 			w={{ base: 'auto', lg: '58rem' }}
 			h='auto'
 			mx='auto'
-			borderRadius='3rem'
-			bg={colors?.white}
+			borderRadius='4px'
+			bg={colors?.cardBg}
 			overflow='hidden'
-			{...props}
-		>
+			{...props}>
 			{children}
 		</Center>
 	);

@@ -1,5 +1,4 @@
-'use client';
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, BoxProps, Grid, GridItem } from '@chakra-ui/react';
 import { productCartHeight, cartBoxShadow } from '@/lib/config/constants';
 import { useGetAllQuery } from '@/store/services/commonApi';
@@ -17,17 +16,11 @@ const TEMPLATE_COLUMNS = {
 };
 
 type ProductsProps = BoxProps & {
-	search?: string;
+	data: any;
 };
 
-const Products: FC<ProductsProps> = ({ search, ...props }) => {
+const GetProducts: FC<ProductsProps> = ({ data, ...props }) => {
 	const colors = useColors();
-
-	const { data } = useGetAllQuery({
-		path: 'products',
-		limit: 8,
-		search: search,
-	});
 
 	if (!data) return null;
 
@@ -57,4 +50,4 @@ const Products: FC<ProductsProps> = ({ search, ...props }) => {
 	);
 };
 
-export default Products;
+export default GetProducts;

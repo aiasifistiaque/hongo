@@ -3,21 +3,18 @@ import { Column, RemoveButton, TextNormal } from '@/components/utils';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { useAppDispatch } from '@/hooks/useReduxHooks';
 import { CartItemProps } from '@/lib/types/ProductTypes';
-import {
-	addToCart,
-	deleteOneFromCart,
-	deleteSingleItemFromCart,
-} from '@/store/slices/cartSlice';
+import { addToCart, deleteOneFromCart, deleteSingleItemFromCart } from '@/store/slices/cartSlice';
 import { Box, Button, Center, Flex } from '@chakra-ui/react';
 import React from 'react';
 import ProductImage from './ProductImage';
+import { useColors } from '@/hooks';
 
 const CartItem = ({ image, id, name, price, qty }: CartItemProps) => {
 	const dispatch = useAppDispatch();
 	const handleRemove = () => {
 		dispatch(deleteSingleItemFromCart(id));
 	};
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 
 	const handleAdd = () => {
 		dispatch(
@@ -42,20 +39,30 @@ const CartItem = ({ image, id, name, price, qty }: CartItemProps) => {
 			w='full'
 			justifyContent='space-between'
 			alignItems='center'
-			borderBottom={`1px solid ${colors?.primary}`}
-			py='1rem'
-		>
-			<Flex alignItems='center' h='full' w='full'>
+			borderBottom={`1px solid ${colors?.border}`}
+			py='1rem'>
+			<Flex
+				alignItems='center'
+				h='full'
+				w='full'>
 				<ProductImage imgSrc={image} />
-				<Column w='full' h='full' justifyContent='center'>
+				<Column
+					w='full'
+					h='full'
+					justifyContent='center'>
 					<TextNormal>{name}</TextNormal>
 					<Flex>
-						<Price fontSize='.85rem' price={price} />
+						<Price
+							fontSize='.85rem'
+							price={price}
+						/>
 					</Flex>
 				</Column>
 			</Flex>
 
-			<Column w='auto' alignItems='center'>
+			<Column
+				w='auto'
+				alignItems='center'>
 				<Flex mb={2}>
 					<Button onClick={handleRemoveOne}>-</Button>
 					<Center width='2rem'>

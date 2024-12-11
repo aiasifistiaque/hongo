@@ -14,6 +14,8 @@ import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
 import SwipperArrowButton from '@/components/swiper-arrow/SwipperArrowButton';
 import { CommonTitle } from '@/components';
+import { useColors } from '@/hooks';
+import { useGetAllQuery } from '@/store/services/commonApi';
 
 const swiperBreakpoints = {
 	320: {
@@ -34,22 +36,35 @@ const swiperBreakpoints = {
 };
 
 type ProductCarouselProps = {
-	data: any;
-	title: string;
+	item: any;
 };
 
-const ProductCarousel: FC<ProductCarouselProps> = ({ data, title }) => {
-	const { colors } = useCustomStyle();
+const ProductCarousel: FC<ProductCarouselProps> = ({ item }) => {
+	const { border } = useColors();
 	const swiperRef = useRef<SwiperCore>();
+
+	const { type, id, title } = item;
+
+	const { data, isFetching } = useGetAllQuery({
+		path: 'products',
+		filters: {
+			...(type == 'category' && { category_in: id }),
+			...(type == 'collection' && { collection_in: id }),
+			limit: 10,
+			sort: 'priority',
+		},
+	});
+
+	if (isFetching) return null;
 
 	return (
 		<Box
 			py='4rem'
-			bg={colors.secondary}
-			borderBottom={`1px solid ${colors.primary}`}
-			position='relative'
-		>
-			<CommonTitle fontSize={{ base: '2rem', lg: '3.5rem' }} mb='4rem'>
+			borderBottom={`1px solid ${border}`}
+			position='relative'>
+			<CommonTitle
+				fontSize={{ base: '2rem', lg: '3.5rem' }}
+				mb='4rem'>
 				{title}
 			</CommonTitle>
 			<Swiper
@@ -57,12 +72,13 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ data, title }) => {
 				pagination={{ clickable: true }}
 				modules={[Pagination]}
 				breakpoints={swiperBreakpoints}
-				onSwiper={swiper => (swiperRef.current = swiper)}
-			>
-				{data?.map((item: any, i: number) => (
+				onSwiper={swiper => (swiperRef.current = swiper)}>
+				{data?.doc?.map((product: any, i: number) => (
 					<SwiperSlide key={i}>
-						<Center bg={colors.secondary} w='full' h='auto'>
-							<ProductCart data={item} />
+						<Center
+							w='full'
+							h='auto'>
+							<ProductCart data={product} />
 						</Center>
 					</SwiperSlide>
 				))}
@@ -71,8 +87,7 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ data, title }) => {
 				position='absolute'
 				top={{ base: '3.25rem', lg: '1.75rem' }}
 				right='0px'
-				bg='red'
-			>
+				bg='red'>
 				<SwipperArrowButton
 					next={() => swiperRef.current?.slideNext()}
 					prev={() => swiperRef.current?.slidePrev()}

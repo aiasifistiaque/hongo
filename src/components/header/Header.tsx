@@ -1,23 +1,15 @@
 'use client';
 import { CartDrawer, Logo } from '@/components';
 import { SearchDrawer } from '@/components/index';
-import {
-	HeaderZIndex,
-	padding,
-} from '@/lib/config/constants';
+import { HeaderZIndex, padding } from '@/lib/config/constants';
 import { data } from '@/lib/config/data';
-import {
-	BoxProps,
-	Flex,
-	Grid,
-	GridItem,
-	useDisclosure,
-} from '@chakra-ui/react';
+import { BoxProps, Flex, Grid, GridItem, useDisclosure } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import SearchInput from './header-components/SearchInput';
 import SearchButton from './header-components/SearchButton';
 import CartButton from './header-components/CartButton';
 import Container from './header-components/Container';
+import { useColors, useContent } from '@/hooks';
 
 type HeaderProps = BoxProps & {};
 
@@ -30,14 +22,19 @@ const Header: FC<HeaderProps> = ({}) => {
 		onClose: onCartDeawerClose,
 	} = useDisclosure();
 
+	const { content, basic } = useContent();
+
 	return (
 		<Wrapper>
 			<GridWrapper>
 				<GridItem>
-					<Logo imgSrc={header?.logo} />
+					<Logo imgSrc={basic?.logo} />
 				</GridItem>
 				<GridItem>
-					<Flex justifyContent='flex-end' alignItems='center' h='full'>
+					<Flex
+						justifyContent='flex-end'
+						alignItems='center'
+						h='full'>
 						<SearchInput />
 						<SearchButton onOpen={onSearchDrawerOpen} />
 						<CartButton onOpen={onCartDrawerOpen} />
@@ -46,19 +43,35 @@ const Header: FC<HeaderProps> = ({}) => {
 			</GridWrapper>
 
 			{/* This drawer will open from top section */}
-			<SearchDrawer isOpen={isOpen} onClose={onClose} />
-			<CartDrawer isOpen={cartOpen} onClose={onCartDeawerClose} />
+			<SearchDrawer
+				isOpen={isOpen}
+				onClose={onClose}
+			/>
+			<CartDrawer
+				isOpen={cartOpen}
+				onClose={onCartDeawerClose}
+			/>
 		</Wrapper>
 	);
 };
 
 export default Header;
 
-const Wrapper = ({ children }: { children: ReactNode }) => (
-	<Container position='sticky' top='0px' left='0px' zIndex={HeaderZIndex}>
-		{children}
-	</Container>
-);
+const Wrapper = ({ children }: { children: ReactNode }) => {
+	const colors = useColors();
+	return (
+		<Container
+			borderBottom={`1px solid ${colors?.headerBorder}`}
+			bg={colors?.headerBg}
+			color={colors?.headerFg}
+			position='sticky'
+			top='0px'
+			left='0px'
+			zIndex={HeaderZIndex}>
+			{children}
+		</Container>
+	);
+};
 
 const GridWrapper = ({ children }: { children: ReactNode }) => (
 	<Grid
@@ -68,8 +81,7 @@ const GridWrapper = ({ children }: { children: ReactNode }) => (
 		}}
 		templateColumns='1fr 1fr'
 		gap={2}
-		h='full'
-	>
+		h='full'>
 		{children}
 	</Grid>
 );

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useColors } from '@/hooks';
 import useCustomStyle from '@/hooks/useCustomStyle';
 
 import { FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react';
@@ -21,7 +22,7 @@ const FormField: FC<FormFieldProps> = ({
 	placeholder,
 	onChange,
 }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
@@ -30,7 +31,7 @@ const FormField: FC<FormFieldProps> = ({
 					placeholder={placeholder}
 					value={value}
 					onChange={e => onChange(e.target.value)}
-					border={`1px solid ${colors?.borderColor}`}
+					border={`1px solid ${colors?.brand}`}
 					rows={5}
 				/>
 			) : (
@@ -38,10 +39,8 @@ const FormField: FC<FormFieldProps> = ({
 					type={type}
 					placeholder={placeholder}
 					value={value}
-					border={`1px solid ${colors?.borderColor}`}
-					onChange={e =>
-						onChange(type === 'number' ? +e.target.value : e.target.value)
-					}
+					border={`1px solid ${colors?.brand}`}
+					onChange={e => onChange(type === 'number' ? +e.target.value : e.target.value)}
 				/>
 			)}
 		</FormControl>

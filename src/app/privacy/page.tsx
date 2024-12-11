@@ -3,11 +3,12 @@ import { PageLayout, SectionPadding, TextNormal } from '@/components';
 import Quote from '@/components/about/Quote';
 import SmallBanner from '@/components/banner/SmallBanner';
 import PrivacyData from '@/components/privacy/PrivacyData';
+import { useColors } from '@/hooks';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { data } from '@/lib/config/data';
 
 export default function Home() {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 
 	const privacy = data?.privacy;
 	return (
@@ -18,13 +19,11 @@ export default function Home() {
 			<SectionPadding
 				px={{ base: '1rem', sm: '2rem', md: '3rem', lg: '15rem', xl: '20rem' }}
 				py='3rem'
-				bg={colors?.secondary}
-			>
+				bg={colors?.bg}>
 				<TextNormal
 					fontWeight='600'
 					fontSize={{ base: '2rem', lg: '3rem' }}
-					mb='2rem'
-				>
+					mb='2rem'>
 					Privacy Policy
 				</TextNormal>
 				<TextNormal mb='1.5rem'>{privacy?.overview}</TextNormal>

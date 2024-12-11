@@ -5,21 +5,34 @@ import { TextBold, TextNormal } from '@/components';
 
 type ServiceCartProps = {
 	data: {
-		imgSrc: string;
+		image: string;
 		title: string;
-		text: string;
+		description: string;
 	};
 };
 
 const ServiceCart: FC<ServiceCartProps> = ({ data }) => {
 	return (
-		<Flex w='full' h='full' alignItems='center' p='1rem'>
-			<Flex w='100px' h='100px' mr='12px'>
-				<Image w='full' h='full' src={data?.imgSrc} alt='Logo Image' />
+		<Flex
+			w='full'
+			h='full'
+			alignItems='center'
+			p={4}
+			gap={3}>
+			<Flex
+				w='100px'
+				h='100px'>
+				<Image
+					w='full'
+					h='full'
+					objectFit='contain'
+					src={data?.image}
+					alt={data?.title}
+				/>
 			</Flex>
 			<Flex flexDir='column'>
 				<TextBold fontSize='1.25rem'>{data?.title}</TextBold>
-				<TextNormal fontSize='1rem'>{data?.text}</TextNormal>
+				<TextNormal fontSize='1rem'>{data?.description}</TextNormal>
 			</Flex>
 		</Flex>
 	);

@@ -6,18 +6,33 @@ import { Box, FlexProps } from '@chakra-ui/react';
 
 import React, { FC } from 'react';
 import Price from './Price';
+import { useColors } from '@/hooks';
 type CartBodyProps = FlexProps & {
 	data: any;
 };
 
 const CartBody: FC<CartBodyProps> = ({ data, ...props }) => {
+	const colors = useColors();
 	return (
-		<Column alignItems='center' gap={2} p='.8rem' {...props}>
-			<TextNormal fontSize='1.2rem'>{data?.name}</TextNormal>
+		<Column
+			bg={colors.cardBg}
+			alignItems='center'
+			gap={2}
+			p='.8rem'
+			{...props}>
+			<TextNormal
+				noOfLines={2}
+				fontSize='1.2rem'>
+				{data?.name}
+			</TextNormal>
 			<Box>
 				<Rating ratingValue={data?.rating || '3'} />
 			</Box>
-			<Price fontWeight='bold' fontSize='1rem' price={data?.price} />
+			<Price
+				fontWeight='bold'
+				fontSize='1rem'
+				price={data?.price.toLocaleString()}
+			/>
 		</Column>
 	);
 };

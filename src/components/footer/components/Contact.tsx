@@ -1,11 +1,11 @@
 import { TextNormal, Icon } from '@/components';
-import useCustomStyle from '@/hooks/useCustomStyle';
+import { useColors, useContent } from '@/hooks';
 import { Box, BoxProps, Flex } from '@chakra-ui/react';
 
 import React, { FC } from 'react';
 
 type ContactProps = BoxProps & {
-	data: {
+	data?: {
 		label: string;
 		address: string;
 		phone: string;
@@ -13,29 +13,54 @@ type ContactProps = BoxProps & {
 	};
 };
 
-const Contact: FC<ContactProps> = ({ data, ...props }) => {
-	const { colors } = useCustomStyle();
+const Contact: FC<ContactProps> = ({ ...props }) => {
+	const colors = useColors();
+	const content: any = useContent();
+
 	return (
-		<Box color={colors?.white} {...props}>
+		<Box
+			color={colors?.footerFg}
+			{...props}>
 			<TextNormal
 				mb='1rem'
 				fontWeight='600'
 				fontSize='2rem'
-				color={colors?.white}
-			>
-				{data?.label}
+				color={colors?.footerFg}>
+				Contact Us
 			</TextNormal>
-			<Flex mb={3} alignItems='center' gap={2}>
-				<Icon color={colors?.white} size={16} name='map' />
-				<TextNormal color={colors?.lightWhite}>{data?.address}</TextNormal>
+			<Flex
+				mb={3}
+				alignItems='center'
+				gap={2}>
+				<Icon
+					color={colors?.footerFg}
+					size={16}
+					name='map'
+				/>
+
+				<TextNormal color={colors?.footerFg}>{content?.data?.shop?.address}</TextNormal>
 			</Flex>
-			<Flex mb={3} alignItems='center' gap={2}>
-				<Icon color={colors?.white} size={16} name='phone' />
-				<TextNormal color={colors?.lightWhite}>{data?.phone}</TextNormal>
+			<Flex
+				mb={3}
+				alignItems='center'
+				gap={2}>
+				<Icon
+					color={colors?.footerFg}
+					size={16}
+					name='phone'
+				/>
+				<TextNormal color={colors?.footerFg}>{content?.basic?.phone}</TextNormal>
 			</Flex>
-			<Flex mb={3} alignItems='center' gap={2}>
-				<Icon color={colors?.white} size={16} name='envelope' />
-				<TextNormal color={colors?.lightWhite}>{data?.mail}</TextNormal>
+			<Flex
+				mb={3}
+				alignItems='center'
+				gap={2}>
+				<Icon
+					color={colors?.footerFg}
+					size={16}
+					name='envelope'
+				/>
+				<TextNormal color={colors?.footerFg}>{content?.basic?.email}</TextNormal>
 			</Flex>
 		</Box>
 	);

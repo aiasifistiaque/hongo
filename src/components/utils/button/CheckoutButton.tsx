@@ -1,3 +1,4 @@
+import { useColors } from '@/hooks';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { Button, ButtonProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
@@ -7,18 +8,23 @@ type CartTitleProps = ButtonProps & {
 };
 
 const CartTitle: FC<CartTitleProps> = ({ children, ...props }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
 		<Button
-			color={colors?.white}
+			color={colors?.btnTextColor}
 			py='1.4rem'
 			transition='.4s'
-			_hover={{ backgroundColor: colors?.black }}
-			bg={colors?.dark}
+			borderWidth={1}
+			borderColor={colors?.btnColor}
+			_hover={{
+				backgroundColor: 'transparent',
+				color: colors?.btnColor,
+				borderColor: colors?.btnColor,
+			}}
+			bg={colors?.btnColor}
 			w='full'
 			borderRadius='full'
-			{...props}
-		>
+			{...props}>
 			{children}
 		</Button>
 	);

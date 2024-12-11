@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
+
 import { BoxProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
 import Container from './components/Container';
 import BannerImage from './components/BannerImage';
 import BannerContent from './components/BannerContent';
+import { useContent } from '@/hooks';
 
 // import { HeaderIcon } from '@/components';
 type BannerProps = BoxProps & {
@@ -12,9 +14,10 @@ type BannerProps = BoxProps & {
 };
 
 const Banner: FC<BannerProps> = ({ data, ...props }) => {
+	const { content } = useContent();
 	return (
 		<Container {...props}>
-			<BannerImage imgSrc={data?.imgSrc} />
+			<BannerImage imgSrc={content?.hero?.image} />
 			<BannerContent data={data} />
 		</Container>
 	);

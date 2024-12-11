@@ -1,3 +1,4 @@
+import { useColors } from '@/hooks';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { Button, ButtonProps } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
@@ -8,17 +9,15 @@ type IconButtonProps = ButtonProps & {
 };
 
 const IconButton: FC<IconButtonProps> = ({ leftIcon, children, ...props }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
 		<Button
 			border='none'
 			leftIcon={leftIcon}
-			color={colors?.white}
+			color='white'
 			fontSize='1rem'
 			bg={colors?.dark}
-			_hover={{ backgroundColor: colors.dark }}
-			{...props}
-		>
+			{...props}>
 			{children}
 		</Button>
 	);

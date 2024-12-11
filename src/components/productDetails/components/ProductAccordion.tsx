@@ -5,6 +5,7 @@ import React, { FC } from 'react';
 import Description from './Description';
 import Shipping from './Shipping';
 import Additional from './Additional';
+import { useColors } from '@/hooks';
 
 type ProductAccordionProps = AccordionProps & {
 	description: any;
@@ -18,27 +19,26 @@ const ProductAccordion: FC<ProductAccordionProps> = ({
 	additionalInformation,
 	...props
 }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
-		<Accordion allowToggle {...props}>
+		<Accordion
+			allowToggle
+			{...props}>
 			<AccordionItem
 				border='none'
-				borderBottom={`1px solid ${colors?.primary}`}
-			>
+				borderBottom={`1px solid ${colors?.border}`}>
 				<Description description={description} />
 			</AccordionItem>
 
 			<AccordionItem
 				border='none'
-				borderBottom={`1px solid ${colors?.primary}`}
-			>
+				borderBottom={`1px solid ${colors?.border}`}>
 				<Shipping shipping={shipping} />
 			</AccordionItem>
 
 			<AccordionItem
 				border='none'
-				borderBottom={`1px solid ${colors?.primary}`}
-			>
+				borderBottom={`1px solid ${colors?.border}`}>
 				<Additional additional={additionalInformation} />
 			</AccordionItem>
 		</Accordion>

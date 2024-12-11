@@ -1,6 +1,5 @@
 'use client';
-import useCustomFont from '@/hooks/useCustomFont';
-import useCustomStyle from '@/hooks/useCustomStyle';
+import { useColors, useFont } from '@/hooks';
 import { Text, TextProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
@@ -9,16 +8,16 @@ type TextBoldProps = TextProps & {
 };
 
 const TextBold: FC<TextBoldProps> = ({ children, ...props }) => {
-	const { colors } = useCustomStyle();
-	const { fonts } = useCustomFont();
+	const colors = useColors();
+	const fonts = useFont();
+
 	return (
 		<Text
-			fontFamily={fonts.inter}
+			fontFamily={fonts?.primaryFont}
 			fontSize='1rem'
 			fontWeight='600'
-			color={colors?.titleColor}
-			{...props}
-		>
+			color={colors?.primaryText}
+			{...props}>
 			{children}
 		</Text>
 	);

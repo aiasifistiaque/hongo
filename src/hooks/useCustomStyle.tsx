@@ -1,3 +1,5 @@
+'use client';
+
 export const colors = {
 	primary: '#C09671',
 	lightPrimary: '#e7b990',

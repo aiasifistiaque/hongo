@@ -1,4 +1,5 @@
 'use client';
+
 import {
 	PageLayout,
 	SliderBottom,
@@ -12,35 +13,41 @@ import { ProductCarousel } from '@/components';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { data } from '@/lib/config/data';
 import { ReactNode } from 'react';
+import { useGetStoreQuery } from '@/store/services/storeApi';
+import { useColors } from '@/hooks';
+import { FlexProps } from '@chakra-ui/react';
 
 export default function Home() {
-	const {
-		homePageServices,
-		products,
-		categoriesData,
-		sportsCollection,
-		winterCollection,
-	} = data;
-	const { colors } = useCustomStyle();
+	const { homePageServices, products, categoriesData, sportsCollection, winterCollection } = data;
+
+	const { data: apiData, isLoading } = useGetStoreQuery({});
+
+	if (isLoading || !apiData) return <PageLayout isLoading={true} />;
 
 	return (
-		<PageLayout>
+		<PageLayout isLoading={isLoading || !apiData}>
 			{/* Slider */}
 			<Banner data={data?.bannerData} />
 			{/* Slider Bottom */}
 			<SectionWrapper>
-				<SliderBottom data={homePageServices} />
+				<SliderBottom data={apiData?.content?.services} />
 			</SectionWrapper>
 
 			<SectionWrapper>
-				<Categories data={categoriesData?.doc} />
+				<Categories data={apiData?.content?.collections} />
 			</SectionWrapper>
 
-			<SectionPadding py={'3rem'} bg={colors?.secondary}>
+			<SectionPadding py={'3rem'}>
 				<CommonTitle mb='4rem'>Products</CommonTitle>
-				<Products data={products?.doc} />
+				<Products />
 			</SectionPadding>
 
+			{apiData?.content?.productList?.map((item: any, i: number) => (
+				<SectionWrapper key={i}>
+					<ProductCarousel item={item} />
+				</SectionWrapper>
+			))}
+			{/* 
 			<SectionWrapper>
 				<ProductCarousel
 					title={'Sports Collection'}
@@ -48,17 +55,24 @@ export default function Home() {
 				/>
 			</SectionWrapper>
 
-			<SectionWrapper>
+			<SectionWrapper borderBottomWidth={0}>
 				<ProductCarousel
 					title='Winter Collection'
 					data={winterCollection?.doc}
 				/>
-			</SectionWrapper>
+			</SectionWrapper> */}
 		</PageLayout>
 	);
 }
 
-const SectionWrapper = ({ children }: { children: ReactNode }) => {
-	const { colors } = useCustomStyle();
-	return <SectionPadding bg={colors?.secondary}>{children}</SectionPadding>;
+const SectionWrapper = ({ children, ...props }: FlexProps & { children: ReactNode }) => {
+	const colors = useColors();
+	return (
+		<SectionPadding
+			bg={colors?.bg}
+			borderBottomWidth={0}
+			borderBottomColor={colors?.border}>
+			{children}
+		</SectionPadding>
+	);
 };

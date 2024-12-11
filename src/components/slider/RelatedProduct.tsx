@@ -14,6 +14,7 @@ import ProductCart from '../home/products/sections/ProductCart';
 import SwiperCore from 'swiper';
 import { cartBoxShadow, productCartHeight } from '@/lib/config/constants';
 import SwipperArrowButton from '../swiper-arrow/SwipperArrowButton';
+import { useColors } from '@/hooks';
 
 const swiperBreakpoints = {
 	320: {
@@ -39,11 +40,16 @@ type RelatedProrductProps = {
 
 const RelatedProrduct: FC<RelatedProrductProps> = ({ data }) => {
 	const swiperRef = useRef<SwiperCore>();
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 
 	return (
-		<Box py='4rem' bg={colors.secondary} position='relative'>
-			<CommonTitle fontSize={{ base: '2rem', lg: '3.5rem' }} mb='4rem'>
+		<Box
+			py='4rem'
+			bg={colors.bg}
+			position='relative'>
+			<CommonTitle
+				fontSize={{ base: '2rem', lg: '3.5rem' }}
+				mb='4rem'>
 				Related Products
 			</CommonTitle>
 			<Swiper
@@ -51,22 +57,23 @@ const RelatedProrduct: FC<RelatedProrductProps> = ({ data }) => {
 				pagination={{ clickable: true }}
 				modules={[Pagination]}
 				breakpoints={swiperBreakpoints}
-				onSwiper={swiper => (swiperRef.current = swiper)}
-			>
+				onSwiper={swiper => (swiperRef.current = swiper)}>
 				{data?.map((item: any, i: number) => (
 					<SwiperSlide key={i}>
 						<Center
-							bg={colors.secondary}
+							bg={colors.bg}
 							w='full'
 							h={productCartHeight}
-							boxShadow={cartBoxShadow}
-						>
+							boxShadow={cartBoxShadow}>
 							<ProductCart data={item} />
 						</Center>
 					</SwiperSlide>
 				))}
 			</Swiper>
-			<Box position='absolute' top={{ base: '52px', lg: '28px' }} right='0px'>
+			<Box
+				position='absolute'
+				top={{ base: '52px', lg: '28px' }}
+				right='0px'>
 				<SwipperArrowButton
 					next={() => swiperRef.current?.slideNext()}
 					prev={() => swiperRef.current?.slidePrev()}

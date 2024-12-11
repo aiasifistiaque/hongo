@@ -1,12 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import {
-	FormField,
-	OrderSummary,
-	PageLayout,
-	SectionPadding,
-	TextNormal,
-} from '@/components';
+import { FormField, OrderSummary, PageLayout, SectionPadding, TextNormal } from '@/components';
 
 import { Grid, GridItem } from '@chakra-ui/react';
 import { addressFields } from '@/lib/config/data';
@@ -36,15 +30,26 @@ export default function Home() {
 	};
 
 	return (
-		<PageLayout>
-			<SectionPadding py={3}>
-				<TextNormal fontWeight='600' fontSize='1.6rem' mb='2rem'>
+		<PageLayout isLoading={false}>
+			<SectionPadding
+				py={12}
+				pb={32}>
+				<TextNormal
+					fontWeight='600'
+					fontSize='1.6rem'
+					mb='2rem'>
 					Checkout
 				</TextNormal>
 				<form>
-					<Grid gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap={8}>
-						<Grid gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap={4}>
-							<TextNormal fontWeight='600' fontSize='1.2rem'>
+					<Grid
+						gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr' }}
+						gap={8}>
+						<Grid
+							gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr' }}
+							gap={4}>
+							<TextNormal
+								fontWeight='600'
+								fontSize='1.2rem'>
 								Address
 							</TextNormal>
 							{addressFields.map((field, i: number) => (
@@ -54,8 +59,7 @@ export default function Home() {
 										field.fieldKey === 'name' || field.fieldKey === 'street'
 											? { base: 1, lg: 2 }
 											: 1
-									}
-								>
+									}>
 									<FormField
 										isRequired={field.isRequired}
 										type={field.type}

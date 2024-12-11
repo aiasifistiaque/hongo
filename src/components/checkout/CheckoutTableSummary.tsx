@@ -2,6 +2,7 @@ import { Box, BoxProps } from '@chakra-ui/react';
 import { FC } from 'react';
 import SummaryItem from './SummaryItem';
 import useCustomStyle from '@/hooks/useCustomStyle';
+import { useColors } from '@/hooks';
 
 type CheckoutTableSummaryProps = BoxProps & {
 	subTotal: number;
@@ -16,14 +17,30 @@ const CheckoutTableSummary: FC<CheckoutTableSummaryProps> = ({
 	discount,
 	...props
 }) => {
-	const { colors } = useCustomStyle();
-	const dark = `1px dashed ${colors?.dark}`;
+	const colors = useColors();
+	const dark = `1px dashed ${colors?.border}`;
 	return (
-		<Box borderTop={dark} borderBottom={dark} py='1rem' {...props}>
-			<SummaryItem text='Subtotal' value={subTotal} />
-			<SummaryItem text='Vat (+)' value={vat} />
-			<SummaryItem text='Shipping (+)' value={shipping} />
-			<SummaryItem text='Discount (-)' value={discount} />
+		<Box
+			borderTop={dark}
+			borderBottom={dark}
+			py='1rem'
+			{...props}>
+			<SummaryItem
+				text='Subtotal'
+				value={subTotal}
+			/>
+			<SummaryItem
+				text='Vat (+)'
+				value={vat}
+			/>
+			<SummaryItem
+				text='Shipping (+)'
+				value={shipping}
+			/>
+			<SummaryItem
+				text='Discount (-)'
+				value={discount}
+			/>
 		</Box>
 	);
 };

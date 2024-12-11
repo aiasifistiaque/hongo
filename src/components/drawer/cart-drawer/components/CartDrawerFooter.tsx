@@ -12,12 +12,21 @@ const CartDrawerFooter: FC<CartDrawerFooterProps> = ({ subTotal }) => {
 	return (
 		<DrawerFooter mt={'auto'}>
 			<Box w='full'>
-				<Center w='full' justifyContent='space-between' mb='1rem'>
-					<TextNormal fontSize='1.5rem' fontWeight='600'>
+				<Center
+					w='full'
+					justifyContent='space-between'
+					mb='1rem'>
+					<TextNormal
+						fontSize='1.5rem'
+						fontWeight='600'>
 						Subtotal:
 					</TextNormal>
 					<Box>
-						<Price fontSize='1.5rem' fontWeight='600' price={subTotal} />
+						<Price
+							fontSize='1.5rem'
+							fontWeight='600'
+							price={subTotal}
+						/>
 					</Box>
 				</Center>
 				<Link href='/checkout'>

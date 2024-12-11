@@ -3,6 +3,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { TextNormal } from '../utils';
 import useCustomStyles from '@/hooks/useCustomStyle';
+import { useColors, useContent } from '@/hooks';
 type TopHeaderProps = {
 	data: {
 		textFirst: string;
@@ -11,7 +12,8 @@ type TopHeaderProps = {
 };
 
 const TopHeader: FC<TopHeaderProps> = ({ data }) => {
-	const { colors } = useCustomStyles();
+	const colors = useColors();
+	const { content } = useContent();
 
 	return (
 		<Box
@@ -19,11 +21,14 @@ const TopHeader: FC<TopHeaderProps> = ({ data }) => {
 			py='8px'
 			w='full'
 			h='auto'
-			bg={colors.primary}
-		>
-			<Flex color={colors.white} gap='30px' justifyContent='center'>
-				<TextNormal>{data?.textFirst}</TextNormal>|
-				<TextNormal>{data?.textSecond}</TextNormal>
+			bg={colors?.bannerBg}>
+			<Flex
+				color={colors?.bannerFg}
+				gap='30px'
+				justifyContent='center'>
+				<TextNormal color={colors?.bannerFg}>{content?.banner?.leftText}</TextNormal>
+				<TextNormal color={colors?.bannerFg}>|</TextNormal>
+				<TextNormal color={colors?.bannerFg}>{content?.banner?.rightText}</TextNormal>
 			</Flex>
 		</Box>
 	);

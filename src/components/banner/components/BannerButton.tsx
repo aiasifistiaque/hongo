@@ -1,3 +1,4 @@
+import { useContent } from '@/hooks';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { Button, Flex, FlexProps } from '@chakra-ui/react';
 import Link from 'next/link';
@@ -8,25 +9,22 @@ type BannerButtonProps = FlexProps & {
 	btnLink: string;
 };
 
-const BannerButton: FC<BannerButtonProps> = ({
-	btnText,
-	btnLink,
-	...props
-}) => {
-	const { colors } = useCustomStyle();
+const BannerButton: FC<BannerButtonProps> = ({ btnText, btnLink, ...props }) => {
+	const { content } = useContent();
 	return (
-		<Flex gap='4' {...props}>
+		<Flex
+			gap='4'
+			{...props}>
 			<Link href={btnLink}>
 				<Button
-					color={colors?.black}
+					color={content?.hero?.btnTextColor}
 					borderRadius='0px'
 					w='full'
 					h='auto'
 					p='16px 18px'
-					bg={colors?.white}
-					border={`1px solid ${colors?.white}`}
-					_hover={{ backgroundColor: 'transparent', color: colors?.white }}
-				>
+					bg={content?.hero?.btnColor}
+					border={`1px solid ${content?.hero?.btnColor}`}
+					_hover={{ backgroundColor: 'transparent', color: content?.hero?.btnColor }}>
 					{btnText}
 				</Button>
 			</Link>

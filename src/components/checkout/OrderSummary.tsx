@@ -15,9 +15,7 @@ type OrderSummaryProps = GridItemProps & {};
 
 const OrderSummary: FC<OrderSummaryProps> = ({ ...props }) => {
 	const [discountCode, setDiscountCode] = useState('');
-	const { cartItems, shipping, subTotal, discount, vat } = useAppSelector(
-		state => state.cart
-	);
+	const { cartItems, shipping, subTotal, discount, vat } = useAppSelector(state => state.cart);
 
 	const handleDiscountChange = (value: string) => {
 		setDiscountCode(value);
@@ -33,7 +31,9 @@ const OrderSummary: FC<OrderSummaryProps> = ({ ...props }) => {
 	};
 	return (
 		<GridItem {...props}>
-			<TextNormal fontWeight='600' fontSize='1.2rem'>
+			<TextNormal
+				fontWeight='600'
+				fontSize='1.2rem'>
 				Order Summary
 			</TextNormal>
 			<CheckoutTableHeader />

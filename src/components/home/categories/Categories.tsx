@@ -14,6 +14,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
 import SwipperArrowButton from '@/components/swiper-arrow/SwipperArrowButton';
+import { useColors } from '@/hooks';
 
 const swiperBreakpoints = {
 	320: {
@@ -38,24 +39,28 @@ type CategoriesProps = {
 };
 
 const Categories: FC<CategoriesProps> = ({ data }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	const swiperRef = useRef<SwiperCore>();
 
 	return (
 		<BoxWrapper>
-			<CommonTitle fontSize={{ base: '2rem', lg: '3.5rem' }} mb='4rem'>
-				Categories
+			<CommonTitle
+				fontSize={{ base: '2rem', lg: '3.5rem' }}
+				mb='4rem'>
+				{data?.title}
 			</CommonTitle>
 			<Swiper
 				spaceBetween={20}
 				pagination={{ clickable: true }}
 				modules={[Pagination]}
 				breakpoints={swiperBreakpoints}
-				onSwiper={swiper => (swiperRef.current = swiper)}
-			>
-				{data?.map((item: any, i: number) => (
+				onSwiper={swiper => (swiperRef.current = swiper)}>
+				{data?.items?.map((item: any, i: number) => (
 					<SwiperSlide key={i}>
-						<Center bg={colors.secondary} w='full' h='18rem'>
+						<Center
+							bg={colors?.bg}
+							w='full'
+							h='18rem'>
 							<CategoriesCart data={item} />
 						</Center>
 					</SwiperSlide>
@@ -64,8 +69,7 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 			<Box
 				position='absolute'
 				top={{ base: '3.25rem', lg: '1.75rem' }}
-				right='0px'
-			>
+				right='0px'>
 				<SwipperArrowButton
 					next={() => swiperRef.current?.slideNext()}
 					prev={() => swiperRef.current?.slidePrev()}
@@ -78,14 +82,12 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 export default Categories;
 
 const BoxWrapper = ({ children }: { children: ReactNode }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
 		<Box
 			py='4rem'
-			bg={colors.secondary}
-			borderBottom={`1px solid ${colors.primary}`}
-			position='relative'
-		>
+			borderBottom={`1px solid ${colors.border}`}
+			position='relative'>
 			{children}
 		</Box>
 	);

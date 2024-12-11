@@ -5,29 +5,48 @@ import Contact from './components/Contact';
 import QuickLinks from './components/QuickLinks';
 import SearchInput from '../header/header-components/SearchInput';
 import { searchInputWidth } from '@/lib/config/constants';
+import { useColors, useContent } from '@/hooks';
 
 type FooterProps = BoxProps & {
 	data: any;
 };
 
 const Footer: FC<FooterProps> = ({ data, ...props }) => {
+	const colors = useColors();
+
 	return (
-		<Box py='4rem' {...props}>
-			<Grid templateColumns='repeat(3, 1fr)' gap={6}>
-				<GridItem w='100%' h='auto'>
-					<Contact data={data?.address} />
-				</GridItem>
-				<GridItem w='100%' h='auto'>
+		<Box
+			bg={colors.footerBg}
+			color={colors.footerFg}
+			py='4rem'
+			{...props}>
+			<Grid
+				templateColumns='repeat(3, 1fr)'
+				gap={6}>
+				<Item>
+					<Contact />
+				</Item>
+				<Item>
 					<QuickLinks data={data?.pages} />
-				</GridItem>
-				<GridItem w='100%' h='auto'>
-					<Box w='full' h='auto'>
+				</Item>
+				<Item>
+					<Box
+						w='full'
+						h='auto'>
 						<SearchInput width={searchInputWidth} />
 					</Box>
-				</GridItem>
+				</Item>
 			</Grid>
 		</Box>
 	);
 };
+
+const Item = ({ children }: { children: React.ReactNode }) => (
+	<GridItem
+		w='100%'
+		h='auto'>
+		{children}
+	</GridItem>
+);
 
 export default Footer;

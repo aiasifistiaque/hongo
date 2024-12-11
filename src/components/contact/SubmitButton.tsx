@@ -1,3 +1,4 @@
+import { useColors } from '@/hooks';
 import useCustomStyle from '@/hooks/useCustomStyle';
 import { Button, ButtonProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
@@ -7,17 +8,23 @@ type SubmitButtonProps = ButtonProps & {
 };
 
 const SubmitButton: FC<SubmitButtonProps> = ({ children, ...props }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
 		<Button
 			w='full'
-			bg={colors?.dark}
-			color='white'
+			bg={colors?.btnColor}
+			color={colors?.btnTextColor}
+			borderColor={colors?.btnColor}
+			border='1px solid'
 			py='24px'
-			_hover={{ backgroundColor: colors?.black }}
+			_hover={{
+				backgroundColor: colors?.btnTextColor,
+				color: colors?.btnColor,
+				border: '1px solid',
+				borderColor: colors?.btnColor,
+			}}
 			mt='2rem'
-			{...props}
-		>
+			{...props}>
 			{children}
 		</Button>
 	);

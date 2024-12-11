@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CheckoutButton as DiscoutButton, TextNormal } from '@/components';
+import { useColors } from '@/hooks';
 
 import { Box, Grid, GridItem, Input } from '@chakra-ui/react';
 import { FC } from 'react';
@@ -17,22 +18,33 @@ const DiscountCode: FC<DiscountCodeProps> = ({
 	handleCouponChange,
 	applyCoupon,
 }) => {
+	const colors = useColors();
 	return (
-		<Box>
-			<TextNormal mb='1rem' fontSize='.85rem'>
+		<Box py={4}>
+			{/* <TextNormal
+				mb='1rem'
+				fontSize='.85rem'>
 				Discount Code
-			</TextNormal>
+			</TextNormal> */}
 			<Grid templateColumns='repeat(4, 1fr)'>
 				<GridItem colSpan={3}>
 					<Input
 						onChange={e => handleCouponChange(e.target.value)}
 						type='text'
+						borderColor={colors?.brand}
 						placeholder='Enter discount code'
 						value={value}
 					/>
 				</GridItem>
-				<GridItem ml='auto' colSpan={1} w='90%'>
-					<DiscoutButton isLoading={loading} onClick={applyCoupon} w='full'>
+				<GridItem
+					ml='auto'
+					colSpan={1}
+					w='90%'>
+					<DiscoutButton
+						isLoading={loading}
+						size='sm'
+						onClick={applyCoupon}
+						w='full'>
 						Apply
 					</DiscoutButton>
 				</GridItem>
