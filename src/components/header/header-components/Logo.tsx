@@ -13,8 +13,7 @@ const Logo: FC<LogoProps> = ({ imgSrc, ...props }) => {
 			h='full'
 			alignItems='center'
 			justifyContent='flex-start'
-			{...props}
-		>
+			{...props}>
 			<Link href='/'>
 				<Image
 					w='auto'

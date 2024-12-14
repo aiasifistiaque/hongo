@@ -14,7 +14,6 @@ import { useColors, useContent } from '@/hooks';
 type HeaderProps = BoxProps & {};
 
 const Header: FC<HeaderProps> = ({}) => {
-	const { header } = data;
 	const { isOpen, onOpen: onSearchDrawerOpen, onClose } = useDisclosure();
 	const {
 		isOpen: cartOpen,
@@ -28,7 +27,7 @@ const Header: FC<HeaderProps> = ({}) => {
 		<Wrapper>
 			<GridWrapper>
 				<GridItem>
-					<Logo imgSrc={basic?.logo} />
+					<Logo imgSrc={content?.header?.logo || ''} />
 				</GridItem>
 				<GridItem>
 					<Flex
@@ -58,12 +57,12 @@ const Header: FC<HeaderProps> = ({}) => {
 export default Header;
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
-	const colors = useColors();
+	const { content } = useContent();
 	return (
 		<Container
-			borderBottom={`1px solid ${colors?.headerBorder}`}
-			bg={colors?.headerBg}
-			color={colors?.headerFg}
+			borderBottom={`1px solid ${content?.header?.borderColor}`}
+			bg={content?.header?.bgColor}
+			color={content?.header?.fgColor}
 			position='sticky'
 			top='0px'
 			left='0px'

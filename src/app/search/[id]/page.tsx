@@ -1,13 +1,15 @@
 'use client';
+
 import { CommonTitle, PageLayout, Products, SectionPadding } from '@/components';
-import { data } from '@/lib/config/data';
 import React, { ReactNode } from 'react';
 import { useColors } from '@/hooks';
+import { useParams } from 'next/navigation';
 
 const FONT_SIZE = { base: '1rem', md: '2rem', lg: '2.8rem' };
 
 const SearchPage = () => {
-	const { productsBySearch } = data;
+	const { id } = useParams<{ id: string }>();
+
 	return (
 		<PageLayout isLoading={false}>
 			<SectionWrapper>
@@ -16,7 +18,7 @@ const SearchPage = () => {
 					fontSize={FONT_SIZE}>{`Search: ${6} result found for adfdf`}</CommonTitle>
 			</SectionWrapper>
 			<SectionWrapper>
-				<Products search={''} />
+				<Products search={id} />
 			</SectionWrapper>
 		</PageLayout>
 	);

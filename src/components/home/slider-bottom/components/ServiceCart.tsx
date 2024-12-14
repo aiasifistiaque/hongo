@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { Flex, Image } from '@chakra-ui/react';
 import { TextBold, TextNormal } from '@/components';
+import { useFont } from '@/hooks';
 
 type ServiceCartProps = {
 	data: {
@@ -12,6 +13,7 @@ type ServiceCartProps = {
 };
 
 const ServiceCart: FC<ServiceCartProps> = ({ data }) => {
+	const font = useFont();
 	return (
 		<Flex
 			w='full'
@@ -31,7 +33,11 @@ const ServiceCart: FC<ServiceCartProps> = ({ data }) => {
 				/>
 			</Flex>
 			<Flex flexDir='column'>
-				<TextBold fontSize='1.25rem'>{data?.title}</TextBold>
+				<TextBold
+					fontSize='1.25rem'
+					fontFamily={font?.primaryFont}>
+					{data?.title}
+				</TextBold>
 				<TextNormal fontSize='1rem'>{data?.description}</TextNormal>
 			</Flex>
 		</Flex>

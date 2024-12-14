@@ -1,8 +1,8 @@
 import { useContent } from '@/hooks';
-import useCustomStyle from '@/hooks/useCustomStyle';
 import { Button, Flex, FlexProps } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { FC } from 'react';
+import { getAlignment } from '@/components';
 
 type BannerButtonProps = FlexProps & {
 	btnText: string;
@@ -14,6 +14,7 @@ const BannerButton: FC<BannerButtonProps> = ({ btnText, btnLink, ...props }) => 
 	return (
 		<Flex
 			gap='4'
+			align={getAlignment(content?.hero?.align)}
 			{...props}>
 			<Link href={btnLink}>
 				<Button

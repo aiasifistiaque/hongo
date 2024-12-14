@@ -1,9 +1,9 @@
-import { CommonTitle, TextNormal } from '@/components';
-import useCustomStyle from '@/hooks/useCustomStyle';
+import { CommonTitle, TextNormal, getAlignment } from '@/components';
 import { Flex, FlexProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import BannerButton from './BannerButton';
-import { useColors, useContent } from '@/hooks';
+import { useContent } from '@/hooks';
+import { padding } from '@/lib/config/constants';
 
 type BannerContentProps = FlexProps & {
 	data: {
@@ -17,21 +17,21 @@ type BannerContentProps = FlexProps & {
 };
 
 const BannerContent: FC<BannerContentProps> = ({ data, ...props }) => {
-	const colors = useColors();
 	const { content } = useContent();
 	return (
 		<Flex
 			w={{ base: '100%', lg: '80%' }}
 			position='absolute'
 			direction='column'
-			align='center'
+			align={getAlignment(content?.hero?.align)}
 			color='white'
-			textAlign='center'
+			textAlign={content?.hero?.align}
 			p='1.5rem'
+			px={{ base: padding.layoutPadding_X_Mobile, lg: padding.layoutPadding_X }}
 			{...props}>
 			<TextNormal
 				textTransform='uppercase'
-				color={colors.headerFg}
+				color={content?.hero?.subTitleColor}
 				lineHeight='1.5rem'
 				mb='1rem'>
 				{content?.hero?.subTitle}
@@ -40,7 +40,7 @@ const BannerContent: FC<BannerContentProps> = ({ data, ...props }) => {
 				mb='3rem'
 				fontSize={{ base: '2.6rem', lg: '5.6rem' }}
 				lineHeight={{ base: '2.8rem', lg: '5rem' }}
-				color={colors.headerFg}>
+				color={content?.hero?.titleColor}>
 				{content?.hero?.title}
 			</CommonTitle>
 			<BannerButton

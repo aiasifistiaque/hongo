@@ -14,8 +14,7 @@ const Container: FC<ContainerProps> = ({ children, ...props }) => {
 			align='center'
 			justify='center'
 			position='relative'
-			{...props}
-		>
+			{...props}>
 			{children}
 		</Flex>
 	);

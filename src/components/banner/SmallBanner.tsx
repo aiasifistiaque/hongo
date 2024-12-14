@@ -1,19 +1,17 @@
 import { Box, BoxProps, Center } from '@chakra-ui/react';
-import { Overlay, TextNormal } from '@/components';
+import { TextNormal } from '@/components';
 import { FC, ReactNode } from 'react';
-import useCustomStyle from '@/hooks/useCustomStyle';
 import { useColors } from '@/hooks';
 type SmallBannerProps = {
-	bannarData?: {
-		imgSrc?: string;
-		text?: string;
-	};
+	bannarData?: any;
+	image?: string;
+	children?: ReactNode;
 };
 
-const SmallBanner: FC<SmallBannerProps> = ({ bannarData }) => {
+const SmallBanner: FC<SmallBannerProps> = ({ image, children }) => {
 	const colors = useColors();
 	return (
-		<BannerWrapper backgroundImage={`url(${bannarData?.imgSrc})`}>
+		<BannerWrapper backgroundImage={`url(${image || './slider/sliderTwo.webp'})`}>
 			<Center
 				w='full'
 				h='full'>
@@ -22,7 +20,7 @@ const SmallBanner: FC<SmallBannerProps> = ({ bannarData }) => {
 					zIndex={'3'}
 					fontSize='3rem'
 					color={colors?.primaryText}>
-					{bannarData?.text}
+					{children}
 				</TextNormal>
 			</Center>
 		</BannerWrapper>

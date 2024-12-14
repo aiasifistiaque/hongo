@@ -9,7 +9,11 @@ type CartHeaderProps = BoxProps & {
 
 const CartHeader: FC<CartHeaderProps> = ({ imgSrc, ...props }) => {
 	return (
-		<Flex w='full' h='18rem' overflow='hidden' {...props}>
+		<Flex
+			w='full'
+			h='18rem'
+			overflow='hidden'
+			{...props}>
 			<Image
 				w='full'
 				h='full'

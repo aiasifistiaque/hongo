@@ -32,20 +32,9 @@ import { FcFeedback } from 'react-icons/fc';
 import { HiUserGroup } from 'react-icons/hi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { HiOutlineMinusSmall } from 'react-icons/hi2';
-import {
-	MdDelete,
-	MdFastfood,
-	MdFeedback,
-	MdOutlineCancel,
-	MdOutlineEdit,
-} from 'react-icons/md';
+import { MdDelete, MdFastfood, MdFeedback, MdOutlineCancel, MdOutlineEdit } from 'react-icons/md';
 // import { IoMdBarcode } from 'react-icons/io';
-import {
-	IoBagOutline,
-	IoGridOutline,
-	IoReorderTwoOutline,
-	IoSearchOutline,
-} from 'react-icons/io5';
+import { IoBagOutline, IoGridOutline, IoReorderTwoOutline, IoSearchOutline } from 'react-icons/io5';
 // import { FaCartShopping } from 'react-icons/fa6';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 
@@ -120,63 +109,62 @@ type IconProps = {
 	name: IconNameOptions;
 };
 
-const icons: { [key in IconNameOptions]: FC<{ size: number; color: string }> } =
-	{
-		arrow: TbArrowForward,
-		add: IoAdd,
-		subtract: GrSubtract,
-		date: BsCalendar2Date,
-		select: TbSelector,
-		settings: TbSettings,
-		'add-tag': IoIosAddCircleOutline,
-		home: GoHomeFill,
-		'add-image': LuImagePlus,
-		product: ImPriceTag,
-		dashboard: IoIosHome,
-		category: BiSolidCategory,
-		order: TbFileInvoice,
-		brand: MdBrandingWatermark,
-		coupon: RiCoupon2Fill,
-		user: FaUserFriends,
-		customer: FaUserTag,
-		role: FaUnlockKeyhole,
-		delivery: TbTruckDelivery,
-		'settings-fill': RiSettings3Fill,
-		fields: FaTable,
-		pos: TiPrinter,
-		barcode: IoMdBarcode,
-		menu: CiMenuBurger,
-		leave: SiCkeditor4,
-		edit: MdOutlineEdit,
-		items: MdFastfood,
-		collections: BsCollectionFill,
-		feedback: FcFeedback,
-		feedbacks: MdFeedback,
-		'clock-outline': FaRegClock,
-		dots: BsThreeDots,
-		close: MdOutlineCancel,
-		delete: MdDelete,
-		customers: HiUserGroup,
-		cart: IoBagOutline,
-		bag: IoBagOutline,
-		hamburger: IoReorderTwoOutline,
-		grid: IoGridOutline,
-		search: IoSearchOutline,
-		'arrow-right': IoIosArrowRoundForward,
-		'arrow-left': IoIosArrowRoundBack,
-		'lu-bag': LuShoppingBag,
-		wishlist: FiHeart,
-		'fi-user': FiUser,
-		'menu-bar': FaBarsStaggered,
-		'rating-fill': IoIosStar,
-		'rating-outline': CiStar,
-		eye: IoEyeOutline,
-		map: FaMapMarkerAlt,
-		phone: MdLocalPhone,
-		envelope: FaRegEnvelope,
-		'subtract-two': HiOutlineMinusSmall,
-		tag: FiTag,
-	};
+const icons: { [key in IconNameOptions]: FC<{ size: number; color: string }> } = {
+	arrow: TbArrowForward,
+	add: IoAdd,
+	subtract: GrSubtract,
+	date: BsCalendar2Date,
+	select: TbSelector,
+	settings: TbSettings,
+	'add-tag': IoIosAddCircleOutline,
+	home: GoHomeFill,
+	'add-image': LuImagePlus,
+	product: ImPriceTag,
+	dashboard: IoIosHome,
+	category: BiSolidCategory,
+	order: TbFileInvoice,
+	brand: MdBrandingWatermark,
+	coupon: RiCoupon2Fill,
+	user: FaUserFriends,
+	customer: FaUserTag,
+	role: FaUnlockKeyhole,
+	delivery: TbTruckDelivery,
+	'settings-fill': RiSettings3Fill,
+	fields: FaTable,
+	pos: TiPrinter,
+	barcode: IoMdBarcode,
+	menu: CiMenuBurger,
+	leave: SiCkeditor4,
+	edit: MdOutlineEdit,
+	items: MdFastfood,
+	collections: BsCollectionFill,
+	feedback: FcFeedback,
+	feedbacks: MdFeedback,
+	'clock-outline': FaRegClock,
+	dots: BsThreeDots,
+	close: MdOutlineCancel,
+	delete: MdDelete,
+	customers: HiUserGroup,
+	cart: IoBagOutline,
+	bag: IoBagOutline,
+	hamburger: IoReorderTwoOutline,
+	grid: IoGridOutline,
+	search: IoSearchOutline,
+	'arrow-right': IoIosArrowRoundForward,
+	'arrow-left': IoIosArrowRoundBack,
+	'lu-bag': LuShoppingBag,
+	wishlist: FiHeart,
+	'fi-user': FiUser,
+	'menu-bar': FaBarsStaggered,
+	'rating-fill': IoIosStar,
+	'rating-outline': CiStar,
+	eye: IoEyeOutline,
+	map: FaMapMarkerAlt,
+	phone: MdLocalPhone,
+	envelope: FaRegEnvelope,
+	'subtract-two': HiOutlineMinusSmall,
+	tag: FiTag,
+};
 
 const Icon: FC<IconProps> = ({ name, ...props }) => {
 	const IconComponent = icons[name] || IoIosHome;
@@ -185,9 +173,7 @@ const Icon: FC<IconProps> = ({ name, ...props }) => {
 	return (
 		<IconComponent
 			size={props.size || 22}
-			color={
-				name == 'arrow' ? brandColor : props.color ? props.color : defaultColor
-			}
+			color={name == 'arrow' ? brandColor : props.color ? props.color : defaultColor}
 			{...props}
 		/>
 	);

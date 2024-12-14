@@ -3,7 +3,7 @@ import { Icon } from '@/components/icon';
 import { useAppSelector } from '@/hooks/useReduxHooks';
 import { Center, CenterProps } from '@chakra-ui/react';
 import React, { FC, ReactNode } from 'react';
-import { useColors } from '@/hooks';
+import { useColors, useContent } from '@/hooks';
 
 type CartButtonProps = CenterProps & {
 	children?: string;
@@ -15,6 +15,7 @@ const BTN_WIDTH = { base: '2rem', md: '2.8rem' };
 const CartButton: FC<CartButtonProps> = ({ onOpen, ...props }) => {
 	const { cartItems } = useAppSelector(state => state.cart);
 	const colors = useColors();
+	const { content } = useContent();
 
 	const cartCount = () => {
 		return cartItems.reduce((acc: any, item: any) => acc + item.qty, 0);
@@ -26,7 +27,7 @@ const CartButton: FC<CartButtonProps> = ({ onOpen, ...props }) => {
 			{...props}>
 			<CartTotal>{cartCount()}</CartTotal>
 			<Icon
-				color={colors.brandText}
+				color={content?.header?.iconFg || colors.brand}
 				size={18}
 				name='cart'
 			/>
@@ -38,12 +39,14 @@ export default CartButton;
 
 const BtnContainer = ({ children, ...props }: CenterProps & { children: ReactNode }) => {
 	const { brand } = useColors();
+	const { content } = useContent();
+
 	return (
 		<Center
 			w={BTN_WIDTH}
 			h={BTN_WIDTH}
-			borderRadius='50%'
-			backgroundColor={brand}
+			borderRadius={content?.header?.iconRadius}
+			backgroundColor={content?.header?.iconBg || brand}
 			cursor='pointer'
 			position='relative'
 			{...props}>
@@ -53,7 +56,8 @@ const BtnContainer = ({ children, ...props }: CenterProps & { children: ReactNod
 };
 
 const CartTotal = ({ children, ...props }: CenterProps & { children: ReactNode }) => {
-	const colors = useColors();
+	const { content } = useContent();
+
 	return (
 		<Center
 			position='absolute'
@@ -62,8 +66,8 @@ const CartTotal = ({ children, ...props }: CenterProps & { children: ReactNode }
 			top='-2px'
 			right='-2px'
 			fontSize='.775rem'
-			color={colors?.btnTextColor}
-			bg={colors?.btnColor}
+			color={content?.header?.tagFg}
+			bg={content?.header?.tagBg}
 			borderRadius='50%'
 			fontWeight='500'
 			{...props}>

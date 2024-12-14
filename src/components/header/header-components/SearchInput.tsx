@@ -5,7 +5,7 @@ import { Center, CenterProps, Input, InputProps } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { searchInputWidth } from '@/lib/config/constants';
 import React, { FC, ReactNode, useState } from 'react';
-import { useColors } from '@/hooks';
+import { useColors, useContent } from '@/hooks';
 
 type SearchInputProps = CenterProps & {};
 
@@ -19,7 +19,7 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 
 	const handleSearchPage = () => {
 		if (searchValue.trim()) {
-			router.push(`/search?value=${encodeURIComponent(searchValue.trim())}`);
+			router.push(`/search/${encodeURIComponent(searchValue.trim())}`);
 		} else {
 			alert('Please enter a search value'); // Replace with better UX if needed
 		}
@@ -32,6 +32,7 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 	};
 
 	const colors = useColors();
+	const { content } = useContent();
 
 	return (
 		<Container {...props}>
@@ -42,7 +43,7 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 			<SearchButton onClick={handleSearchPage}>
 				<Icon
 					name='search'
-					color={colors?.brand}
+					color={content?.header?.searchBoxIcon}
 				/>
 			</SearchButton>
 		</Container>
@@ -52,6 +53,8 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 export default SearchInput;
 
 const Container = ({ children, ...props }: CenterProps & { children: ReactNode }) => {
+	const { content } = useContent();
+
 	return (
 		<Center
 			position='relative'
@@ -66,15 +69,21 @@ const Container = ({ children, ...props }: CenterProps & { children: ReactNode }
 
 const SearchInputField = ({ ...props }: InputProps & {}) => {
 	const colors = useColors();
+	const { content } = useContent();
+
 	return (
 		<Input
 			pr='4rem'
 			type='text'
-			placeholder='Search your desired products'
-			borderRadius={InputRadius}
+			placeholder={content?.header?.searchBoxText}
+			borderRadius={content?.header?.searchBoxRadius}
 			w={searchInputWidth}
-			borderColor={colors?.brand}
+			borderColor={content?.header?.searchBoxBg}
 			color={colors?.primaryText}
+			bg={content?.header?.searchBoxFg}
+			_placeholder={{
+				color: content?.header?.searchBoxTextColor,
+			}}
 			py='1.5rem'
 			{...props}
 		/>
