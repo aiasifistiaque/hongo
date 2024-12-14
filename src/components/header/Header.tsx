@@ -2,14 +2,13 @@
 import { CartDrawer, Logo } from '@/components';
 import { SearchDrawer } from '@/components/index';
 import { HeaderZIndex, padding } from '@/lib/config/constants';
-import { data } from '@/lib/config/data';
 import { BoxProps, Flex, Grid, GridItem, useDisclosure } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import SearchInput from './header-components/SearchInput';
 import SearchButton from './header-components/SearchButton';
 import CartButton from './header-components/CartButton';
 import Container from './header-components/Container';
-import { useColors, useContent } from '@/hooks';
+import { useContent } from '@/hooks';
 
 type HeaderProps = BoxProps & {};
 

@@ -1,5 +1,5 @@
 import { TextNormal, Column } from '@/components';
-import { useColors, useFont } from '@/hooks';
+import { useColors, useContent, useFont } from '@/hooks';
 import { Box, BoxProps } from '@chakra-ui/react';
 import Link from 'next/link';
 
@@ -15,16 +15,18 @@ type QuickLinksProps = BoxProps & {
 const QuickLinks: FC<QuickLinksProps> = ({ data, ...props }) => {
 	const colors = useColors();
 	const font = useFont();
+	const { content, basic } = useContent();
+	const fgColor = content?.footer?.fgColor;
 	return (
 		<Box
-			color={colors?.bannerFg}
+			color={fgColor}
 			{...props}>
 			<TextNormal
 				mb='1rem'
 				fontWeight='600'
 				fontSize='2rem'
 				fontFamily={font?.primaryFont}
-				color={colors?.bannerFg}>
+				color={fgColor}>
 				{data?.label}
 			</TextNormal>
 			<Column gap={3}>
@@ -34,7 +36,7 @@ const QuickLinks: FC<QuickLinksProps> = ({ data, ...props }) => {
 						href={item?.link}>
 						<TextNormal
 							_hover={{ textDecoration: 'underline' }}
-							color={colors?.bannerFg}
+							color={fgColor}
 							display='inline-block'>
 							{item?.name}
 						</TextNormal>

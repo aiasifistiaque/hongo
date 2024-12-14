@@ -17,7 +17,7 @@ const Logo: FC<LogoProps> = ({ imgSrc, ...props }) => {
 			<Link href='/'>
 				<Image
 					w='auto'
-					h='2.5rem'
+					h='3.2rem'
 					objectFit='contain'
 					src={imgSrc}
 					alt='Logo Image'

@@ -10,9 +10,10 @@ type CartButtonProps = ButtonProps & {
 
 const CartButton: FC<CartButtonProps> = ({ children, ...props }) => {
 	const colors = useColors();
+
 	return (
 		<Button
-			borderRadius={0}
+			borderRadius={`${colors?.cardRadius / 2}px`}
 			w='full'
 			transition='.4s'
 			bg={colors?.btnColor}

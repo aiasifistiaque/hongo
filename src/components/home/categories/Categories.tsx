@@ -44,8 +44,8 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 	return (
 		<BoxWrapper>
 			<CommonTitle
-				fontSize={{ base: '2rem', lg: '3.5rem' }}
-				mb='4rem'>
+				fontSize={{ base: '2rem', md: '3.5rem' }}
+				mb={{ base: '2rem', md: '3rem' }}>
 				{data?.title}
 			</CommonTitle>
 			<Swiper
@@ -58,8 +58,7 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 					<SwiperSlide key={i}>
 						<Center
 							bg={colors?.bg}
-							w='full'
-							h='18rem'>
+							w='full'>
 							<CategoriesCart data={item} />
 						</Center>
 					</SwiperSlide>

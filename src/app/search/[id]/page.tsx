@@ -15,7 +15,7 @@ const SearchPage = () => {
 			<SectionWrapper>
 				<CommonTitle
 					textAlign='center'
-					fontSize={FONT_SIZE}>{`Search: ${6} result found for adfdf`}</CommonTitle>
+					fontSize={FONT_SIZE}>{`Search: Results found for ${id}`}</CommonTitle>
 			</SectionWrapper>
 			<SectionWrapper>
 				<Products search={id} />

@@ -15,19 +15,20 @@ type ContactProps = BoxProps & {
 
 const Contact: FC<ContactProps> = ({ ...props }) => {
 	const colors = useColors();
-	const content: any = useContent();
+	const { content, basic }: any = useContent();
 	const font = useFont();
+	const fgColor = content?.footer?.fgColor;
 
 	return (
 		<Box
-			color={colors?.bannerFg}
+			color={fgColor}
 			{...props}>
 			<TextNormal
 				mb='1rem'
 				fontWeight='600'
 				fontSize='2rem'
 				fontFamily={font?.primaryFont}
-				color={colors?.bannerFg}>
+				color={fgColor}>
 				Contact Us
 			</TextNormal>
 			<Flex
@@ -35,34 +36,34 @@ const Contact: FC<ContactProps> = ({ ...props }) => {
 				alignItems='center'
 				gap={2}>
 				<Icon
-					color={colors?.bannerFg}
+					color={fgColor}
 					size={16}
 					name='map'
 				/>
 
-				<TextNormal color={colors?.bannerFg}>{content?.data?.shop?.address}</TextNormal>
+				<TextNormal color={fgColor}>{basic?.address}</TextNormal>
 			</Flex>
 			<Flex
 				mb={3}
 				alignItems='center'
 				gap={2}>
 				<Icon
-					color={colors?.bannerFg}
+					color={fgColor}
 					size={16}
 					name='phone'
 				/>
-				<TextNormal color={colors?.bannerFg}>{content?.basic?.phone}</TextNormal>
+				<TextNormal color={fgColor}>{basic?.phone}</TextNormal>
 			</Flex>
 			<Flex
 				mb={3}
 				alignItems='center'
 				gap={2}>
 				<Icon
-					color={colors?.bannerFg}
+					color={fgColor}
 					size={16}
 					name='envelope'
 				/>
-				<TextNormal color={colors?.bannerFg}>{content?.basic?.email}</TextNormal>
+				<TextNormal color={fgColor}>{basic?.email}</TextNormal>
 			</Flex>
 		</Box>
 	);

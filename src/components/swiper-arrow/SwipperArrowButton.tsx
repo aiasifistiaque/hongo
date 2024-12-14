@@ -12,6 +12,7 @@ const SwipperArrowButton: FC<SwipperArrowButtonProps> = ({ prev, next, ...props 
 	const colors = useColors();
 	return (
 		<Center
+			gap={2}
 			w={{ base: '5rem', lg: '8rem' }}
 			h={{ base: '5rem', lg: '8rem' }}
 			bg='transparent'

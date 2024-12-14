@@ -10,7 +10,6 @@ import {
 	CommonTitle,
 } from '@/components';
 import { ProductCarousel } from '@/components';
-import useCustomStyle from '@/hooks/useCustomStyle';
 import { data } from '@/lib/config/data';
 import { ReactNode } from 'react';
 import { useGetStoreQuery } from '@/store/services/storeApi';
@@ -18,8 +17,6 @@ import { useColors } from '@/hooks';
 import { FlexProps } from '@chakra-ui/react';
 
 export default function Home() {
-	const { homePageServices, products, categoriesData, sportsCollection, winterCollection } = data;
-
 	const { data: apiData, isLoading } = useGetStoreQuery({});
 
 	if (isLoading || !apiData) return <PageLayout isLoading={true} />;
@@ -38,7 +35,7 @@ export default function Home() {
 			</SectionWrapper>
 
 			<SectionPadding py={'3rem'}>
-				<CommonTitle mb='4rem'>Products</CommonTitle>
+				<CommonTitle mb='2rem'>Products</CommonTitle>
 				<Products />
 			</SectionPadding>
 
@@ -47,20 +44,6 @@ export default function Home() {
 					<ProductCarousel item={item} />
 				</SectionWrapper>
 			))}
-			{/* 
-			<SectionWrapper>
-				<ProductCarousel
-					title={'Sports Collection'}
-					data={sportsCollection?.doc}
-				/>
-			</SectionWrapper>
-
-			<SectionWrapper borderBottomWidth={0}>
-				<ProductCarousel
-					title='Winter Collection'
-					data={winterCollection?.doc}
-				/>
-			</SectionWrapper> */}
 		</PageLayout>
 	);
 }
@@ -71,7 +54,8 @@ const SectionWrapper = ({ children, ...props }: FlexProps & { children: ReactNod
 		<SectionPadding
 			bg={colors?.bg}
 			borderBottomWidth={0}
-			borderBottomColor={colors?.border}>
+			borderBottomColor={colors?.border}
+			{...props}>
 			{children}
 		</SectionPadding>
 	);

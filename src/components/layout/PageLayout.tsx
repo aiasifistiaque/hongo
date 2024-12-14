@@ -4,7 +4,7 @@ import React, { FC, ReactNode } from 'react';
 import { data } from '@/lib/config/data';
 import { Box, Center, Spinner } from '@chakra-ui/react';
 import Footer from '../footer/Footer';
-import { useColors } from '@/hooks';
+import { useColors, useContent } from '@/hooks';
 type LayoutProps = {
 	children?: ReactNode;
 	isLoading?: boolean;
@@ -13,6 +13,8 @@ type LayoutProps = {
 const PageLayout: FC<LayoutProps> = ({ children, isLoading = false }) => {
 	const { topHeader, footer } = data;
 	const color = useColors();
+	const { content } = useContent();
+	const bgColor = content?.footer?.bgColor;
 
 	if (isLoading)
 		return (
@@ -29,7 +31,7 @@ const PageLayout: FC<LayoutProps> = ({ children, isLoading = false }) => {
 			<TopHeader data={topHeader} />
 			<Header />
 			<Box minH={'80vh'}>{children}</Box>
-			<SectionPadding bg={color.bannerBg}>
+			<SectionPadding bg={bgColor}>
 				<Footer data={footer} />
 			</SectionPadding>
 		</>

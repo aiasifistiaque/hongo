@@ -13,11 +13,15 @@ type FooterProps = BoxProps & {
 
 const Footer: FC<FooterProps> = ({ data, ...props }) => {
 	const colors = useColors();
+	const { content } = useContent();
+	// const { bgColor, fgColor } = content?.footer;
+	const bgColor = content?.footer?.bgColor;
+	const fgColor = content?.footer?.fgColor;
 
 	return (
 		<Box
-			bg={colors.bannerBg}
-			color={colors.bannerFg}
+			bg={bgColor}
+			color={fgColor}
 			py='4rem'
 			{...props}>
 			<Grid

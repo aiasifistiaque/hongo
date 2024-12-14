@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, BoxProps, Grid, GridItem } from '@chakra-ui/react';
+import { Box, BoxProps, Flex, Grid, GridItem } from '@chakra-ui/react';
 import { productCartHeight, cartBoxShadow } from '@/lib/config/constants';
 import { useGetAllQuery } from '@/store/services/commonApi';
 
@@ -32,27 +32,19 @@ const Products: FC<ProductsProps> = ({ search, ...props }) => {
 	if (!data) return null;
 
 	return (
-		<Box
-			{...props}
+		<Grid
 			borderBottomWidth={1}
 			pb='72px'
-			borderBottomColor={colors?.border}>
-			<Grid
-				templateColumns={TEMPLATE_COLUMNS}
-				gap={6}>
-				{data?.doc?.map((item: any, i: number) => (
-					<GridItem
-						bg={colors?.cardBg}
-						key={i}
-						w='100%'
-						borderRadius={colors?.cardRadius}
-						h={productCartHeight}
-						maxH={productCartHeight}>
-						<ProductCart data={item} />
-					</GridItem>
-				))}
-			</Grid>
-		</Box>
+			borderBottomColor={colors?.border}
+			templateColumns={TEMPLATE_COLUMNS}
+			gap={6}>
+			{data?.doc?.map((item: any, i: number) => (
+				<ProductCart
+					data={item}
+					key={i}
+				/>
+			))}
+		</Grid>
 	);
 };
 

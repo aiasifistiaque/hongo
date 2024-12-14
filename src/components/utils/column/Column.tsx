@@ -7,7 +7,11 @@ type ColumnProps = FlexProps & {
 
 const Column: FC<ColumnProps> = ({ children, ...props }) => {
 	return (
-		<Flex w='full' h='full' flexDirection='column' {...props}>
+		<Flex
+			w='full'
+			h='full'
+			flexDirection='column'
+			{...props}>
 			{children}
 		</Flex>
 	);

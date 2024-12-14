@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { useColors } from '@/hooks';
 import { BoxProps, Flex, Image } from '@chakra-ui/react';
 
 import React, { FC } from 'react';
@@ -8,15 +9,17 @@ type CartHeaderProps = BoxProps & {
 };
 
 const CartHeader: FC<CartHeaderProps> = ({ imgSrc, ...props }) => {
+	const colors = useColors();
 	return (
 		<Flex
 			w='full'
-			h='18rem'
+			maxH='300px'
 			overflow='hidden'
 			{...props}>
 			<Image
 				w='full'
-				h='full'
+				h='300px'
+				borderTopRadius={`${colors.cardRadius}px`}
 				objectFit='cover'
 				src={imgSrc}
 				alt='Product Image'

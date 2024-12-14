@@ -55,6 +55,8 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ item }) => {
 		},
 	});
 
+	const colors = useColors();
+
 	if (isFetching) return null;
 
 	return (
@@ -64,7 +66,7 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ item }) => {
 			position='relative'>
 			<CommonTitle
 				fontSize={{ base: '2rem', lg: '3.5rem' }}
-				mb='4rem'>
+				mb='3rem'>
 				{title}
 			</CommonTitle>
 			<Swiper
@@ -74,12 +76,10 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ item }) => {
 				breakpoints={swiperBreakpoints}
 				onSwiper={swiper => (swiperRef.current = swiper)}>
 				{data?.doc?.map((product: any, i: number) => (
-					<SwiperSlide key={i}>
-						<Center
-							w='full'
-							h='auto'>
-							<ProductCart data={product} />
-						</Center>
+					<SwiperSlide
+						key={i}
+						style={{ background: colors?.bg }}>
+						<ProductCart data={product} />
 					</SwiperSlide>
 				))}
 			</Swiper>

@@ -10,7 +10,7 @@ type CartButtonProps = CenterProps & {
 	onOpen?: () => void;
 };
 
-const BTN_WIDTH = { base: '2rem', md: '2.8rem' };
+const BTN_WIDTH = { base: '2.4rem', md: '2.8rem' };
 
 const CartButton: FC<CartButtonProps> = ({ onOpen, ...props }) => {
 	const { cartItems } = useAppSelector(state => state.cart);

@@ -25,7 +25,7 @@ const CartDrawerFooter: FC<CartDrawerFooterProps> = ({ subTotal }) => {
 						<Price
 							fontSize='1.5rem'
 							fontWeight='600'
-							price={subTotal}
+							price={subTotal?.toLocaleString()}
 						/>
 					</Box>
 				</Center>

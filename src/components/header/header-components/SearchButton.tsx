@@ -8,7 +8,7 @@ type SearchButtonProps = CenterProps & {
 	onOpen: () => void;
 };
 
-const BTN_WIDTH = { base: '2rem', md: '2.8rem' };
+const BTN_WIDTH = { base: '2.4rem', md: '2.8rem' };
 
 const SearchButton: FC<SearchButtonProps> = ({ onOpen, ...props }) => {
 	const { content } = useContent();

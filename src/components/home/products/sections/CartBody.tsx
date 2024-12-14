@@ -2,7 +2,7 @@
 
 import { Column, TextNormal } from '@/components';
 import Rating from '@/components/utils/rating/Rating';
-import { Box, FlexProps } from '@chakra-ui/react';
+import { Box, Flex, FlexProps } from '@chakra-ui/react';
 
 import React, { FC } from 'react';
 import Price from './Price';
@@ -12,32 +12,40 @@ type CartBodyProps = FlexProps & {
 };
 
 const CartBody: FC<CartBodyProps> = ({ data, ...props }) => {
-	const colors = useColors();
 	const font = useFont();
+	const colors = useColors();
 	return (
-		<Column
+		<Flex
+			flexDir='column'
 			bg={colors.cardBg}
-			alignItems='center'
 			gap={2}
+			flex={1}
 			p='.8rem'
 			{...props}>
 			<TextNormal
 				fontFamily={font?.primaryFont}
 				fontWeight='500'
 				noOfLines={2}
+				textAlign='center'
 				fontSize='1.2rem'>
 				{data?.name}
 			</TextNormal>
-			<Box>
-				<Rating ratingValue={data?.rating || '3'} />
-			</Box>
-			<Price
-				fontFamily={font?.primaryFont}
-				fontWeight='bold'
-				fontSize='1rem'
-				price={data?.price.toLocaleString()}
-			/>
-		</Column>
+			<Column
+				w='full'
+				align='center'
+				justify='flex-end'
+				flex={1}>
+				<Box>
+					<Rating ratingValue={data?.rating || '3'} />
+				</Box>
+				<Price
+					fontFamily={font?.primaryFont}
+					fontWeight='bold'
+					fontSize='1rem'
+					price={data?.price.toLocaleString()}
+				/>
+			</Column>
+		</Flex>
 	);
 };
 
