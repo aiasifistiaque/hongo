@@ -12,23 +12,18 @@ type PriceProps = FlexProps & {
 	fontWeight?: string;
 };
 
-const Price: FC<PriceProps> = ({
-	price,
-	fontSize,
-	color,
-	fontWeight,
-	...props
-}) => {
+const Price: FC<PriceProps> = ({ price, fontSize, color, fontWeight, ...props }) => {
 	return (
-		<Flex fontSize='3rem' justifyContent='center' gap={1} {...props}>
-			<TextNormal fontSize={fontSize} color={color} fontWeight={fontWeight}>
-				{currency?.symbol}
-			</TextNormal>
-			<TextNormal fontSize={fontSize} color={color} fontWeight={fontWeight}>
-				{price}
-			</TextNormal>
-			<TextNormal fontSize={fontSize} color={color} fontWeight={fontWeight}>
-				{currency?.code}
+		<Flex
+			fontSize='3rem'
+			justifyContent='center'
+			gap={1}
+			{...props}>
+			<TextNormal
+				fontSize={fontSize}
+				color={color}
+				fontWeight={fontWeight}>
+				BDT. {price}
 			</TextNormal>
 		</Flex>
 	);

@@ -32,6 +32,7 @@ const CartBody: FC<CartBodyProps> = ({ data, ...props }) => {
 				<Rating ratingValue={data?.rating || '3'} />
 			</Box>
 			<Price
+				fontFamily={font?.primaryFont}
 				fontWeight='bold'
 				fontSize='1rem'
 				price={data?.price.toLocaleString()}

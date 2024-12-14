@@ -17,7 +17,7 @@ import { useColors } from '@/hooks';
 
 const swiperBreakpoints = {
 	320: {
-		slidesPerView: 1,
+		slidesPerView: 2,
 	},
 	480: {
 		slidesPerView: 2,
