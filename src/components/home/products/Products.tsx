@@ -47,8 +47,7 @@ const Products: FC<ProductsProps> = ({ search, ...props }) => {
 						w='100%'
 						borderRadius={colors?.cardRadius}
 						h={productCartHeight}
-						// boxShadow={cartBoxShadow}
-					>
+						maxH={productCartHeight}>
 						<ProductCart data={item} />
 					</GridItem>
 				))}

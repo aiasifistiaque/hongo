@@ -3,7 +3,7 @@ import { TextBold } from '@/components/utils';
 import { Flex, FlexProps, Image, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { FC } from 'react';
-import { useGetItemByName } from '@/hooks';
+import { useContent, useGetItemByName } from '@/hooks';
 import { useGetAllQuery } from '@/store/services/commonApi';
 
 const FLEX_WI = { base: '12rem', xl: '14rem' };
@@ -14,6 +14,7 @@ type CategoriesCartProps = FlexProps & {
 
 const CategoriesCart: FC<CategoriesCartProps> = ({ data, ...props }) => {
 	const { name, image } = useGetItemByName({ id: data?.id, path: data?.type });
+	const { content } = useContent();
 
 	const href =
 		data?.type === 'categories' ? `/category/${data?.id}` : `/category/collection/${data?.id}`;
@@ -34,7 +35,7 @@ const CategoriesCart: FC<CategoriesCartProps> = ({ data, ...props }) => {
 						objectFit='cover'
 						src={image}
 						alt='Categories Image'
-						borderRadius='50%'
+						borderRadius={content?.collections?.borderRadius || 4}
 					/>
 				</Flex>
 				<TextBold

@@ -29,7 +29,7 @@ const PageLayout: FC<LayoutProps> = ({ children, isLoading = false }) => {
 			<TopHeader data={topHeader} />
 			<Header />
 			<Box minH={'80vh'}>{children}</Box>
-			<SectionPadding bg={color.footerBg}>
+			<SectionPadding bg={color.bannerBg}>
 				<Footer data={footer} />
 			</SectionPadding>
 		</>

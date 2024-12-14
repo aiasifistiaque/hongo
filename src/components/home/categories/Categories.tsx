@@ -2,7 +2,6 @@
 'use client';
 import React, { FC, ReactNode, useRef } from 'react';
 import { Box, Center } from '@chakra-ui/react';
-import useCustomStyle from '@/hooks/useCustomStyle';
 
 import { CommonTitle } from '@/components/utils';
 import SwiperCore from 'swiper';

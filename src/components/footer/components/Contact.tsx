@@ -1,5 +1,5 @@
 import { TextNormal, Icon } from '@/components';
-import { useColors, useContent } from '@/hooks';
+import { useColors, useContent, useFont } from '@/hooks';
 import { Box, BoxProps, Flex } from '@chakra-ui/react';
 
 import React, { FC } from 'react';
@@ -16,16 +16,18 @@ type ContactProps = BoxProps & {
 const Contact: FC<ContactProps> = ({ ...props }) => {
 	const colors = useColors();
 	const content: any = useContent();
+	const font = useFont();
 
 	return (
 		<Box
-			color={colors?.footerFg}
+			color={colors?.bannerFg}
 			{...props}>
 			<TextNormal
 				mb='1rem'
 				fontWeight='600'
 				fontSize='2rem'
-				color={colors?.footerFg}>
+				fontFamily={font?.primaryFont}
+				color={colors?.bannerFg}>
 				Contact Us
 			</TextNormal>
 			<Flex
@@ -33,34 +35,34 @@ const Contact: FC<ContactProps> = ({ ...props }) => {
 				alignItems='center'
 				gap={2}>
 				<Icon
-					color={colors?.footerFg}
+					color={colors?.bannerFg}
 					size={16}
 					name='map'
 				/>
 
-				<TextNormal color={colors?.footerFg}>{content?.data?.shop?.address}</TextNormal>
+				<TextNormal color={colors?.bannerFg}>{content?.data?.shop?.address}</TextNormal>
 			</Flex>
 			<Flex
 				mb={3}
 				alignItems='center'
 				gap={2}>
 				<Icon
-					color={colors?.footerFg}
+					color={colors?.bannerFg}
 					size={16}
 					name='phone'
 				/>
-				<TextNormal color={colors?.footerFg}>{content?.basic?.phone}</TextNormal>
+				<TextNormal color={colors?.bannerFg}>{content?.basic?.phone}</TextNormal>
 			</Flex>
 			<Flex
 				mb={3}
 				alignItems='center'
 				gap={2}>
 				<Icon
-					color={colors?.footerFg}
+					color={colors?.bannerFg}
 					size={16}
 					name='envelope'
 				/>
-				<TextNormal color={colors?.footerFg}>{content?.basic?.email}</TextNormal>
+				<TextNormal color={colors?.bannerFg}>{content?.basic?.email}</TextNormal>
 			</Flex>
 		</Box>
 	);

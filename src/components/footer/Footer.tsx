@@ -16,8 +16,8 @@ const Footer: FC<FooterProps> = ({ data, ...props }) => {
 
 	return (
 		<Box
-			bg={colors.footerBg}
-			color={colors.footerFg}
+			bg={colors.bannerBg}
+			color={colors.bannerFg}
 			py='4rem'
 			{...props}>
 			<Grid
