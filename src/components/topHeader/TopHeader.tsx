@@ -1,49 +1,57 @@
 'use client';
-import { Box, Flex } from '@chakra-ui/react';
-import React, { FC } from 'react';
-import { TextNormal } from '../utils';
-import useCustomStyles from '@/hooks/useCustomStyle';
-import { useColors, useContent, useFont } from '@/hooks';
+
+import { Center, Flex, Text } from '@chakra-ui/react';
+import React, { FC, ReactNode } from 'react';
+
 type TopHeaderProps = {
-	data: {
-		textFirst: string;
-		textSecond: string;
-	};
+	data?: any;
 };
 
-const TopHeader: FC<TopHeaderProps> = ({ data }) => {
-	const colors = useColors();
+import { useContent } from '@/library';
+
+const TopHeader: FC<TopHeaderProps> = () => {
 	const { content } = useContent();
-	const font = useFont();
 
 	return (
-		<Box
-			display={{ base: 'none', lg: 'block' }}
-			py='8px'
+		<Container>
+			{content?.banner?.leftText && <BannerText>{content?.banner?.leftText}</BannerText>}
+			{content?.banner?.leftText && content?.banner?.rightText && <BannerText>|</BannerText>}
+			{content?.banner?.rightText && <BannerText>{content?.banner?.rightText}</BannerText>}
+		</Container>
+	);
+};
+
+const Container = ({ children }: { children: ReactNode }) => {
+	const { content, basic } = useContent();
+
+	if (content?.banner?.hide) return null;
+
+	return (
+		<Center
+			display={{ base: 'none', md: 'flex' }}
+			py={`${content?.banner?.paddingY}px` || '8px'}
 			w='full'
-			h='auto'
-			bg={colors?.bannerBg}>
-			<Flex
-				color={colors?.bannerFg}
-				gap='30px'
-				justifyContent='center'>
-				<TextNormal
-					fontFamily={font.primaryFont}
-					color={colors?.bannerFg}>
-					{content?.banner?.leftText}
-				</TextNormal>
-				<TextNormal
-					fontFamily={font.primaryFont}
-					color={colors?.bannerFg}>
-					|
-				</TextNormal>
-				<TextNormal
-					fontFamily={font.primaryFont}
-					color={colors?.bannerFg}>
-					{content?.banner?.rightText}
-				</TextNormal>
-			</Flex>
-		</Box>
+			h={content?.banner?.height || 'auto'}
+			bg={content?.banner?.bgColor || basic?.primaryColor}
+			color={content?.banner?.fgColor || 'white'}
+			gap='30px'>
+			{children}
+		</Center>
+	);
+};
+
+const BannerText = ({ children }: { children: ReactNode }) => {
+	const { content, basic } = useContent();
+
+	return (
+		<Text
+			fontFamily={content?.banner?.fontFamily || basic?.primaryFont}
+			color='inherit'
+			fontSize={content?.banner?.fontSize || '1rem'}
+			letterSpacing={content?.banner?.letterSpacing || 0}
+			fontWeight={content?.banner?.fontWeight || '400'}>
+			{children}
+		</Text>
 	);
 };
 

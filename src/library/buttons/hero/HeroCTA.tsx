@@ -1,22 +1,18 @@
+'use client';
+
+import React from 'react';
+import { getAlignment } from '@/library';
 import { useContent } from '@/hooks';
-import { Button, Flex, FlexProps } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
-import React, { FC } from 'react';
-import { getAlignment } from '@/components';
 
-type BannerButtonProps = FlexProps & {
-	btnText: string;
-	btnLink: string;
-};
-
-const BannerButton: FC<BannerButtonProps> = ({ btnText, btnLink, ...props }) => {
+const HeroCTA = () => {
 	const { content } = useContent();
 	return (
 		<Flex
 			gap='4'
-			align={getAlignment(content?.hero?.align)}
-			{...props}>
-			<Link href={btnLink}>
+			align={getAlignment(content?.hero?.align)}>
+			<Link href={content?.hero?.href || '#'}>
 				<Button
 					fontSize={content?.hero?.btnFontSize ? `${content?.hero?.btnFontSize}px` : '0'}
 					h={content?.hero?.btnHeight ? `${content?.hero?.btnHeight}px` : '44px'}
@@ -30,11 +26,11 @@ const BannerButton: FC<BannerButtonProps> = ({ btnText, btnLink, ...props }) => 
 						borderColor: content?.hero?.btnHoverBorderColor,
 					}}
 					p='16px 18px'>
-					{btnText}
+					{content?.hero?.btnText}
 				</Button>
 			</Link>
 		</Flex>
 	);
 };
 
-export default BannerButton;
+export default HeroCTA;

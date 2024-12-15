@@ -2,28 +2,39 @@
 
 import { BoxProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
-
-import Container from './components/Container';
-import BannerImage from './components/BannerImage';
-import BannerContent from './components/BannerContent';
 import { useContent } from '@/hooks';
-import { getAlignment } from '@/components';
+import {
+	BgImage,
+	HeroCTA,
+	HeroSubTitle,
+	HeroTitle,
+	HongoHeroContainer,
+	getAlignment,
+} from '@/library';
+import { padding } from '@/lib/config/constants';
 
-// import { HeaderIcon } from '@/components';
 type BannerProps = BoxProps & {
 	data: any;
 };
+
+const PADDING_X = { base: padding.layoutPadding_X_Mobile, lg: padding.layoutPadding_X };
 
 const Banner: FC<BannerProps> = ({ data, ...props }) => {
 	const { content } = useContent();
 
 	return (
-		<Container
-			{...props}
-			align={getAlignment(content?.hero?.align)}>
-			<BannerImage imgSrc={content?.hero?.image} />
-			<BannerContent data={data} />
-		</Container>
+		<BgImage
+			src={content?.hero?.image}
+			minH='90vh'
+			justify={getAlignment(content?.hero?.align)}>
+			<HongoHeroContainer
+				px={PADDING_X}
+				content={content}>
+				<HeroSubTitle />
+				<HeroTitle />
+				<HeroCTA />
+			</HongoHeroContainer>
+		</BgImage>
 	);
 };
 
