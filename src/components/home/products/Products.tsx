@@ -37,12 +37,10 @@ const Products: FC<ProductsProps> = ({ search, ...props }) => {
 			pb='72px'
 			borderBottomColor={colors?.border}
 			templateColumns={TEMPLATE_COLUMNS}
-			gap={6}>
+			gap={6}
+		>
 			{data?.doc?.map((item: any, i: number) => (
-				<ProductCart
-					data={item}
-					key={i}
-				/>
+				<ProductCart data={item} key={i} />
 			))}
 		</Grid>
 	);

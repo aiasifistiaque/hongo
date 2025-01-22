@@ -16,6 +16,7 @@ import SwipperArrowButton from '@/components/swiper-arrow/SwipperArrowButton';
 import { CommonTitle } from '@/components';
 import { useColors } from '@/hooks';
 import { useGetAllQuery } from '@/store/services/commonApi';
+import { Title } from './index';
 
 const swiperBreakpoints = {
 	320: {
@@ -60,34 +61,27 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ item }) => {
 	if (isFetching) return null;
 
 	return (
-		<Box
-			py='4rem'
-			borderBottom={`1px solid ${border}`}
-			position='relative'>
-			<CommonTitle
-				fontSize={{ base: '2rem', lg: '3.5rem' }}
-				mb='3rem'>
-				{title}
-			</CommonTitle>
+		<Box py='4rem' borderBottom={`1px solid ${border}`} position='relative'>
+			<Title>{title}</Title>
 			<Swiper
 				spaceBetween={20}
 				pagination={{ clickable: true }}
 				modules={[Pagination]}
 				breakpoints={swiperBreakpoints}
-				onSwiper={swiper => (swiperRef.current = swiper)}>
+				onSwiper={swiper => (swiperRef.current = swiper)}
+			>
 				{data?.doc?.map((product: any, i: number) => (
-					<SwiperSlide
-						key={i}
-						style={{ background: colors?.bg }}>
+					<SwiperSlide key={i} style={{ background: colors?.bg }}>
 						<ProductCart data={product} />
 					</SwiperSlide>
 				))}
 			</Swiper>
 			<Box
 				position='absolute'
-				top={{ base: '3.25rem', lg: '1.75rem' }}
+				top={{ base: '2.8rem', sm: '3.25rem', lg: '1.75rem' }}
 				right='0px'
-				bg='red'>
+				bg='red'
+			>
 				<SwipperArrowButton
 					next={() => swiperRef.current?.slideNext()}
 					prev={() => swiperRef.current?.slidePrev()}

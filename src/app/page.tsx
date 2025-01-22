@@ -48,14 +48,18 @@ export default function Home() {
 	);
 }
 
-const SectionWrapper = ({ children, ...props }: FlexProps & { children: ReactNode }) => {
+const SectionWrapper = ({
+	children,
+	...props
+}: FlexProps & { children: ReactNode }) => {
 	const colors = useColors();
 	return (
 		<SectionPadding
 			bg={colors?.bg}
 			borderBottomWidth={0}
 			borderBottomColor={colors?.border}
-			{...props}>
+			{...props}
+		>
 			{children}
 		</SectionPadding>
 	);

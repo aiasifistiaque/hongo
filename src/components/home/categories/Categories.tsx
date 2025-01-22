@@ -3,7 +3,7 @@
 import React, { FC, ReactNode, useRef } from 'react';
 import { Box, Center } from '@chakra-ui/react';
 
-import { CommonTitle } from '@/components/utils';
+import { CommonTitle, TextNormal } from '@/components/utils';
 import SwiperCore from 'swiper';
 import CategoriesCart from './components/CategoriesCart';
 
@@ -14,6 +14,7 @@ import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
 import SwipperArrowButton from '@/components/swiper-arrow/SwipperArrowButton';
 import { useColors } from '@/hooks';
+import { SIZES } from '@/lib/config/constants';
 
 const swiperBreakpoints = {
 	320: {
@@ -41,11 +42,16 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 	const colors = useColors();
 	const swiperRef = useRef<SwiperCore>();
 
+	const responsive = SIZES?.collection;
+
 	return (
 		<BoxWrapper>
 			<CommonTitle
-				fontSize={{ base: '2rem', md: '3.5rem' }}
-				mb={{ base: '2rem', md: '3rem' }}>
+				fontSize={responsive?.title}
+				mb={{ base: '2rem', md: '3rem' }}
+				pr='5rem'
+				lineHeight={{ base: '2.5rem', sm: '3.5rem' }}
+			>
 				{data?.title}
 			</CommonTitle>
 			<Swiper
@@ -53,12 +59,11 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 				pagination={{ clickable: true }}
 				modules={[Pagination]}
 				breakpoints={swiperBreakpoints}
-				onSwiper={swiper => (swiperRef.current = swiper)}>
+				onSwiper={swiper => (swiperRef.current = swiper)}
+			>
 				{data?.items?.map((item: any, i: number) => (
 					<SwiperSlide key={i}>
-						<Center
-							bg={colors?.bg}
-							w='full'>
+						<Center bg={colors?.bg} w='full'>
 							<CategoriesCart data={item} />
 						</Center>
 					</SwiperSlide>
@@ -66,8 +71,9 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 			</Swiper>
 			<Box
 				position='absolute'
-				top={{ base: '3.25rem', lg: '1.75rem' }}
-				right='0px'>
+				top={{ base: '2.8rem', sm: '3.25rem', lg: '1.75rem' }}
+				right='0px'
+			>
 				<SwipperArrowButton
 					next={() => swiperRef.current?.slideNext()}
 					prev={() => swiperRef.current?.slidePrev()}
@@ -85,7 +91,8 @@ const BoxWrapper = ({ children }: { children: ReactNode }) => {
 		<Box
 			py='4rem'
 			borderBottom={`1px solid ${colors.border}`}
-			position='relative'>
+			position='relative'
+		>
 			{children}
 		</Box>
 	);

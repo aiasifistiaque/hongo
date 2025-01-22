@@ -19,14 +19,8 @@ const Footer: FC<FooterProps> = ({ data, ...props }) => {
 	const fgColor = content?.footer?.fgColor;
 
 	return (
-		<Box
-			bg={bgColor}
-			color={fgColor}
-			py='4rem'
-			{...props}>
-			<Grid
-				templateColumns='repeat(3, 1fr)'
-				gap={6}>
+		<Box bg={bgColor} color={fgColor} py='4rem' {...props}>
+			<Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={6}>
 				<Item>
 					<Contact />
 				</Item>
@@ -34,9 +28,7 @@ const Footer: FC<FooterProps> = ({ data, ...props }) => {
 					<QuickLinks data={data?.pages} />
 				</Item>
 				<Item>
-					<Box
-						w='full'
-						h='auto'>
+					<Box w='full' h='auto'>
 						<SearchInput width={searchInputWidth} />
 					</Box>
 				</Item>
@@ -46,9 +38,7 @@ const Footer: FC<FooterProps> = ({ data, ...props }) => {
 };
 
 const Item = ({ children }: { children: React.ReactNode }) => (
-	<GridItem
-		w='100%'
-		h='auto'>
+	<GridItem w='100%' h='auto'>
 		{children}
 	</GridItem>
 );
