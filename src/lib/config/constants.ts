@@ -36,3 +36,10 @@ export const borderRadius = {
 	xl: '20px',
 	xxl: '24px',
 };
+
+export const SIZES = {
+	collection: {
+		title: { base: '1.8rem', md: '2.4rem', xl: '3.5rem' },
+		name: { base: '1rem', md: '1.2rem' },
+	},
+};

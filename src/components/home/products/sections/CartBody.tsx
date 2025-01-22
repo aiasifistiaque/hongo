@@ -21,20 +21,19 @@ const CartBody: FC<CartBodyProps> = ({ data, ...props }) => {
 			gap={2}
 			flex={1}
 			p='.8rem'
-			{...props}>
+			{...props}
+		>
 			<TextNormal
 				fontFamily={font?.primaryFont}
 				fontWeight='500'
 				noOfLines={2}
+				minH='60px'
 				textAlign='center'
-				fontSize='1.2rem'>
+				fontSize='1.2rem'
+			>
 				{data?.name}
 			</TextNormal>
-			<Column
-				w='full'
-				align='center'
-				justify='flex-end'
-				flex={1}>
+			<Column w='full' align='center' justify='flex-end' flex={1}>
 				<Box>
 					<Rating ratingValue={data?.rating || '3'} />
 				</Box>
