@@ -17,30 +17,12 @@ const CheckoutTableSummary: FC<CheckoutTableSummaryProps> = ({
 	discount,
 	...props
 }) => {
-	const colors = useColors();
-	const dark = `1px dashed ${colors?.border}`;
 	return (
-		<Box
-			borderTop={dark}
-			borderBottom={dark}
-			py='1rem'
-			{...props}>
-			<SummaryItem
-				text='Subtotal'
-				value={subTotal}
-			/>
-			<SummaryItem
-				text='Vat (+)'
-				value={vat}
-			/>
-			<SummaryItem
-				text='Shipping (+)'
-				value={shipping}
-			/>
-			<SummaryItem
-				text='Discount (-)'
-				value={discount}
-			/>
+		<Box py='1rem' {...props}>
+			<SummaryItem text='Subtotal' value={subTotal} />
+			<SummaryItem text='Vat (+)' value={vat} />
+			<SummaryItem text='Shipping (+)' value={shipping} />
+			<SummaryItem text='Discount (-)' value={discount} />
 		</Box>
 	);
 };

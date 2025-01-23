@@ -18,6 +18,7 @@ export * from './common';
 export * from './invoice';
 export * from './product-carousel';
 export * from './collection-page';
+export * from './utils/button/index';
 
 export const getAlignment = (align: string) => {
 	if (align == 'center') {

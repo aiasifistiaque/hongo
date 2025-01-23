@@ -6,9 +6,10 @@ import React, { FC } from 'react';
 
 type TextNormalProps = TextProps & {
 	children?: React.ReactNode;
+	basic?: any;
 };
 
-const TextNormal: FC<TextNormalProps> = ({ children, ...props }) => {
+const TextNormal: FC<TextNormalProps> = ({ children, basic, ...props }) => {
 	const colors = useColors();
 	const fonts = useFont();
 	return (
@@ -17,7 +18,8 @@ const TextNormal: FC<TextNormalProps> = ({ children, ...props }) => {
 			fontSize='1rem'
 			fontWeight='400'
 			color={colors?.primaryText}
-			{...props}>
+			{...props}
+		>
 			{children}
 		</Text>
 	);

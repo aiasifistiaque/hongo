@@ -15,7 +15,8 @@ const SectionPadding: FC<SectionPaddingProps> = ({ children, ...props }) => {
 			w='full'
 			h='auto'
 			px={{ base: padding.layoutPadding_X_Mobile, lg: padding.layoutPadding_X }}
-			{...props}>
+			{...props}
+		>
 			{children}
 		</Box>
 	);

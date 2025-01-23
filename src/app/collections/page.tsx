@@ -26,9 +26,7 @@ const page = () => {
 				{collectionPage?.title || 'All Collections'}
 			</SmallBanner>
 
-			<Box py='4rem'>
-				<CollectionPage />
-			</Box>
+			<CollectionPage />
 		</PageLayout>
 	);
 };

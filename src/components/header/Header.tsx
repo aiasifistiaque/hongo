@@ -10,23 +10,47 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
-import SearchInput from './header-components/SearchInput';
-import SearchButton from './header-components/SearchButton';
-import CartButton from './header-components/CartButton';
-import Container from './header-components/Container';
+import {
+	SearchInput,
+	SearchButton,
+	CartButton,
+	LoginButton,
+	Container,
+	LoggedInIcon,
+} from './header-components/index';
 import { useContent } from '@/hooks';
+import LoginModal from '../drawer/login-drawer/LoginDrawer';
+import { useAppSelector, useAuth } from '@/library';
+import Link from 'next/link';
+import { useGetSelfQuery } from '@/store/services/authApi';
 
 type HeaderProps = BoxProps & {};
 
 const Header: FC<HeaderProps> = ({}) => {
 	const { isOpen, onOpen: onSearchDrawerOpen, onClose } = useDisclosure();
+	const { cartItems } = useAppSelector(state => state.cart);
 	const {
 		isOpen: cartOpen,
 		onOpen: onCartDrawerOpen,
 		onClose: onCartDeawerClose,
 	} = useDisclosure();
 
+	const { isLoggedIn } = useAuth();
+	const { data } = useGetSelfQuery({});
+
+	const firstLetter = data?.name?.slice(0, 1);
+
+	const {
+		isOpen: loginOpen,
+		onOpen: onLoginDrawerOpen,
+		onClose: onLoginDeawerClose,
+	} = useDisclosure();
 	const { content, basic } = useContent();
+
+	const cartTotal = cartItems.reduce(
+		(acc: any, item: any) => acc + item.qty,
+		0
+	);
 
 	return (
 		<Wrapper>
@@ -35,10 +59,18 @@ const Header: FC<HeaderProps> = ({}) => {
 					<Logo imgSrc={content?.header?.logo || ''} />
 				</GridItem>
 				<GridItem>
-					<Flex justifyContent='flex-end' alignItems='center' h='full'>
+					<Flex gap={2} justifyContent='flex-end' alignItems='center' h='full'>
 						<SearchInput />
 						<SearchButton onOpen={onSearchDrawerOpen} />
-						<CartButton onOpen={onCartDrawerOpen} />
+						<CartButton cartTotal={cartTotal} onOpen={onCartDrawerOpen} />
+
+						{!isLoggedIn && <LoginButton onOpen={onLoginDrawerOpen} />}
+
+						{isLoggedIn && (
+							<Link href='/dashboard/account'>
+								<LoggedInIcon firstLetter={firstLetter} />
+							</Link>
+						)}
 					</Flex>
 				</GridItem>
 			</GridWrapper>
@@ -46,6 +78,12 @@ const Header: FC<HeaderProps> = ({}) => {
 			{/* This drawer will open from top section */}
 			<SearchDrawer isOpen={isOpen} onClose={onClose} />
 			<CartDrawer isOpen={cartOpen} onClose={onCartDeawerClose} />
+			<LoginModal
+				isOpen={loginOpen}
+				onClose={onLoginDeawerClose}
+				content={content}
+				basic={basic}
+			/>
 		</Wrapper>
 	);
 };

@@ -5,6 +5,8 @@ import { TOKEN_NAME } from './constants';
 import mainApi from './services/mainApi';
 import { cartSlice } from './slices/cartSlice';
 import { tableSlice } from './slices/tableSlice';
+import guestMainApi from './checkout-as-guest-api/guestMainApi';
+import microServiceMainApi from './micro-services/microServiceMainApi';
 
 // import { routeSlice, tableSlice, cartSlice, authSlice } from '@/components/library/store';
 
@@ -15,8 +17,14 @@ export const store = configureStore({
 		table: tableSlice.reducer,
 		cart: cartSlice.reducer,
 		[mainApi.reducerPath]: mainApi.reducer,
+		[guestMainApi.reducerPath]: guestMainApi.reducer,
+		[microServiceMainApi.reducerPath]: microServiceMainApi.reducer,
 	},
-	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(mainApi.middleware),
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware()
+			.concat(mainApi.middleware)
+			.concat(guestMainApi.middleware)
+			.concat(microServiceMainApi.middleware),
 });
 
 store.subscribe(() => {
