@@ -11,7 +11,7 @@ const HeroCTA = () => {
 
 	return (
 		<Flex gap='4' align={getAlignment(content?.hero?.align)}>
-			<Link href={content?.hero?.href || '/explore'}>
+			<Link href={'/collections'}>
 				<Button
 					fontSize={
 						content?.hero?.btnFontSize ? `${content?.hero?.btnFontSize}px` : '0'

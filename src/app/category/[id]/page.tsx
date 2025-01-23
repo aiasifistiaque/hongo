@@ -28,13 +28,10 @@ export default function Home() {
 		{ skip: !id }
 	);
 
-	console.log('CatData', catData);
-
 	const { data, isFetching } = useGetAllQuery(
 		{
 			path: 'products',
 			sort,
-			limit: 20,
 			filters: {
 				category_in: id,
 			},

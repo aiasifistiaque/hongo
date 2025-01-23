@@ -28,8 +28,6 @@ const Header: FC<HeaderProps> = ({}) => {
 
 	const { content, basic } = useContent();
 
-	console.log('Content', content);
-
 	return (
 		<Wrapper>
 			<GridWrapper>

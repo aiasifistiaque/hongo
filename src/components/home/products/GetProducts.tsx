@@ -6,6 +6,7 @@ import { useGetAllQuery } from '@/store/services/commonApi';
 import React, { FC } from 'react';
 import ProductCart from './sections/ProductCart';
 import { useColors } from '@/hooks';
+import { TextNormal } from '@/components/utils';
 
 const TEMPLATE_COLUMNS = {
 	base: 'repeat(1, 1fr)',
@@ -29,22 +30,24 @@ const GetProducts: FC<ProductsProps> = ({ data, ...props }) => {
 			{...props}
 			borderBottomWidth={1}
 			pb='72px'
-			borderBottomColor={colors?.border}>
-			<Grid
-				templateColumns={TEMPLATE_COLUMNS}
-				gap={6}>
-				{data?.doc?.map((item: any, i: number) => (
-					<GridItem
-						bg={colors?.cardBg}
-						key={i}
-						w='100%'
-						borderRadius={colors?.cardRadius}
-						h={productCartHeight}
-						// boxShadow={cartBoxShadow}
-					>
-						<ProductCart data={item} />
-					</GridItem>
-				))}
+			borderBottomColor={colors?.border}
+		>
+			<Grid templateColumns={TEMPLATE_COLUMNS} gap={6}>
+				{data?.doc?.length > 0 ? (
+					data?.doc?.map((item: any, i: number) => (
+						<GridItem
+							bg={colors?.cardBg}
+							key={i}
+							w='100%'
+							borderRadius={colors?.cardRadius}
+							h={productCartHeight}
+						>
+							<ProductCart data={item} />
+						</GridItem>
+					))
+				) : (
+					<TextNormal>No products found</TextNormal>
+				)}
 			</Grid>
 		</Box>
 	);
