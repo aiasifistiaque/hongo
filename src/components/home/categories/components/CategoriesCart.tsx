@@ -25,7 +25,7 @@ const CategoriesCart: FC<CategoriesCartProps> = ({ data, ...props }) => {
 	const responsive = SIZES?.collection;
 
 	return (
-		<Link href={'#'}>
+		<Link href={href}>
 			<Flex alignItems='center' flexDir='column' {...props}>
 				<Flex w={FLEX_WI} h={FLEX_WI} mb='16px'>
 					<Image

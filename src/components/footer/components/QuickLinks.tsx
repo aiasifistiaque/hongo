@@ -1,6 +1,6 @@
 import { TextNormal, Column } from '@/components';
 import { useColors, useContent, useFont } from '@/hooks';
-import { Box, BoxProps } from '@chakra-ui/react';
+import { Box, BoxProps, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import React, { FC } from 'react';
@@ -18,32 +18,35 @@ const QuickLinks: FC<QuickLinksProps> = ({ data, ...props }) => {
 	const { content, basic } = useContent();
 	const fgColor = content?.footer?.fgColor;
 	return (
-		<Box
+		<Flex
+			flexDir='column'
+			alignItems={{ base: 'center', md: 'flex-start' }}
 			color={fgColor}
-			{...props}>
+			{...props}
+		>
 			<TextNormal
 				mb='1rem'
 				fontWeight='600'
 				fontSize='2rem'
 				fontFamily={font?.primaryFont}
-				color={fgColor}>
+				color={fgColor}
+			>
 				{data?.label}
 			</TextNormal>
-			<Column gap={3}>
+			<Column alignItems={{ base: 'center', md: 'flex-start' }} gap={3}>
 				{data?.links?.map((item, i) => (
-					<Link
-						key={i}
-						href={item?.link}>
+					<Link key={i} href={item?.link}>
 						<TextNormal
 							_hover={{ textDecoration: 'underline' }}
 							color={fgColor}
-							display='inline-block'>
+							display='inline-block'
+						>
 							{item?.name}
 						</TextNormal>
 					</Link>
 				))}
 			</Column>
-		</Box>
+		</Flex>
 	);
 };
 

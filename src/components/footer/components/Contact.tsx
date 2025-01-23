@@ -20,52 +20,35 @@ const Contact: FC<ContactProps> = ({ ...props }) => {
 	const fgColor = content?.footer?.fgColor;
 
 	return (
-		<Box
+		<Flex
+			flexDir='column'
+			alignItems={{ base: 'center', md: 'flex-start' }}
 			color={fgColor}
-			{...props}>
+			{...props}
+		>
 			<TextNormal
 				mb='1rem'
 				fontWeight='600'
 				fontSize='2rem'
 				fontFamily={font?.primaryFont}
-				color={fgColor}>
+				color={fgColor}
+			>
 				Contact Us
 			</TextNormal>
-			<Flex
-				mb={3}
-				alignItems='center'
-				gap={2}>
-				<Icon
-					color={fgColor}
-					size={16}
-					name='map'
-				/>
+			<Flex mb={3} alignItems='center' gap={2}>
+				<Icon color={fgColor} size={16} name='map' />
 
 				<TextNormal color={fgColor}>{basic?.address}</TextNormal>
 			</Flex>
-			<Flex
-				mb={3}
-				alignItems='center'
-				gap={2}>
-				<Icon
-					color={fgColor}
-					size={16}
-					name='phone'
-				/>
+			<Flex mb={3} alignItems='center' gap={2}>
+				<Icon color={fgColor} size={16} name='phone' />
 				<TextNormal color={fgColor}>{basic?.phone}</TextNormal>
 			</Flex>
-			<Flex
-				mb={3}
-				alignItems='center'
-				gap={2}>
-				<Icon
-					color={fgColor}
-					size={16}
-					name='envelope'
-				/>
+			<Flex mb={3} alignItems='center' gap={2}>
+				<Icon color={fgColor} size={16} name='envelope' />
 				<TextNormal color={fgColor}>{basic?.email}</TextNormal>
 			</Flex>
-		</Box>
+		</Flex>
 	);
 };
 

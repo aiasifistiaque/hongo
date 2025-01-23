@@ -11,15 +11,12 @@ type SmallBannerProps = {
 const SmallBanner: FC<SmallBannerProps> = ({ image, children }) => {
 	const colors = useColors();
 	return (
-		<BannerWrapper backgroundImage={`url(${image || './slider/sliderTwo.webp'})`}>
-			<Center
-				w='full'
-				h='full'>
+		<BannerWrapper
+			backgroundImage={`url(${image || './slider/sliderTwo.webp'})`}
+		>
+			<Center w='full' h='full'>
 				{/* <Overlay bg={colors?.overlay} /> */}
-				<TextNormal
-					zIndex={'3'}
-					fontSize='3rem'
-					color={colors?.primaryText}>
+				<TextNormal zIndex={'3'} fontSize='3rem' color={colors?.primaryText}>
 					{children}
 				</TextNormal>
 			</Center>
@@ -29,7 +26,10 @@ const SmallBanner: FC<SmallBannerProps> = ({ image, children }) => {
 
 export default SmallBanner;
 
-const BannerWrapper = ({ children, ...props }: BoxProps & { children: ReactNode }) => {
+const BannerWrapper = ({
+	children,
+	...props
+}: BoxProps & { children: ReactNode }) => {
 	return (
 		<Box
 			w='full'
@@ -38,7 +38,8 @@ const BannerWrapper = ({ children, ...props }: BoxProps & { children: ReactNode 
 			backgroundSize='cover'
 			backgroundRepeat='no-repeat'
 			position='relative'
-			{...props}>
+			{...props}
+		>
 			{children}
 		</Box>
 	);

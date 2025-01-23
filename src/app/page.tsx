@@ -18,7 +18,6 @@ import { FlexProps } from '@chakra-ui/react';
 
 export default function Home() {
 	const { data: apiData, isLoading } = useGetStoreQuery({});
-
 	if (isLoading || !apiData) return <PageLayout isLoading={true} />;
 
 	return (

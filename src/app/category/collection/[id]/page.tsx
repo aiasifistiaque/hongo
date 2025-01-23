@@ -17,12 +17,12 @@ import { useState } from 'react';
 
 export default function Home() {
 	const colors = useColors();
-	const [sort, setSort] = useState('-createdAt');
 	const { id } = useParams<{ id: string }>();
+	const [sort, setSort] = useState('-createdAt');
 
 	const { data: catData, isFetching: catFetching } = useGetByIdQuery(
 		{
-			path: 'categories',
+			path: 'collections',
 			id: id,
 		},
 		{ skip: !id }
@@ -31,7 +31,7 @@ export default function Home() {
 	const { data, isFetching } = useGetAllQuery(
 		{
 			path: 'products',
-			sort,
+
 			filters: {
 				category_in: id,
 			},
@@ -50,9 +50,8 @@ export default function Home() {
 						<CommonTitle mb={2}>{catData?.name}</CommonTitle>
 						<TextNormal
 							fontSize={{ base: '1rem', md: '1.4rem' }}
-						>{`Explore products from category ${catData?.name}`}</TextNormal>
+						>{`Explore products from ${catData?.name}`}</TextNormal>
 					</Box>
-
 					<Box>
 						<Select
 							value='sort'
