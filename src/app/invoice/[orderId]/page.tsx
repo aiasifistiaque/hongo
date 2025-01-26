@@ -19,7 +19,7 @@ const page = () => {
 		{ skip: !orderId }
 	);
 
-	if (isLoading || !data) return <PageLayout isLoading={true} />;
+	if (isLoading || !data) return <PageLayout apiData={data} isLoading={true} />;
 
 	console.log('OrderDta', orderData);
 
@@ -27,7 +27,7 @@ const page = () => {
 	console.log('Id', orderId);
 
 	return (
-		<PageLayout isLoading={isLoading || isFetching}>
+		<PageLayout apiData={data} isLoading={isLoading || isFetching}>
 			<Invoice basic={data?.basic} content={data?.content} data={orderData} />
 		</PageLayout>
 	);

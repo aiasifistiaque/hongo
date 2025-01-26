@@ -10,17 +10,22 @@ type CartButtonProps = CenterProps & {
 	children?: string;
 	onOpen?: () => void;
 	cartTotal: number | string;
+	content: any;
 };
 
 const BTN_WIDTH = { base: '2.4rem', md: '2.8rem' };
 
-const CartButton: FC<CartButtonProps> = ({ onOpen, cartTotal, ...props }) => {
+const CartButton: FC<CartButtonProps> = ({
+	onOpen,
+	cartTotal,
+	content,
+	...props
+}) => {
 	const colors = useColors();
-	const { content } = useContent();
 
 	return (
-		<BtnContainer onClick={onOpen} {...props}>
-			<CartTotal>{cartTotal || 0}</CartTotal>
+		<BtnContainer content={content} onClick={onOpen} {...props}>
+			<CartTotal content={content}>{cartTotal || 0}</CartTotal>
 			<Icon
 				color={content?.header?.iconFg || colors.brand}
 				size={18}
@@ -33,10 +38,10 @@ const CartButton: FC<CartButtonProps> = ({ onOpen, cartTotal, ...props }) => {
 export default CartButton;
 const BtnContainer = ({
 	children,
+	content,
 	...props
-}: CenterProps & { children: ReactNode }) => {
+}: CenterProps & { children: ReactNode; content: any }) => {
 	const { brand } = useColors();
-	const { content } = useContent();
 
 	return (
 		<Center
@@ -53,9 +58,11 @@ const BtnContainer = ({
 	);
 };
 
-const CartTotal = ({ children, ...props }: CenterProps & { children: any }) => {
-	const { content } = useContent();
-
+const CartTotal = ({
+	children,
+	content,
+	...props
+}: CenterProps & { children: any; content: any }) => {
 	return (
 		<Center
 			position='absolute'

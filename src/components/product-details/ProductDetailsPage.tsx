@@ -6,9 +6,11 @@ import { useColors } from '@/hooks';
 import { data as dat } from '@/lib/config/data';
 import { ContentWrapper } from '@/library';
 import { useGetByIdQuery } from '@/store/services/commonApi';
+import { useGetStoreQuery } from '@/store/services/storeApi';
 import { useParams } from 'next/navigation';
 
 const ProductDetailsPage = () => {
+	const { data: apiData, isLoading } = useGetStoreQuery({});
 	const { id } = useParams<{ id: string }>();
 	const { singleProduct, relatedProduct } = dat;
 	const colors = useColors();
@@ -23,7 +25,7 @@ const ProductDetailsPage = () => {
 
 	return (
 		<ContentWrapper>
-			<PageLayout>
+			<PageLayout apiData={apiData} isLoading={isLoading}>
 				<SectionPadding bg={colors?.bg}>
 					<ProductDetails id={id} data={data} />
 				</SectionPadding>

@@ -32,7 +32,7 @@ export async function generateMetadata(
 		openGraph: {
 			title: metaData?.title || basicStoreData?.name,
 			description: metaData?.description || shopData?.description,
-			images: [basicStoreData?.logo, ...previousImages],
+			images: [basicStoreData?.logo || shopData?.logo, ...previousImages],
 			type: 'website',
 			locale: 'en-us',
 			url: `${BASE_URL}`,

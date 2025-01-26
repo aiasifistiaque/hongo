@@ -74,7 +74,7 @@ const Checkout: FC<CheckoutProps> = ({ basic, content, storeId }) => {
 	const handlePlaceOrder = () => {
 		const body = {
 			address,
-			cart: guestCartResult?.data,
+			cart: resultCart?.data || guestCartResult?.data,
 			isPaid: false,
 			paymentMethod: 'cash on delivery',
 			paymentAmount: 0,
@@ -129,10 +129,10 @@ const Checkout: FC<CheckoutProps> = ({ basic, content, storeId }) => {
 	// This is for redirect to new page
 	useEffect(() => {
 		if (result.isSuccess || guestOrderResult?.isSuccess) {
-			sendMailTrigger({
-				body: result?.data?.order || guestOrderResult?.data,
-				path: 'send-invoice',
-			});
+			// sendMailTrigger({
+			// 	body: result?.data?.order || guestOrderResult?.data,
+			// 	path: 'send-invoice',
+			// });
 			dispatch(resetCart());
 			router.push(
 				`/invoice/${result?.data?.order?._id || guestOrderResult?.data?._id}`
@@ -142,17 +142,20 @@ const Checkout: FC<CheckoutProps> = ({ basic, content, storeId }) => {
 
 	// If coupon is verified then this will call
 	useEffect(() => {
-		guestTriggerCart({
-			storeId: storeId,
-			body: {
-				coupon: couponCode,
-				items: cartItems,
-			},
-		});
-		triggerCart({
-			body: { items: cartItems, discount: 0, shipping: 0 },
-			path: 'orders/cart-total',
-		});
+		if (isLoggedIn) {
+			triggerCart({
+				body: { items: cartItems, discount: 0, shipping: 0 },
+				path: 'orders/cart-total',
+			});
+		} else {
+			guestTriggerCart({
+				storeId: storeId,
+				body: {
+					coupon: couponCode,
+					items: cartItems,
+				},
+			});
+		}
 
 		if (verifyCoupon?.isError) {
 			toast({
@@ -180,9 +183,6 @@ const Checkout: FC<CheckoutProps> = ({ basic, content, storeId }) => {
 		successText: 'Order placed successfully',
 		successTitle: 'Success',
 	});
-
-	console.log('result Cart', resultCart);
-	console.log('guestCart', guestCartResult);
 
 	return (
 		<Box bg={css?.bgColor} py={12}>

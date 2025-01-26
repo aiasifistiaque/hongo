@@ -7,10 +7,10 @@ import {
 	TextNormal,
 } from '@/components';
 
-import SmallBanner from '@/components/banner/SmallBanner';
 import GetProducts from '@/components/home/products/GetProducts';
 import { useColors } from '@/hooks';
 import { useGetAllQuery, useGetByIdQuery } from '@/store/services/commonApi';
+import { useGetStoreQuery } from '@/store/services/storeApi';
 import { Box, Flex, Select } from '@chakra-ui/react';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
@@ -19,6 +19,7 @@ export default function Home() {
 	const colors = useColors();
 	const [sort, setSort] = useState('-createdAt');
 	const { id } = useParams<{ id: string }>();
+	const { data: apiData, isLoading } = useGetStoreQuery({});
 
 	const { data: catData, isFetching: catFetching } = useGetByIdQuery(
 		{
@@ -40,7 +41,7 @@ export default function Home() {
 	);
 
 	return (
-		<PageLayout isLoading={false}>
+		<PageLayout apiData={apiData} isLoading={false}>
 			{/* Slider */}
 			{/* <SmallBanner bannarData={catData?.name} /> */}
 			{/* Slider Bottom */}

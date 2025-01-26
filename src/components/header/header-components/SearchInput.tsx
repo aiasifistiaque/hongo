@@ -6,9 +6,12 @@ import { searchInputWidth } from '@/lib/config/constants';
 import React, { FC, ReactNode, useState } from 'react';
 import { useColors, useContent } from '@/hooks';
 
-type SearchInputProps = CenterProps & {};
+type SearchInputProps = CenterProps & {
+	basic: any;
+	content: any;
+};
 
-const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
+const SearchInput: FC<SearchInputProps> = ({ basic, content, ...props }) => {
 	const [searchValue, setSearchValue] = useState('');
 	const router = useRouter();
 
@@ -31,13 +34,13 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 	};
 
 	const colors = useColors();
-	const { content } = useContent();
 
 	return (
 		<Container {...props}>
 			<SearchInputField
 				onKeyDown={handleKeyDown}
 				onChange={handleSearchValue}
+				content={content}
 			/>
 			<SearchButton onClick={handleSearchPage}>
 				<Icon name='search' color={content?.header?.searchBoxIcon} />
@@ -66,9 +69,11 @@ const Container = ({
 	);
 };
 
-const SearchInputField = ({ ...props }: InputProps & {}) => {
+const SearchInputField = ({
+	content,
+	...props
+}: InputProps & { content: any }) => {
 	const colors = useColors();
-	const { content } = useContent();
 
 	return (
 		<Input

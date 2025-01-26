@@ -6,12 +6,12 @@ import React, { FC } from 'react';
 type LoginButtonProps = CenterProps & {
 	children?: string;
 	onOpen: () => void;
+	content: any;
 };
 
 const BTN_WIDTH = { base: '2.4rem', md: '2.8rem' };
 
-const LoginButton: FC<LoginButtonProps> = ({ onOpen, ...props }) => {
-	const { content } = useContent();
+const LoginButton: FC<LoginButtonProps> = ({ onOpen, content, ...props }) => {
 	return (
 		<Center
 			w={BTN_WIDTH}

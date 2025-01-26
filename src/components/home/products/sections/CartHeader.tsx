@@ -11,14 +11,11 @@ type CartHeaderProps = BoxProps & {
 const CartHeader: FC<CartHeaderProps> = ({ imgSrc, ...props }) => {
 	const colors = useColors();
 	return (
-		<Flex
-			w='full'
-			maxH='300px'
-			overflow='hidden'
-			{...props}>
+		<Flex w='full' maxH='250px' overflow='hidden' {...props}>
 			<Image
 				w='full'
-				h='300px'
+				h='full'
+				maxH='250px'
 				borderTopRadius={`${colors.cardRadius}px`}
 				objectFit='cover'
 				src={imgSrc}

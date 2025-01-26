@@ -15,12 +15,8 @@ export async function generateMetadata(
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
 	const { id: productId } = await params;
-
 	const productData = await getAProduct(productId);
-
 	const metaData = productData?.meta;
-
-	console.log('ProductData', productData);
 	const previousImages = (await parent).openGraph?.images || [];
 
 	return {

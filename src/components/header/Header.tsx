@@ -24,9 +24,12 @@ import { useAppSelector, useAuth } from '@/library';
 import Link from 'next/link';
 import { useGetSelfQuery } from '@/store/services/authApi';
 
-type HeaderProps = BoxProps & {};
+type HeaderProps = BoxProps & {
+	content: any;
+	basic: any;
+};
 
-const Header: FC<HeaderProps> = ({}) => {
+const Header: FC<HeaderProps> = ({ content, basic }) => {
 	const { isOpen, onOpen: onSearchDrawerOpen, onClose } = useDisclosure();
 	const { cartItems } = useAppSelector(state => state.cart);
 	const {
@@ -45,7 +48,6 @@ const Header: FC<HeaderProps> = ({}) => {
 		onOpen: onLoginDrawerOpen,
 		onClose: onLoginDeawerClose,
 	} = useDisclosure();
-	const { content, basic } = useContent();
 
 	const cartTotal = cartItems.reduce(
 		(acc: any, item: any) => acc + item.qty,
@@ -53,22 +55,28 @@ const Header: FC<HeaderProps> = ({}) => {
 	);
 
 	return (
-		<Wrapper>
+		<Wrapper content={content}>
 			<GridWrapper>
 				<GridItem>
 					<Logo imgSrc={content?.header?.logo || ''} />
 				</GridItem>
 				<GridItem>
 					<Flex gap={2} justifyContent='flex-end' alignItems='center' h='full'>
-						<SearchInput />
-						<SearchButton onOpen={onSearchDrawerOpen} />
-						<CartButton cartTotal={cartTotal} onOpen={onCartDrawerOpen} />
+						<SearchInput basic={basic} content={content} />
+						<SearchButton content={content} onOpen={onSearchDrawerOpen} />
+						<CartButton
+							content={content}
+							cartTotal={cartTotal}
+							onOpen={onCartDrawerOpen}
+						/>
 
-						{!isLoggedIn && <LoginButton onOpen={onLoginDrawerOpen} />}
+						{!isLoggedIn && (
+							<LoginButton content={content} onOpen={onLoginDrawerOpen} />
+						)}
 
 						{isLoggedIn && (
 							<Link href='/dashboard/account'>
-								<LoggedInIcon firstLetter={firstLetter} />
+								<LoggedInIcon content={content} firstLetter={firstLetter} />
 							</Link>
 						)}
 					</Flex>
@@ -90,8 +98,13 @@ const Header: FC<HeaderProps> = ({}) => {
 
 export default Header;
 
-const Wrapper = ({ children }: { children: ReactNode }) => {
-	const { content } = useContent();
+const Wrapper = ({
+	children,
+	content,
+}: {
+	children: ReactNode;
+	content: any;
+}) => {
 	return (
 		<Container
 			borderBottom={`1px solid ${content?.header?.borderColor}`}

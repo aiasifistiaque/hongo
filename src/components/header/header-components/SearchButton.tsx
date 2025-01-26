@@ -6,12 +6,12 @@ import React, { FC } from 'react';
 type SearchButtonProps = CenterProps & {
 	children?: string;
 	onOpen: () => void;
+	content: any;
 };
 
 const BTN_WIDTH = { base: '2.4rem', md: '2.8rem' };
 
-const SearchButton: FC<SearchButtonProps> = ({ onOpen, ...props }) => {
-	const { content } = useContent();
+const SearchButton: FC<SearchButtonProps> = ({ onOpen, content, ...props }) => {
 	return (
 		<Center
 			w={BTN_WIDTH}
@@ -22,12 +22,9 @@ const SearchButton: FC<SearchButtonProps> = ({ onOpen, ...props }) => {
 			display={{ base: 'flex', lg: 'none' }}
 			mr='8px'
 			onClick={onOpen}
-			{...props}>
-			<Icon
-				color={content?.header?.iconFg}
-				size={18}
-				name='search'
-			/>
+			{...props}
+		>
+			<Icon color={content?.header?.iconFg} size={18} name='search' />
 		</Center>
 	);
 };
