@@ -3,8 +3,9 @@ import { Icon } from '@/components';
 import Link from 'next/link';
 import { Box, BoxProps } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
-import useCustomStyle from '@/hooks/useCustomStyle';
+
 import { borderRadius } from '@/lib/config/constants';
+import { useColors } from '@/library';
 
 const HomeButton = () => {
 	return (
@@ -25,12 +26,12 @@ export const IconContainer: FC<IconContainerProps> = ({
 	children,
 	...props
 }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 	return (
 		<Box
 			p='.4rem'
 			borderRadius={borderRadius?.xs}
-			_hover={{ backgroundColor: colors?.lightWhite }}
+			_hover={{ backgroundColor: '#ddd' }}
 			cursor='pointer'
 			{...props}
 		>

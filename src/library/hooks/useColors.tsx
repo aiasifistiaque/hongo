@@ -27,6 +27,7 @@ export type ColorProps = {
 	cardRadius: number;
 	btnColor: string;
 	btnTextColor: string;
+	borderColor: string;
 };
 
 const useColors = (): ColorProps => {
@@ -58,7 +59,8 @@ const useColors = (): ColorProps => {
 	const [footerBannerFg, setFooterBannerFg] = React.useState<string>('#000');
 
 	//fonts
-	const [primaryFont, setPrimaryFont] = React.useState<string>('Playfair Display');
+	const [primaryFont, setPrimaryFont] =
+		React.useState<string>('Playfair Display');
 	const [secondaryFont, setSecondaryFont] = React.useState<string>('Inter');
 
 	//
@@ -68,6 +70,8 @@ const useColors = (): ColorProps => {
 	const [btnColor, setBtnColor] = React.useState<string>('#202020');
 	const [btnTextColor, setBtnTextColor] = React.useState<string>('#fff');
 
+	const [borderColor, setBorderColor] = React.useState<string>('#cfcfcf');
+
 	React.useEffect(() => {
 		if (data) {
 			setBrand(data?.basic?.brandColor);
@@ -75,7 +79,9 @@ const useColors = (): ColorProps => {
 			setPrimaryText(data?.basic?.primaryTextColor);
 			setSecondaryText(data?.basic?.secondaryTextColor);
 			setBannerBg(data?.content?.banner?.bgColor || data?.basic?.brandColor);
-			setBannerFg(data?.content?.banner?.fgColor || data?.basic?.brandTextColor);
+			setBannerFg(
+				data?.content?.banner?.fgColor || data?.basic?.brandTextColor
+			);
 			setHeaderBg(data?.basic?.headerBg || data?.basic?.brandColor);
 			setHeaderFg(data?.basic?.headerFg || data?.basic?.brandTextColor);
 			setHeaderBorder(data?.basic?.headerBorder || 'eborder.200');
@@ -84,8 +90,12 @@ const useColors = (): ColorProps => {
 			setBgColor(data?.basic?.bgColor);
 			setFooterBg(data?.basic?.footerBg || '#fff');
 			setFooterFg(data?.basic?.footerFg || '#222');
-			setFooterBannerBg(data?.content?.footerBannerBg || data?.basic?.footerBg || '#f8f8f8');
-			setFooterBannerFg(data?.content?.footerBannerFg || data?.basic?.footerFg || '#000');
+			setFooterBannerBg(
+				data?.content?.footerBannerBg || data?.basic?.footerBg || '#f8f8f8'
+			);
+			setFooterBannerFg(
+				data?.content?.footerBannerFg || data?.basic?.footerFg || '#000'
+			);
 			setCardBg(data?.basic?.cardBg || '#fff');
 			setCardRadius(data?.basic?.cardRadius || 4);
 
@@ -120,6 +130,7 @@ const useColors = (): ColorProps => {
 		cardRadius,
 		btnColor,
 		btnTextColor,
+		borderColor,
 	};
 };
 

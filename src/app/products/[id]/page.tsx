@@ -1,40 +1,47 @@
-'use client';
-import { PageLayout, SectionPadding } from '@/components';
-import ProductDetails from '@/components/productDetails/ProductDetails';
-import RelatedProrduct from '@/components/slider/RelatedProduct';
-import { useColors } from '@/hooks';
-import { data as dat } from '@/lib/config/data';
-import { ContentWrapper } from '@/library';
-import { useGetByIdQuery } from '@/store/services/commonApi';
-import { useParams } from 'next/navigation';
+import { getAProduct } from '@/components/utils/functions/getAProduct';
 
-export default function ProductPage() {
-	const { id } = useParams<{ id: string }>();
-	const { singleProduct, relatedProduct } = dat;
-	const colors = useColors();
+import { ProductDetailsPage } from '@/components';
+import { Metadata, NextPage, ResolvingMetadata } from 'next';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-	const { data, isFetching } = useGetByIdQuery(
-		{
-			path: 'products',
-			id,
+type SingleProductProps = {
+	params: Promise<{
+		id: string;
+	}>;
+};
+
+export async function generateMetadata(
+	{ params }: SingleProductProps,
+	parent: ResolvingMetadata
+): Promise<Metadata> {
+	const { id: productId } = await params;
+
+	const productData = await getAProduct(productId);
+
+	const metaData = productData?.meta;
+
+	console.log('ProductData', productData);
+	const previousImages = (await parent).openGraph?.images || [];
+
+	return {
+		title: metaData?.title || productData?.name,
+		description: metaData?.description || productData?.description,
+		openGraph: {
+			title: metaData?.title || productData?.name,
+			description: metaData?.description || productData?.description,
+			images: [productData?.image, ...previousImages],
+			type: 'website',
+			locale: 'en-us',
+			url: `${BASE_URL}`,
+			siteName: `${BASE_URL}`,
 		},
-		{ skip: !id }
-	);
-
-	return (
-		<ContentWrapper>
-			<PageLayout>
-				<SectionPadding bg={colors?.bg}>
-					<ProductDetails
-						id={id}
-						data={data}
-					/>
-				</SectionPadding>
-
-				<SectionPadding bg={colors?.bg}>
-					<RelatedProrduct data={relatedProduct?.doc} />
-				</SectionPadding>
-			</PageLayout>
-		</ContentWrapper>
-	);
+	};
 }
+
+const SingleProduct: NextPage<SingleProductProps> = async ({ params }) => {
+	const { id } = await params;
+
+	return <ProductDetailsPage />;
+};
+
+export default SingleProduct;

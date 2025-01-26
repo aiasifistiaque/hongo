@@ -10,10 +10,10 @@ const InvoiceContainer: FC<InvoiceContainerProps> = ({
 }) => {
 	return (
 		<Box
-			mt={4}
 			maxW={{ base: 'full', md: '30rem', lg: '50rem' }}
 			mx='auto'
 			px='1rem'
+			py='2rem'
 			{...props}
 		>
 			{children}

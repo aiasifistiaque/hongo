@@ -41,6 +41,7 @@ const Checkout: FC<CheckoutProps> = ({ basic, content, storeId }) => {
 	const { cartItems } = useAppSelector(state => state.cart);
 	// These are for logged in user
 	const [trigger, result] = usePostMutation();
+	const [triggerCart, resultCart] = usePostMutation();
 
 	// These are for guest user
 	const [guestOrderTrigger, guestOrderResult] = useCreateOrderMutation();
@@ -96,7 +97,7 @@ const Checkout: FC<CheckoutProps> = ({ basic, content, storeId }) => {
 	const handlePlaceOrderAsGuest = () => {
 		const body = {
 			address,
-			cart: guestCartResult?.data,
+			cart: guestCartResult?.data || resultCart?.data,
 			isPaid: false,
 			paymentMethod: 'cash on delivery',
 			paymentAmount: 0,
@@ -148,6 +149,10 @@ const Checkout: FC<CheckoutProps> = ({ basic, content, storeId }) => {
 				items: cartItems,
 			},
 		});
+		triggerCart({
+			body: { items: cartItems, discount: 0, shipping: 0 },
+			path: 'orders/cart-total',
+		});
 
 		if (verifyCoupon?.isError) {
 			toast({
@@ -175,6 +180,9 @@ const Checkout: FC<CheckoutProps> = ({ basic, content, storeId }) => {
 		successText: 'Order placed successfully',
 		successTitle: 'Success',
 	});
+
+	console.log('result Cart', resultCart);
+	console.log('guestCart', guestCartResult);
 
 	return (
 		<Box bg={css?.bgColor} py={12}>
@@ -216,21 +224,21 @@ const Checkout: FC<CheckoutProps> = ({ basic, content, storeId }) => {
 								))}
 							</CheckoutGridContainer>
 						</Box>
-						{/* <OrderSummary
+						<OrderSummary
 							basic={basic}
 							css={css}
 							isBtnDisabled={isBtnDisabled}
 							addressData={address}
 							handlePlaceOrder={handlePlaceOrder}
 							handlePlaceOrderAsGuest={handlePlaceOrderAsGuest}
-							cardData={guestCartResult?.data}
+							cardData={guestCartResult?.data || resultCart?.data}
 							couponCode={couponCode}
 							applyCouponCode={applyCouponCode}
 							handleCouponChange={handleCouponChange}
-							cartLoading={guestCartResult?.isLoading}
+							cartLoading={guestCartResult?.isLoading || resultCart?.isLoading}
 							handleLoading={result?.isLoading || guestOrderResult?.isLoading}
 							couponCodeLoading={verifyCoupon?.isLoading}
-						/> */}
+						/>
 					</Grid>
 				</form>
 			</SectionPadding>

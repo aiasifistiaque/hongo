@@ -1,65 +1,50 @@
-'use client';
+import { getStore } from '@/components/utils/functions/getStore';
 
-import {
-	PageLayout,
-	SliderBottom,
-	Banner,
-	Categories,
-	SectionPadding,
-	Products,
-	CommonTitle,
-} from '@/components';
-import { ProductCarousel } from '@/components';
-import { data } from '@/lib/config/data';
-import { ReactNode } from 'react';
-import { useGetStoreQuery } from '@/store/services/storeApi';
-import { useColors } from '@/hooks';
-import { FlexProps } from '@chakra-ui/react';
+import { HomePage } from '@/components';
+import { Metadata, NextPage, ResolvingMetadata } from 'next';
 
-export default function Home() {
-	const { data: apiData, isLoading } = useGetStoreQuery({});
-	if (isLoading || !apiData) return <PageLayout isLoading={true} />;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-	return (
-		<PageLayout isLoading={isLoading || !apiData}>
-			{/* Slider */}
-			<Banner data={data?.bannerData} />
-			{/* Slider Bottom */}
-			<SectionWrapper>
-				<SliderBottom data={apiData?.content?.services} />
-			</SectionWrapper>
+type HomePageProps = {
+	params: Promise<{
+		id: string;
+	}>;
+};
 
-			<SectionWrapper>
-				<Categories data={apiData?.content?.collections} />
-			</SectionWrapper>
+export async function generateMetadata(
+	{ params }: HomePageProps,
+	parent: ResolvingMetadata
+): Promise<Metadata> {
+	const { id: productId } = await params;
 
-			<SectionPadding py={'3rem'}>
-				<CommonTitle mb='2rem'>Products</CommonTitle>
-				<Products />
-			</SectionPadding>
+	const storeData = await getStore();
 
-			{apiData?.content?.productList?.map((item: any, i: number) => (
-				<SectionWrapper key={i}>
-					<ProductCarousel item={item} />
-				</SectionWrapper>
-			))}
-		</PageLayout>
-	);
+	const metaData = storeData?.shop?.meta;
+
+	const previousImages = (await parent).openGraph?.images || [];
+
+	const basicStoreData = storeData?.basic;
+	const shopData = storeData?.shop;
+
+	return {
+		title: metaData?.title || basicStoreData?.name,
+		description: metaData?.description || shopData?.description,
+		openGraph: {
+			title: metaData?.title || basicStoreData?.name,
+			description: metaData?.description || shopData?.description,
+			images: [basicStoreData?.logo, ...previousImages],
+			type: 'website',
+			locale: 'en-us',
+			url: `${BASE_URL}`,
+			siteName: `${BASE_URL}`,
+		},
+	};
 }
 
-const SectionWrapper = ({
-	children,
-	...props
-}: FlexProps & { children: ReactNode }) => {
-	const colors = useColors();
-	return (
-		<SectionPadding
-			bg={colors?.bg}
-			borderBottomWidth={0}
-			borderBottomColor={colors?.border}
-			{...props}
-		>
-			{children}
-		</SectionPadding>
-	);
+const Home: NextPage<HomePageProps> = async ({ params }) => {
+	const { id } = await params;
+
+	return <HomePage />;
 };
+
+export default Home;
