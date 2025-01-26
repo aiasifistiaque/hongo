@@ -16,15 +16,17 @@ import {
 
 type InvoiceProps = BoxProps & {
 	data: any;
+	basic: any;
+	content: any;
 };
 
-const Invoice: FC<InvoiceProps> = ({ data }) => {
+const Invoice: FC<InvoiceProps> = ({ data, basic, content }) => {
+	const css = content?.invoiceCss;
 	return (
 		<InvoiceContainer>
-			<HomeButton />
-			<InvoiceHeader id={data?._id} />
-			<CustomerDetails data={data} />
-			<InvoiceTableHeader />
+			<InvoiceHeader data={data} basic={basic} css={css} id={data?._id} />
+			<CustomerDetails basic={basic} css={css} data={data} />
+			<InvoiceTableHeader basic={basic} css={css} />
 			{data?.items.map((item: any, i: number) => (
 				<InvoiceProductRow
 					key={i}
@@ -33,6 +35,8 @@ const Invoice: FC<InvoiceProps> = ({ data }) => {
 					totalPrice={item?.totalPrice}
 					unitPrice={item?.unitPrice}
 					image={item?.image}
+					basic={basic}
+					css={css}
 				/>
 			))}
 			<InvoiceSummary
@@ -40,9 +44,11 @@ const Invoice: FC<InvoiceProps> = ({ data }) => {
 				vat={data?.vat}
 				shipping={data?.shippingCharge}
 				discount={data?.discount}
+				basic={basic}
+				css={css}
 			/>
 
-			<InvoiceTotal total={data?.total} />
+			<InvoiceTotal basic={basic} css={css} total={data?.total} />
 		</InvoiceContainer>
 	);
 };

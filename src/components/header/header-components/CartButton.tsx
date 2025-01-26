@@ -4,28 +4,23 @@ import { useAppSelector } from '@/hooks/useReduxHooks';
 import { Center, CenterProps } from '@chakra-ui/react';
 import React, { FC, ReactNode } from 'react';
 import { useColors, useContent } from '@/hooks';
+import { TextNormal } from '@/components/utils';
 
 type CartButtonProps = CenterProps & {
 	children?: string;
 	onOpen?: () => void;
+	cartTotal: number | string;
 };
 
 const BTN_WIDTH = { base: '2.4rem', md: '2.8rem' };
 
-const CartButton: FC<CartButtonProps> = ({ onOpen, ...props }) => {
-	const { cartItems } = useAppSelector(state => state.cart);
+const CartButton: FC<CartButtonProps> = ({ onOpen, cartTotal, ...props }) => {
 	const colors = useColors();
 	const { content } = useContent();
 
-	const cartCount = () => {
-		return cartItems.reduce((acc: any, item: any) => acc + item.qty, 0);
-	};
-
 	return (
-		<BtnContainer
-			onClick={onOpen}
-			{...props}>
-			<CartTotal>{cartCount()}</CartTotal>
+		<BtnContainer onClick={onOpen} {...props}>
+			<CartTotal>{cartTotal || 0}</CartTotal>
 			<Icon
 				color={content?.header?.iconFg || colors.brand}
 				size={18}
@@ -36,8 +31,10 @@ const CartButton: FC<CartButtonProps> = ({ onOpen, ...props }) => {
 };
 
 export default CartButton;
-
-const BtnContainer = ({ children, ...props }: CenterProps & { children: ReactNode }) => {
+const BtnContainer = ({
+	children,
+	...props
+}: CenterProps & { children: ReactNode }) => {
 	const { brand } = useColors();
 	const { content } = useContent();
 
@@ -49,13 +46,14 @@ const BtnContainer = ({ children, ...props }: CenterProps & { children: ReactNod
 			backgroundColor={content?.header?.iconBg || brand}
 			cursor='pointer'
 			position='relative'
-			{...props}>
+			{...props}
+		>
 			{children}
 		</Center>
 	);
 };
 
-const CartTotal = ({ children, ...props }: CenterProps & { children: ReactNode }) => {
+const CartTotal = ({ children, ...props }: CenterProps & { children: any }) => {
 	const { content } = useContent();
 
 	return (
@@ -70,8 +68,15 @@ const CartTotal = ({ children, ...props }: CenterProps & { children: ReactNode }
 			bg={content?.header?.tagBg}
 			borderRadius='50%'
 			fontWeight='500'
-			{...props}>
-			{children}
+			{...props}
+		>
+			<TextNormal
+				fontSize='10px'
+				fontWeight='bold'
+				color={content?.header?.countFg || '#fff'}
+			>
+				{children}
+			</TextNormal>
 		</Center>
 	);
 };

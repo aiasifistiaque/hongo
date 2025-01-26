@@ -1,6 +1,5 @@
 'use client';
 import { Icon } from '@/components/icon';
-import { InputRadius } from '@/lib/config/constants';
 import { Center, CenterProps, Input, InputProps } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { searchInputWidth } from '@/lib/config/constants';
@@ -41,10 +40,7 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 				onChange={handleSearchValue}
 			/>
 			<SearchButton onClick={handleSearchPage}>
-				<Icon
-					name='search'
-					color={content?.header?.searchBoxIcon}
-				/>
+				<Icon name='search' color={content?.header?.searchBoxIcon} />
 			</SearchButton>
 		</Container>
 	);
@@ -52,16 +48,19 @@ const SearchInput: FC<SearchInputProps> = ({ ...props }) => {
 
 export default SearchInput;
 
-const Container = ({ children, ...props }: CenterProps & { children: ReactNode }) => {
+const Container = ({
+	children,
+	...props
+}: CenterProps & { children: ReactNode }) => {
 	const { content } = useContent();
 
 	return (
 		<Center
 			position='relative'
-			mr='16px'
 			display={{ base: 'none', lg: 'flex' }}
 			w={searchInputWidth}
-			{...props}>
+			{...props}
+		>
 			{children}
 		</Center>
 	);
@@ -90,7 +89,10 @@ const SearchInputField = ({ ...props }: InputProps & {}) => {
 	);
 };
 
-const SearchButton = ({ children, ...props }: CenterProps & { children: ReactNode }) => {
+const SearchButton = ({
+	children,
+	...props
+}: CenterProps & { children: ReactNode }) => {
 	const colors = useColors();
 
 	return (
@@ -102,7 +104,8 @@ const SearchButton = ({ children, ...props }: CenterProps & { children: ReactNod
 			right='12px'
 			cursor='pointer'
 			userSelect='none'
-			{...props}>
+			{...props}
+		>
 			{children}
 		</Center>
 	);

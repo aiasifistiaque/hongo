@@ -3,11 +3,16 @@ import useCustomStyle from '@/hooks/useCustomStyle';
 import { Button, ButtonProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
-type CartTitleProps = ButtonProps & {
+type CheckoutButtonProps = ButtonProps & {
 	children?: string;
+	basic?: any;
 };
 
-const CartTitle: FC<CartTitleProps> = ({ children, ...props }) => {
+const CheckoutButton: FC<CheckoutButtonProps> = ({
+	children,
+	basic,
+	...props
+}) => {
 	const colors = useColors();
 	return (
 		<Button
@@ -24,10 +29,11 @@ const CartTitle: FC<CartTitleProps> = ({ children, ...props }) => {
 			bg={colors?.btnColor}
 			w='full'
 			borderRadius='full'
-			{...props}>
+			{...props}
+		>
 			{children}
 		</Button>
 	);
 };
 
-export default CartTitle;
+export default CheckoutButton;

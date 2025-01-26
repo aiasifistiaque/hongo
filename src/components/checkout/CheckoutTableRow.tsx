@@ -19,10 +19,7 @@ const CheckoutTableRow: FC<CheckoutTableRowProps> = ({
 	...props
 }) => {
 	return (
-		<Grid
-			gridTemplateColumns='2fr 1fr 1fr'
-			py='1rem'
-			{...props}>
+		<Grid gridTemplateColumns='2fr 1fr 1fr' py='1rem' {...props}>
 			<AlignCenter gap={4}>
 				<Image
 					alt='Product Image'
@@ -33,24 +30,25 @@ const CheckoutTableRow: FC<CheckoutTableRowProps> = ({
 				/>
 				<TextNormal
 					fontSize={{ base: '.875rem', lg: '1.1rem' }}
-					fontWeight='500'>
+					fontWeight='500'
+				>
 					{name}
 				</TextNormal>
 			</AlignCenter>
 			<AlignCenter>
 				<TextNormal
 					fontSize={{ base: '.875rem', lg: '1.1rem' }}
-					fontWeight='400'>{`${
+					fontWeight='400'
+				>{`${
 					currency?.symbol
 				} ${unitPrice.toLocaleString()} x ${qty}`}</TextNormal>
 			</AlignCenter>
-			<AlignCenter
-				w='full'
-				justify='flex-end'>
+			<AlignCenter w='full' justify='flex-end'>
 				<TextNormal
 					fontSize={{ base: '.875rem', lg: '1.1rem' }}
 					fontWeight='700'
-					textAlign='right'>{`${currency?.symbol} ${totalPrice.toLocaleString()}`}</TextNormal>
+					textAlign='right'
+				>{`${currency?.symbol} ${totalPrice.toLocaleString()}`}</TextNormal>
 			</AlignCenter>
 		</Grid>
 	);

@@ -6,18 +6,27 @@ import { FC } from 'react';
 type InvoiceSummaryItemProps = FlexProps & {
 	text: string;
 	value: number;
+	basic: any;
+	css: any;
 };
 const InvoiceSummaryItem: FC<InvoiceSummaryItemProps> = ({
 	text,
 	value,
+	basic,
+	css,
 	...props
 }) => {
 	return (
 		<Flex justifyContent='space-between' {...props}>
-			<TextNormal fontWeight='700' fontSize={{ base: '.875rem', lg: '1.1rem' }}>
+			<TextNormal
+				basic={basic}
+				fontWeight='700'
+				fontSize={{ base: '.875rem', lg: '1.1rem' }}
+			>
 				{text}
 			</TextNormal>
 			<TextNormal
+				basic={basic}
 				fontSize={{ base: '.875rem', lg: '1.1rem' }}
 				fontWeight='700'
 				textAlign='right'

@@ -5,3 +5,4 @@ export { default as SummaryItem } from './SummaryItem';
 export { default as CheckoutTableSummary } from './CheckoutTableSummary';
 export { default as OrderSummary } from './OrderSummary';
 export { default as CouponCode } from './CouponCode';
+export { default as PaymentMethod } from './PaymentMethod';

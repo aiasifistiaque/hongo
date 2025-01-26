@@ -15,9 +15,12 @@ export * from './home/index';
 
 export * from './checkout';
 export * from './common';
-export * from './invoice';
+export * from './home-page';
+export * from './invoice-page';
 export * from './product-carousel';
 export * from './collection-page';
+export * from './utils/button/index';
+export * from './product-details';
 
 export const getAlignment = (align: string) => {
 	if (align == 'center') {

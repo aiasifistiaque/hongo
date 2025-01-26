@@ -1,11 +1,18 @@
 import { Grid, GridProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { TextNormal } from '@/components';
-import useCustomStyle from '@/hooks/useCustomStyle';
+import { useColors } from '@/library';
 
-type InvoiceTableHeaderProps = GridProps & {};
-const InvoiceTableHeader: FC<InvoiceTableHeaderProps> = ({ ...props }) => {
-	const { colors } = useCustomStyle();
+type InvoiceTableHeaderProps = GridProps & {
+	basic: any;
+	css: any;
+};
+const InvoiceTableHeader: FC<InvoiceTableHeaderProps> = ({
+	basic,
+	css,
+	...props
+}) => {
+	const colors = useColors();
 	return (
 		<Grid
 			gridTemplateColumns='2fr 1fr 1fr'
@@ -14,13 +21,22 @@ const InvoiceTableHeader: FC<InvoiceTableHeaderProps> = ({ ...props }) => {
 			py={4}
 			{...props}
 		>
-			<TextNormal fontSize={{ base: '.875rem', lg: '1.1rem' }} fontWeight='700'>
+			<TextNormal
+				basic={basic}
+				fontSize={{ base: '.875rem', lg: '1.1rem' }}
+				fontWeight='700'
+			>
 				Item
 			</TextNormal>
-			<TextNormal fontSize={{ base: '.875rem', lg: '1.1rem' }} fontWeight='700'>
+			<TextNormal
+				basic={basic}
+				fontSize={{ base: '.875rem', lg: '1.1rem' }}
+				fontWeight='700'
+			>
 				qty
 			</TextNormal>
 			<TextNormal
+				basic={basic}
 				fontSize={{ base: '.875rem', lg: '1.1rem' }}
 				fontWeight='700'
 				textAlign='right'
