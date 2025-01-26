@@ -10,12 +10,18 @@ import LogoImage from './components/LogoImage';
 
 type FooterProps = BoxProps & {
 	data: any;
+	apiData: {
+		basic: any;
+		content: any;
+	};
 };
 
-const Footer: FC<FooterProps> = ({ data, ...props }) => {
+const Footer: FC<FooterProps> = ({ data, apiData, ...props }) => {
 	const colors = useColors();
-	const { content } = useContent();
+	// const { content } = useContent();
 	// const { bgColor, fgColor } = content?.footer;
+
+	const { content, basic } = apiData;
 	const bgColor = content?.footer?.bgColor;
 	const fgColor = content?.footer?.fgColor;
 

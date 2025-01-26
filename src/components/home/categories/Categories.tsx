@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React, { FC, ReactNode, useRef } from 'react';
-import { Box, Center } from '@chakra-ui/react';
+import {
+	Box,
+	Center,
+	Flex,
+	Skeleton,
+	useBreakpointValue,
+} from '@chakra-ui/react';
 
 import { CommonTitle, TextNormal } from '@/components/utils';
 import SwiperCore from 'swiper';
@@ -15,6 +21,7 @@ import { Pagination } from 'swiper/modules';
 import SwipperArrowButton from '@/components/swiper-arrow/SwipperArrowButton';
 import { useColors } from '@/hooks';
 import { SIZES } from '@/lib/config/constants';
+import { useGetByIdQuery } from '@/store/services/commonApi';
 
 const swiperBreakpoints = {
 	320: {
@@ -44,6 +51,38 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 
 	const responsive = SIZES?.collection;
 
+	const navQueries = data?.items
+		?.slice(0, 6)
+		.map((item: any) => useGetByIdQuery({ id: item.id, path: item.type }));
+
+	const itemCount =
+		useBreakpointValue({
+			base: 2, // For small screens (mobile)
+			sm: 3, // For small screens (mobile)
+			md: 3, // For small devices
+
+			xl: 4, // For large devices (desktop)
+			'2xl': 5, // For large devices (desktop)
+		}) ?? 4;
+
+	// Create an array of the desired length
+	const skeletonArray = Array.from({ length: itemCount }, (_, i) => i + 1);
+
+	const isLoading = navQueries?.some((query: any) => query?.isLoading);
+
+	const skeleton = (
+		<Flex gap={4} justifyContent='space-between' bg={'transparent'} py='2rem'>
+			{skeletonArray?.map((item: number) => (
+				<Skeleton
+					key={item}
+					borderRadius='full'
+					height={{ base: '150px', md: '250px' }}
+					width={{ base: '150px', md: '250px' }}
+				/>
+			))}
+		</Flex>
+	);
+
 	return (
 		<BoxWrapper>
 			<CommonTitle
@@ -54,21 +93,26 @@ const Categories: FC<CategoriesProps> = ({ data }) => {
 			>
 				{data?.title}
 			</CommonTitle>
-			<Swiper
-				spaceBetween={20}
-				pagination={{ clickable: true }}
-				modules={[Pagination]}
-				breakpoints={swiperBreakpoints}
-				onSwiper={swiper => (swiperRef.current = swiper)}
-			>
-				{data?.items?.map((item: any, i: number) => (
-					<SwiperSlide key={i}>
-						<Center bg={colors?.bg} w='full'>
-							<CategoriesCart data={item} />
-						</Center>
-					</SwiperSlide>
-				))}
-			</Swiper>
+			{isLoading ? (
+				skeleton
+			) : (
+				<Swiper
+					spaceBetween={20}
+					pagination={{ clickable: true }}
+					modules={[Pagination]}
+					breakpoints={swiperBreakpoints}
+					onSwiper={swiper => (swiperRef.current = swiper)}
+				>
+					{data?.items?.map((item: any, i: number) => (
+						<SwiperSlide key={i}>
+							<Center bg={colors?.bg} w='full'>
+								<CategoriesCart data={item} />
+							</Center>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			)}
+
 			<Box
 				position='absolute'
 				top={{ base: '2.8rem', sm: '3.25rem', lg: '1.75rem' }}

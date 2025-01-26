@@ -1,6 +1,30 @@
 import { FiUser, FiSearch, FiHeart } from 'react-icons/fi';
 import { LuShoppingBag } from 'react-icons/lu';
 
+export const ProfileJson = [
+	{
+		label: 'Account Info',
+		slug: 'account',
+		iconName: 'userIcon',
+	},
+	{
+		label: 'My Orders',
+		slug: 'orders',
+		iconName: 'checklist',
+	},
+	// {
+	// 	label: 'Manage Address',
+	// 	slug: 'address',
+	// 	iconName: 'notes',
+
+	// },
+	{
+		label: 'FAQ',
+		slug: 'faq',
+		iconName: 'question',
+	},
+];
+
 export const data = {
 	topHeader: {
 		textFirst: 'Free shipping on orders $99 and above',
@@ -1860,7 +1884,7 @@ export const data = {
 			},
 		],
 	},
-	
+
 	winterCollection: {
 		search: '',
 		sort: '-createdAt',

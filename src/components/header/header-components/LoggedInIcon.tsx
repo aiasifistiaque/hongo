@@ -4,11 +4,16 @@ import React, { FC } from 'react';
 
 type LoggedInIconProps = CenterProps & {
 	firstLetter: string;
+	content: any;
 };
 
-const LoggedInIcon: FC<LoggedInIconProps> = ({ firstLetter, ...props }) => {
+const LoggedInIcon: FC<LoggedInIconProps> = ({
+	firstLetter,
+	content,
+	...props
+}) => {
 	const BTN_WIDTH = { base: '2.4rem', md: '2.8rem' };
-	const { content } = useContent();
+
 	return (
 		<Center
 			w={BTN_WIDTH}

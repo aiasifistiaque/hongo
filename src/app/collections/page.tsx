@@ -15,13 +15,14 @@ import React, { useState } from 'react';
 
 const page = () => {
 	const { data: apiData, isLoading } = useGetStoreQuery({});
-	if (isLoading || !apiData) return <PageLayout isLoading={true} />;
+	if (isLoading || !apiData)
+		return <PageLayout apiData={apiData} isLoading={true} />;
 
 	const content = apiData?.content;
 	const collectionPage = apiData?.content?.collectionPage;
 
 	return (
-		<PageLayout isLoading={isLoading || !apiData}>
+		<PageLayout apiData={apiData} isLoading={isLoading || !apiData}>
 			<SmallBanner image={collectionPage?.image}>
 				{collectionPage?.title || 'All Collections'}
 			</SmallBanner>

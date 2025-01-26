@@ -24,7 +24,7 @@ export default function Home() {
 	const { data, isLoading } = useGetStoreQuery({});
 
 	return (
-		<PageLayout isLoading={isLoading}>
+		<PageLayout apiData={data} isLoading={isLoading}>
 			<SectionPadding py={12} pb={32}>
 				<Checkout
 					content={data?.content}

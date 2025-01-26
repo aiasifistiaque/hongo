@@ -18,10 +18,11 @@ import { FlexProps } from '@chakra-ui/react';
 
 const HomePage = () => {
 	const { data: apiData, isLoading } = useGetStoreQuery({});
-	if (isLoading || !apiData) return <PageLayout isLoading={true} />;
+	if (isLoading || !apiData)
+		return <PageLayout apiData={apiData} isLoading={isLoading} />;
 
 	return (
-		<PageLayout isLoading={isLoading || !apiData}>
+		<PageLayout apiData={apiData} isLoading={isLoading || !apiData}>
 			{/* Slider */}
 			<Banner data={data?.bannerData} />
 			{/* Slider Bottom */}

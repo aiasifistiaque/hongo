@@ -1,6 +1,12 @@
 import React, { FC, ReactNode } from 'react';
 import { ServiceCart } from './components/index';
-import { Box, Grid, GridItem, GridItemProps, GridProps } from '@chakra-ui/react';
+import {
+	Box,
+	Grid,
+	GridItem,
+	GridItemProps,
+	GridProps,
+} from '@chakra-ui/react';
 import { useColors } from '@/hooks';
 
 type SliderBottomProps = {
@@ -29,16 +35,19 @@ const SliderBottom: FC<SliderBottomProps> = ({ data }) => {
 	);
 };
 
-const Item = ({ children, ...props }: GridItemProps & { children: ReactNode }) => (
-	<GridItem
-		w='100%'
-		h={{ base: 'auto', lg: '180px' }}
-		{...props}>
+const Item = ({
+	children,
+	...props
+}: GridItemProps & { children: ReactNode }) => (
+	<GridItem w='100%' h={{ base: 'auto', lg: '180px' }} {...props}>
 		{children}
 	</GridItem>
 );
 
-const Container = ({ children, ...props }: GridProps & { children: ReactNode }) => (
+const Container = ({
+	children,
+	...props
+}: GridProps & { children: ReactNode }) => (
 	<Grid
 		templateColumns={{
 			base: 'repeat(1, 1fr)',
@@ -48,7 +57,8 @@ const Container = ({ children, ...props }: GridProps & { children: ReactNode }) 
 		}}
 		gap={4}
 		borderBottom='1px solid'
-		{...props}>
+		{...props}
+	>
 		{children}
 	</Grid>
 );

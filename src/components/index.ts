@@ -21,6 +21,9 @@ export * from './product-carousel';
 export * from './collection-page';
 export * from './utils/button/index';
 export * from './product-details';
+export * from './skeleton';
+export * from './breadcrumb';
+export * from './dashboard-pages';
 
 export const getAlignment = (align: string) => {
 	if (align == 'center') {
