@@ -1,7 +1,8 @@
 'use client';
 import { ProfileJson } from '@/lib/config/data';
 import { Box, Flex, Grid, GridItem, GridProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import { data } from '@/lib/config/data';
+import React, { FC, ReactNode } from 'react';
 
 import { useAppDispatch, useColors } from '@/library';
 
@@ -35,7 +36,7 @@ const ProfilePage: FC<ProfilePageProps> = ({
 }) => {
 	const { data: selfData, isLoading: selfLoading } = useGetSelfQuery({});
 
-	const colors = useColors();
+	const faqData = data?.faqContent;
 	const router = useRouter();
 
 	const dispatch = useAppDispatch();
@@ -66,17 +67,9 @@ const ProfilePage: FC<ProfilePageProps> = ({
 							key={i}
 						/>
 					))}
-					<Flex
-						onClick={() => onLogout()}
-						cursor='pointer'
-						py='.5rem'
-						px='.5rem'
-						mb='6px'
-					>
-						<TextNormal _hover={{ color: headerCss?.bgColor }} basic={basic}>
-							Log Out
-						</TextNormal>
-					</Flex>
+					<LogOutBtn onLogout={onLogout} css={headerCss} basic={basic}>
+						Log Out
+					</LogOutBtn>
 				</Box>
 			</GridItem>
 			<GridItem colSpan={{ base: 4, xl: 5 }}>
@@ -99,16 +92,39 @@ const ProfilePage: FC<ProfilePageProps> = ({
 					<OrderComponent basic={basic} css={content?.dashboardOrderCss} />
 				)}
 
-				{/* {slug === 'address' && (
-					<AddressComponent basic={basic} css={content?.dashboardAddressCss} />
-				)} */}
-
-				{/* {slug === 'faq' && (
+				{slug === 'faq' && (
 					<FaqComponent basic={basic} css={dashboardCss} faqData={faqData} />
-				)} */}
+				)}
 			</GridItem>
 		</Grid>
 	);
 };
 
 export default ProfilePage;
+
+const LogOutBtn = ({
+	children,
+	onLogout,
+	css,
+	basic,
+}: {
+	children: ReactNode;
+	onLogout: () => void;
+	css: any;
+	basic: any;
+}) => {
+	const colors = useColors();
+	return (
+		<Flex
+			onClick={() => onLogout()}
+			cursor='pointer'
+			py='.5rem'
+			px='.5rem'
+			mb='6px'
+		>
+			<TextNormal color={css?.btnColor} basic={basic}>
+				{children}
+			</TextNormal>
+		</Flex>
+	);
+};

@@ -27,7 +27,7 @@ const page = () => {
 	}, [isLoggedIn]);
 
 	// these are common dashboard css
-	const dashboardCss = data?.content?.dashboardCss;
+	const css = data?.content?.dashboardCss;
 	const breadCrumbCss = data?.basic?.breadCrumbCss;
 
 	const colors = useColors();
@@ -36,9 +36,10 @@ const page = () => {
 		<PageLayout apiData={data} isLoading={isLoading}>
 			<Box py='2rem' bg={colors?.bg}>
 				<SectionPadding>
-					<Center pb='1rem'>
+					<Center pb={{ base: '0px', md: '16px' }}>
 						<CommonTitle
 							fontSize={{ base: '1.5rem', md: '2.5rem', lg: '3.5rem' }}
+							color={css?.fgColor}
 						>
 							My Account
 						</CommonTitle>
@@ -51,8 +52,8 @@ const page = () => {
 
 			<Box
 				minH='100vh'
-				bg={dashboardCss?.bgColor || '#fff'}
-				color={dashboardCss?.fgColor || '#000'}
+				bg={css?.bgColor || '#fff'}
+				color={css?.fgColor || '#000'}
 			>
 				<SectionPadding>
 					<ProfilePage

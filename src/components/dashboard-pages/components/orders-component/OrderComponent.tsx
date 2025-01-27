@@ -11,10 +11,12 @@ type OrderComponentProps = FlexProps & {
 };
 
 const OrderComponent: FC<OrderComponentProps> = ({ basic, css, ...props }) => {
-	const BORDER = `1px solid ${css?.borderColor || '#e7e7e7'}`;
-
+	const { page, limit, sort } = useAppSelector(state => state.table);
 	const { data: ordersData, isFetching } = useGetAllQuery({
 		path: `orders`,
+		page,
+		limit,
+		sort,
 	});
 
 	const { cartItems } = useAppSelector(state => state.cart);

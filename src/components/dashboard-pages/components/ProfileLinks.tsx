@@ -5,7 +5,6 @@ import Link from 'next/link';
 import React, { FC, ReactNode } from 'react';
 
 type ProfileLinksProps = FlexProps & {
-	css?: any;
 	basic: any;
 	item: any;
 	slug: string;
@@ -13,7 +12,6 @@ type ProfileLinksProps = FlexProps & {
 };
 
 const ProfileLinks: FC<ProfileLinksProps> = ({
-	css,
 	basic,
 	item,
 	content,
@@ -22,11 +20,19 @@ const ProfileLinks: FC<ProfileLinksProps> = ({
 }) => {
 	const isActive = slug == item?.slug;
 
-	const headerCss = content?.header;
+	const css = content?.dashboardNavigationCss;
 	return (
 		<Link href={`/dashboard/${item?.slug}`}>
 			<Container css={css} item={item} {...props}>
-				<TextNormal _hover={{ color: headerCss?.bgColor }} basic={basic}>
+				<TextNormal
+					color={isActive ? css?.activeColor : css?.color}
+					_hover={{ color: css?.activeColor }}
+					fontSize={{
+						base: `${css?.fontSizeBase}px`,
+						lg: `${css?.fontSizeBg}px`,
+					}}
+					basic={basic}
+				>
 					{item?.label}
 				</TextNormal>
 			</Container>

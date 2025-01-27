@@ -6,6 +6,8 @@ import React, { FC } from 'react';
 
 import { Tr, Td } from '@chakra-ui/react';
 import { currency } from '@/lib/config/constants';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type OrderTableRowProps = FlexProps & {
 	basic: any;
@@ -19,6 +21,7 @@ type OrderTableRowProps = FlexProps & {
 	totalPrice: any;
 	dueAmount: any;
 	isFetching: boolean;
+	orderId: any;
 };
 
 const OrderTableRow: FC<OrderTableRowProps> = ({
@@ -33,7 +36,9 @@ const OrderTableRow: FC<OrderTableRowProps> = ({
 	totalPrice,
 	dueAmount,
 	isFetching,
+	orderId,
 }) => {
+	const router = useRouter();
 	const formattedDate = format(new Date(date), 'dd/MM/yyyy');
 	const formattedTime = format(new Date(date), 'h:mm:ss a');
 
@@ -52,20 +57,45 @@ const OrderTableRow: FC<OrderTableRowProps> = ({
 	// 	}
 	// };
 
+	const handleClick = () => {
+		router.push(`/invoice/${orderId}`);
+	};
+
+	const tdStyle = {
+		cursor: 'pointer',
+	};
+
 	return (
 		<Tr
 			borderBottom={`1px solid ${css?.tableBorder || '#fff'}`}
 			margin='0px'
 			padding='0px'
 		>
-			<Td>{customer}</Td>
-			<Td>{deliveryStatus}</Td>
-			<Td>{`${formattedDate}, ${formattedTime}`}</Td>
-			<Td>{totalItems}</Td>
-			<Td>{`${currency?.symbol} ${vat.toLocaleString()}`}</Td>
-			<Td>{`${currency?.symbol} ${subTotal.toLocaleString()}`}</Td>
-			<Td>{`${currency?.symbol} ${totalPrice.toLocaleString()}`}</Td>
-			<Td>{`${currency?.symbol} ${dueAmount.toLocaleString()}`}</Td>
+			<Td onClick={handleClick} {...tdStyle}>
+				{customer}
+			</Td>
+			<Td onClick={handleClick} {...tdStyle}>
+				{deliveryStatus}
+			</Td>
+			<Td
+				onClick={handleClick}
+				{...tdStyle}
+			>{`${formattedDate}, ${formattedTime}`}</Td>
+			<Td onClick={handleClick} {...tdStyle}>
+				{totalItems}
+			</Td>
+			<Td onClick={handleClick} {...tdStyle}>{`${
+				currency?.symbol
+			} ${vat.toLocaleString()} `}</Td>
+			<Td onClick={handleClick} {...tdStyle}>{`${
+				currency?.symbol
+			} ${subTotal.toLocaleString()} `}</Td>
+			<Td onClick={handleClick} {...tdStyle}>{`${
+				currency?.symbol
+			} ${totalPrice.toLocaleString()} `}</Td>
+			<Td onClick={handleClick} {...tdStyle}>{`${
+				currency?.symbol
+			} ${dueAmount.toLocaleString()}`}</Td>
 		</Tr>
 	);
 };

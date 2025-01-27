@@ -1,6 +1,14 @@
 'use client';
 
-import { Box, BoxProps, Center, Flex, useToast, Button, ButtonProps } from '@chakra-ui/react';
+import {
+	Box,
+	BoxProps,
+	Center,
+	Flex,
+	useToast,
+	Button,
+	ButtonProps,
+} from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { CartHeader, CartBody } from './index';
 import { addToCart } from '@/store/slices/cartSlice';
@@ -46,25 +54,17 @@ const ProductCart: FC<ProductCartProps> = ({ data, ...props }) => {
 			w='full'
 			flex={1}
 			borderRadius={`${colors.cardRadius}px`}
-			{...props}>
-			<Flex
-				flex={1}
-				w='full'>
-				<Link
-					href={`/products/${data?._id}`}
-					style={{ width: '100%' }}>
-					<Column
-						flex={1}
-						w='full'>
+			{...props}
+		>
+			<Flex flex={1} w='full'>
+				<Link href={`/products/${data?._id}`} style={{ width: '100%' }}>
+					<Column flex={1} w='full'>
 						<CartHeader imgSrc={data?.image} />
 						<CartBody data={data} />
 					</Column>
 				</Link>
 			</Flex>
-			<Flex
-				align='flex-end'
-				justify='center'
-				p='.8rem'>
+			<Flex align='flex-end' justify='center' p='.8rem'>
 				<CartButton onClick={handleAddToCart}>Add to Cart</CartButton>
 			</Flex>
 		</Flex>
@@ -92,7 +92,8 @@ const CartButton: FC<CartButtonProps> = ({ children, ...props }) => {
 				color: colors.btnColor,
 				borderColor: colors.btnColor,
 			}}
-			{...props}>
+			{...props}
+		>
 			{children}
 		</Button>
 	);

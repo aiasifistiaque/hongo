@@ -27,10 +27,10 @@ const GetProducts: FC<ProductsProps> = ({ data, ...props }) => {
 
 	return (
 		<Box
-			{...props}
 			borderBottomWidth={1}
 			pb='72px'
 			borderBottomColor={colors?.border}
+			{...props}
 		>
 			<Grid templateColumns={TEMPLATE_COLUMNS} gap={6}>
 				{data?.doc?.length > 0 ? (
@@ -40,7 +40,6 @@ const GetProducts: FC<ProductsProps> = ({ data, ...props }) => {
 							key={i}
 							w='100%'
 							borderRadius={colors?.cardRadius}
-							h={productCartHeight}
 						>
 							<ProductCart data={item} />
 						</GridItem>

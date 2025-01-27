@@ -1,4 +1,5 @@
 import { EditButton, TextNormal, TextButton } from '@/components';
+import { useColors } from '@/hooks';
 import { Flex, FlexProps } from '@chakra-ui/react';
 import React, { FC, useState } from 'react';
 
@@ -22,6 +23,7 @@ const AccountHeader: FC<AccountHeaderProps> = ({
 	isLoading,
 	...props
 }) => {
+	const colors = useColors();
 	const BORDER = `1px solid ${css?.borderColor || '#e7e7e7'}`;
 
 	return (
@@ -46,8 +48,6 @@ const AccountHeader: FC<AccountHeaderProps> = ({
 				basic={basic}
 				w={`${css?.editBtnWidth}px`}
 				h={`${css?.editBtnHeight || 32}px`}
-				border={`1px solid ${css?.editBtnBorder || '#ef4a23'}`}
-				color={css?.editBtnColor || '#ef4a23'}
 			>
 				Edit
 			</EditButton>
@@ -63,8 +63,6 @@ const AccountHeader: FC<AccountHeaderProps> = ({
 				<EditButton
 					w={`${css?.editBtnWidth}px`}
 					h={`${css?.editBtnHeight || 32}px`}
-					border={`1px solid ${css?.editBtnBorder || '#ef4a23'}`}
-					color={css?.editBtnColor || '#ef4a23'}
 					isLoading={isLoading}
 					onClick={handleSubmit}
 					basic={basic}
