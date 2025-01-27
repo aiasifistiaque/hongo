@@ -17,7 +17,7 @@ const CartBody: FC<CartBodyProps> = ({ data, ...props }) => {
 	return (
 		<Flex
 			flexDir='column'
-			bg={colors.cardBg}
+			bg={colors?.cardBg}
 			gap={2}
 			flex={1}
 			p='.8rem'
@@ -41,7 +41,7 @@ const CartBody: FC<CartBodyProps> = ({ data, ...props }) => {
 					fontFamily={font?.primaryFont}
 					fontWeight='bold'
 					fontSize='1rem'
-					price={data?.price.toLocaleString()}
+					price={data?.price?.toLocaleString()}
 				/>
 			</Column>
 		</Flex>

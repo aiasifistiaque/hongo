@@ -172,16 +172,6 @@ const AccountInfo: FC<AccountInfoProps> = ({
 						onChange={handleFormData}
 						isDisabled={!isEditAccount}
 					/>
-
-					{/* <FormControlComp
-						label='Full Name'
-						placeholder='Full Name'
-						type={'text'}
-						css={css}
-						value={formData.fullName}
-						name={'fullName'}
-						onChange={handleFormData}
-					/> */}
 				</Grid>
 			</Box>
 			<Box border={BORDER} px='1rem' py='1rem'>

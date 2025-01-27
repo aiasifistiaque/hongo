@@ -2,14 +2,15 @@
 import {
 	CommonTitle,
 	PageLayout,
+	Pagination,
 	Products,
 	SectionPadding,
 	TextNormal,
 } from '@/components';
 
-import SmallBanner from '@/components/banner/SmallBanner';
 import GetProducts from '@/components/home/products/GetProducts';
 import { useColors } from '@/hooks';
+import { useAppSelector } from '@/library';
 import { useGetAllQuery, useGetByIdQuery } from '@/store/services/commonApi';
 import { useGetStoreQuery } from '@/store/services/storeApi';
 import { Box, Flex, Select } from '@chakra-ui/react';
@@ -22,6 +23,7 @@ export default function Home() {
 	const [sort, setSort] = useState('-createdAt');
 	const { data: apiData, isLoading } = useGetStoreQuery({});
 
+	const { page, limit } = useAppSelector(state => state.table);
 	const { data: catData, isFetching: catFetching } = useGetByIdQuery(
 		{
 			path: 'collections',
@@ -33,16 +35,18 @@ export default function Home() {
 	const { data, isFetching } = useGetAllQuery(
 		{
 			path: 'products',
-
+			sort,
+			page,
+			limit,
 			filters: {
-				category_in: id,
+				collection_in: id,
 			},
 		},
 		{ skip: !id }
 	);
 
 	return (
-		<PageLayout apiData={apiData} isLoading={false}>
+		<PageLayout apiData={apiData} isLoading={isLoading}>
 			{/* Slider */}
 			{/* <SmallBanner bannarData={catData?.name} /> */}
 			{/* Slider Bottom */}
@@ -56,7 +60,7 @@ export default function Home() {
 					</Box>
 					<Box>
 						<Select
-							value='sort'
+							value={sort}
 							placeholder='Sort by'
 							onChange={e => {
 								setSort(e.target.value);
@@ -73,6 +77,14 @@ export default function Home() {
 			</SectionPadding>
 			<SectionPadding pb='3rem' bg={colors?.bg}>
 				<GetProducts data={data} />
+				<Box>
+					<Pagination
+						data={data}
+						basic={apiData?.basic}
+						content={apiData?.content}
+						justifyContent='flex-end'
+					/>
+				</Box>
 			</SectionPadding>
 		</PageLayout>
 	);

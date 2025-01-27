@@ -1,11 +1,12 @@
 'use client';
 
 import { TextNormal, OrderTableRowSkeleton } from '@/components';
-import { FlexProps } from '@chakra-ui/react';
+import { Flex, FlexProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
 import { Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react';
 import { OrderTableRow } from './index';
+import Pagination from './Pagination';
 
 type OrderListProps = FlexProps & {
 	basic: any;
@@ -25,9 +26,20 @@ const OrderList: FC<OrderListProps> = ({
 			bg={css?.tableBg || '#EEF0F7'}
 			borderRadius={`${css?.tableRadius || 8}px`}
 		>
-			<Table fontFamily={basic?.primaryFont} size='md' variant={'unstyled'}>
+			<Flex
+				borderBottom={`1px solid ${css?.tableBorder || '#fff'}`}
+				px='24px'
+				w='full'
+			>
+				<Pagination basic={basic} css={css} data={orderData && orderData} />
+			</Flex>
+
+			<Table fontFamily={basic?.secondaryFont} size='md' variant={'unstyled'}>
 				<Thead>
-					<Tr borderBottom={`1px solid ${css?.tableBorder || '#fff'}`}>
+					<Tr
+						fontFamily={basic?.secondaryFont}
+						borderBottom={`1px solid ${css?.tableBorder || '#fff'}`}
+					>
 						<Th>Customer</Th>
 						<Th>Delivery Status</Th>
 						<Th>Order Date</Th>
@@ -59,11 +71,12 @@ const OrderList: FC<OrderListProps> = ({
 								totalPrice={order?.total}
 								vat={order?.vat}
 								isFetching={isFetching}
+								orderId={order?._id}
 							/>
 						))
 					) : (
 						<TextNormal px='1.5rem' py='1rem' basic={basic}>
-							No orders found!
+							No more orders found!
 						</TextNormal>
 					)}
 				</Tbody>

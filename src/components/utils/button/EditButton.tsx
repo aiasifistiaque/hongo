@@ -15,16 +15,16 @@ const EditButton: FC<EditButtonProps> = ({
 	css,
 	...props
 }) => {
-	const { colors } = useCustomStyle();
+	const colors = useColors();
 
 	return (
 		<Button
-			bg={colors?.white}
-			color={colors?.warning}
+			bg={'transparent'}
+			color={colors?.btnColor || 'yellow'}
 			fontWeight='400'
 			py='2px'
 			fontSize='1rem'
-			border={`1px solid ${colors?.warning}`}
+			border={`1px solid ${colors?.btnColor}`}
 			fontFamily={css?.fontFamily || basic?.secondaryFont}
 			h='32px'
 			_hover={{

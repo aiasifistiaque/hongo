@@ -12,7 +12,6 @@ export * from './header';
 export * from './icon';
 export * from './utils';
 export * from './home/index';
-
 export * from './checkout';
 export * from './common';
 export * from './home-page';
@@ -24,6 +23,8 @@ export * from './product-details';
 export * from './skeleton';
 export * from './breadcrumb';
 export * from './dashboard-pages';
+export * from './pagination';
+export * from './filter-modal';
 
 export const getAlignment = (align: string) => {
 	if (align == 'center') {
